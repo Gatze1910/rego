@@ -1,3 +1,18 @@
+# ReGo
+This is going to be the MMP3-Project during our MultiMediaTechnology bachelor studis at the university of applied sciences salzburg.
+
+Creators: Bernadette Ackerl, Vanessa Reiter and Markus Rinnerberger
+
+---
+Currently using: 
+- Next.js, 
+- Prisma, 
+- Postgresql, 
+- GraphQL, GraphQL-yoga, 
+- SASS
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

@@ -15,7 +15,6 @@
   max-width: var(--max-width);
   width: 100%;
   z-index: 2;
-  font-family: var(--font-mono);
 }
 
 .description a {
@@ -36,48 +35,16 @@
 
 .code {
   font-weight: 700;
-  font-family: var(--font-mono);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
-  width: var(--max-width);
-  max-width: 100%;
-}
-
-.card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
-}
-
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
-}
-
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  margin: 0;
-  opacity: 0.6;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-width: 30ch;
 }
 
 .center {
+  align-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  padding: 4rem 0;
+  flex-wrap: wrap;
+  gap: 4rem;
+  padding-bottom: 40vh;
 }
 
 .center::before {
@@ -102,11 +69,6 @@
   position: absolute;
   filter: blur(45px);
   transform: translateZ(0);
-}
-
-.logo,
-.thirteen {
-  position: relative;
 }
 
 .thirteen {
