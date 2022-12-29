@@ -16,10 +16,9 @@ type Shop {
   email: String
   id: String
   name: String
-  owner: String
+  owner: User
   postcode: Int
   street: String
-  users: [User]
 }
 
 type User {

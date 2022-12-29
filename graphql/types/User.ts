@@ -1,4 +1,3 @@
-// /graphql/types/Link.ts
 import { enumType, objectType, extendType } from 'nexus'
 import { Shop } from './Shop'
 
@@ -15,8 +14,8 @@ export const User = objectType({
     t.field('role', { type: Role })
     t.list.field('shops', {
       type: Shop,
-      async resolve(_parent, _args, ctx) {
-        return await ctx.prisma.user
+      async resolve(_parent, _args, context) {
+        return await context.prisma.user
           .findUnique({
             where: {
               id: _parent.id,

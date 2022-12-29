@@ -5,21 +5,19 @@ export const Shop = objectType({
   name: 'Shop',
   definition(t) {
     t.string('id')
-    t.string('owner')
     t.string('name')
     t.string('street')
     t.int('postcode')
     t.string('email')
-    t.list.field('users', {
+    t.field('owner', {
       type: User,
       async resolve(_parent, _args, context) {
         return await context.prisma.shop
-          .findUnique({
+          .findFirst({
             where: {
               id: _parent.id,
             },
-          })
-          .users()
+          }).owner()
       },
     })
   },
