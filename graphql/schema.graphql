@@ -2,33 +2,34 @@
 ### Do not make changes to this file directly
 
 
-type Query {
-  shops: [Shop]!
-  users: [User]!
+type Mutation {
+  createShop(name: String!, ownerId: Int!, postcode: Int!, street: String!): Shop!
 }
 
-enum Role {
-  ADMIN
-  USER
+type Query {
+  shops: [Shop]!
+  user: User!
+  users: [User]!
 }
 
 type Shop {
   email: String
-  id: String
+  id: Int
   name: String
   owner: User
+  ownerId: Int
+  phone: Int
   postcode: Int
   street: String
 }
 
 type User {
   email: String
-  id: String
+  id: Int
   lastname: String
   name: String
   phone: Int
   postcode: Int
-  role: Role
   shops: [Shop]
   street: String
 }

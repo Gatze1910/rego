@@ -11,6 +11,10 @@ const AllUsersQuery = gql`
       shops {
         id
         name
+        street
+        owner {
+          name
+        }
       }
     }
   }
@@ -27,15 +31,17 @@ export default function Data() {
       <main className={styles.main}>
         <div>
           <h1>Versuch Daten zu laden via Apollo Client mit Prisma und gql...</h1>
-          {data.users.map( user => (
+          {data.users.map((user: any) => (
             <li key={user.id}>
               <b>{user.name}</b>
-              <p>{user.lastname}</p>
-              <p>{user.shops.map( shop => (
-                <li key={shop.id}>
-                  <i>{shop.name}</i>
-                </li>
-              ))}</p>
+              <i> {user.lastname}</i>
+              <p>das sind alle Shops von {user.name}</p> <br></br>
+              {user.shops.map( (shop: any) => (
+                <ul key={shop.id}>
+                  <b>{shop.name}</b> 
+                  <i> {shop.street}</i>
+                </ul>
+              ))}
             </li>
           ))}
         </div>
