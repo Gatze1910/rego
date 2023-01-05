@@ -1,5 +1,7 @@
+import { timeStamp } from 'console'
 import { randomUUID } from 'crypto'
 import { objectType, extendType, nonNull, intArg, stringArg } from 'nexus'
+import { normalizeArgWrapping } from 'nexus/dist/core'
 import { User } from './User'
 
 export const Shop = objectType({
@@ -26,13 +28,30 @@ export const Shop = objectType({
   },
 })
 
-export const LinksQuery = extendType({
+export const ShopsQuery = extendType({
   type: 'Query',
   definition(t) {
     t.nonNull.list.field('shops', {
       type: 'Shop',
       resolve(_parent, _args, ctx) {
         return ctx.prisma.shop.findMany()
+      }
+    })
+  },
+})
+
+export const ShopsByUserIdQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.field('shopsByUserId', {
+      type: 'Shop',
+      args: {
+        ownerId: nonNull(intArg()),
+      },
+      resolve(_parent, args, ctx) {
+        return ctx.prisma.shop.findMany(
+         { where: { ownerId: args.ownerId }}
+        )
       }
     })
   },
@@ -48,7 +67,9 @@ export const CreateShopMutation = extendType({
         name: nonNull(stringArg()),
         street: nonNull(stringArg()),
         postcode: nonNull(intArg()),
-        ownerId: nonNull(intArg())
+        ownerId: nonNull(intArg()),
+        phone: intArg(),
+        email: stringArg()
       },
       async resolve(_parent, args, ctx) {
 
@@ -56,14 +77,17 @@ export const CreateShopMutation = extendType({
         if (!ctx.user) {
           throw new Error(`You need to be logged in to perform an action`)
         }
+
+        dann bei new shop irgendwie von ctx also session den user als user id setzen bei ownerId
         */
-       const User = await ctx.prisma.user.findFirst();
 
         const newShop = {
           ownerId: args.ownerId,
           name: args.name,
           street: args.street,
-          postcode: args.postcode
+          postcode: args.postcode,
+          phone: args.phone,
+          email: args.email,
         }
 
         return await ctx.prisma.shop.create({
@@ -73,3 +97,53 @@ export const CreateShopMutation = extendType({
     })
   },
 })
+
+
+export const DeleteShopMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('deleteShop', {
+      type: 'Shop',
+      args: {
+        id: nonNull(intArg()),
+      },
+      resolve(_parent, args, ctx) {
+        return ctx.prisma.shop.delete({
+          where: { id: args.id },
+        });
+      },
+    });
+  },
+});
+
+
+export const UpdateShopMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('updateShop', {
+      type: 'Shop',
+      args: {
+        id: nonNull(intArg()),
+        ownerId: intArg(),
+        name: stringArg(),
+        street: stringArg(),
+        postcode: intArg(),
+        phone: intArg(),
+        email: stringArg(),
+      },
+      resolve(_parent, args, ctx) {
+        return ctx.prisma.shop.update({
+          where: { id: args.id },
+          data: {
+            ownerId: args.ownerId,
+            name: args.name,
+            street: args.street,
+            postcode: args.postcode,
+            phone: args.phone,
+            email: args.email,
+          },
+        });
+      },
+    });
+  },
+});

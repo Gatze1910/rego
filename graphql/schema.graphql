@@ -3,12 +3,14 @@
 
 
 type Mutation {
-  createShop(name: String!, ownerId: Int!, postcode: Int!, street: String!): Shop!
+  createShop(email: String, name: String!, ownerId: Int!, phone: Int, postcode: Int!, street: String!): Shop!
+  deleteShop(id: Int!): Shop!
+  updateShop(email: String, id: Int!, name: String, ownerId: Int, phone: Int, postcode: Int, street: String): Shop!
 }
 
 type Query {
   shops: [Shop]!
-  user: User!
+  shopsByUserId(ownerId: Int!): [Shop]!
   users: [User]!
 }
 
