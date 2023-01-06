@@ -24,21 +24,23 @@ export default function Data() {
   const { data, loading, error } = useQuery(AllUsersQuery)
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Oh no... {error.message}</p>
+  if (error) return <p>Currently there is no production database available..</p>
 
   return (
     <>
       <main className={styles.main}>
         <div>
-          <h1>Versuch Daten zu laden via Apollo Client mit Prisma und gql...</h1>
+          <h1>
+            Versuch Daten zu laden via Apollo Client mit Prisma und gql...
+          </h1>
           {data.users.map((user: any) => (
             <li key={user.id}>
               <b>{user.name}</b>
               <i> {user.lastname}</i>
               <p>das sind alle Shops von {user.name}</p> <br></br>
-              {user.shops.map( (shop: any) => (
+              {user.shops.map((shop: any) => (
                 <ul key={shop.id}>
-                  <b>{shop.name}</b> 
+                  <b>{shop.name}</b>
                   <i> {shop.street}</i>
                 </ul>
               ))}

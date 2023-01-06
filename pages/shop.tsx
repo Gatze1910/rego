@@ -4,8 +4,20 @@ import { gql, useMutation } from '@apollo/client'
 import prisma from '../lib/prisma'
 
 const CreateShopMutation = gql`
-  mutation($name: String!, $street: String!, $postcode: Int!, $ownerId: Int!, $owner: User!) {
-    createShop(name: $name, street: $street, postcode: $postcode, ownerId: $ownerId, owner: $owner) {
+  mutation (
+    $name: String!
+    $street: String!
+    $postcode: Int!
+    $ownerId: Int!
+    $owner: User!
+  ) {
+    createShop(
+      name: $name
+      street: $street
+      postcode: $postcode
+      ownerId: $ownerId
+      owner: $owner
+    ) {
       name
       street
       postcode
@@ -16,11 +28,11 @@ const CreateShopMutation = gql`
 `
 
 const owner = gql`
-  query($user: User!) {
+  query ($user: User!) {
     user {
-        id
-    }  
-}
+      id
+    }
+  }
 `
 
 const Shop = () => {
@@ -32,16 +44,14 @@ const Shop = () => {
   } = useForm()
 
   const [createShop, { loading, error }] = useMutation(CreateShopMutation, {
-    onCompleted: () => reset()
+    onCompleted: () => reset(),
   })
 
-  const onSubmit = async data => {
-    
+  const onSubmit = async (data) => {
     const { name, street, postcode, ownerId } = data
     const variables = { name, street, postcode, ownerId, owner }
     try {
       createShop({ variables })
-
     } catch (error) {
       console.error(error)
     }
@@ -50,8 +60,10 @@ const Shop = () => {
   return (
     <div>
       <h1>Create a new Shop</h1>
-      <form className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg" onSubmit={handleSubmit(onSubmit)}>
-       
+      <form
+        className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <label className="block">
           <span className="text-gray-700">name</span>
           <input
@@ -84,12 +96,12 @@ const Shop = () => {
         </label>
 
         <input
-            placeholder="1"
-            {...register('ownerId', { valueAsNumber: true, required: true })}
-            name="ownerId"
-            type="number"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
+          placeholder="1"
+          {...register('ownerId', { valueAsNumber: true, required: true })}
+          name="ownerId"
+          type="number"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        />
 
         <button
           disabled={loading}

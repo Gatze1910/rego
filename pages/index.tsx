@@ -6,7 +6,10 @@ export default function Home() {
     <>
       <Head>
         <title>ReGo</title>
-        <meta name="description" content="MMP3 - FH Salzburg - ReGo - Bernadette Ackerl, Vanessa Reiter und Markus Rinnerberger" />
+        <meta
+          name="description"
+          content="MMP3 - FH Salzburg - ReGo - Bernadette Ackerl, Vanessa Reiter und Markus Rinnerberger"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -22,7 +25,6 @@ export default function Home() {
           <h1>ReGo - Regionalität to go</h1>
           <p>besuche uns bald wieder</p>
         </div>
-
       </main>
     </>
   )

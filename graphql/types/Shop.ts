@@ -1,7 +1,4 @@
-import { timeStamp } from 'console'
-import { randomUUID } from 'crypto'
 import { objectType, extendType, nonNull, intArg, stringArg } from 'nexus'
-import { normalizeArgWrapping } from 'nexus/dist/core'
 import { User } from './User'
 
 export const Shop = objectType({
@@ -22,7 +19,8 @@ export const Shop = objectType({
             where: {
               ownerId: _parent.id,
             },
-          }).owner()
+          })
+          .owner()
       },
     })
   },
@@ -35,7 +33,7 @@ export const ShopsQuery = extendType({
       type: 'Shop',
       resolve(_parent, _args, ctx) {
         return ctx.prisma.shop.findMany()
-      }
+      },
     })
   },
 })
@@ -49,14 +47,11 @@ export const ShopsByUserIdQuery = extendType({
         ownerId: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
-        return ctx.prisma.shop.findMany(
-         { where: { ownerId: args.ownerId }}
-        )
-      }
+        return ctx.prisma.shop.findMany({ where: { ownerId: args.ownerId } })
+      },
     })
   },
 })
-
 
 export const CreateShopMutation = extendType({
   type: 'Mutation',
@@ -69,10 +64,9 @@ export const CreateShopMutation = extendType({
         postcode: nonNull(intArg()),
         ownerId: nonNull(intArg()),
         phone: intArg(),
-        email: stringArg()
+        email: stringArg(),
       },
       async resolve(_parent, args, ctx) {
-
         /** 
         if (!ctx.user) {
           throw new Error(`You need to be logged in to perform an action`)
@@ -98,7 +92,6 @@ export const CreateShopMutation = extendType({
   },
 })
 
-
 export const DeleteShopMutation = extendType({
   type: 'Mutation',
   definition(t) {
@@ -110,12 +103,11 @@ export const DeleteShopMutation = extendType({
       resolve(_parent, args, ctx) {
         return ctx.prisma.shop.delete({
           where: { id: args.id },
-        });
+        })
       },
-    });
+    })
   },
-});
-
+})
 
 export const UpdateShopMutation = extendType({
   type: 'Mutation',
@@ -142,8 +134,8 @@ export const UpdateShopMutation = extendType({
             phone: args.phone,
             email: args.email,
           },
-        });
+        })
       },
-    });
+    })
   },
-});
+})

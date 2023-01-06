@@ -1,14 +1,17 @@
 # ReGo - Regionalität to go
+
 This is going to be the MMP3-Project during our MultiMediaTechnology bachelor studis at the university of applied sciences salzburg.
 
 Creators: Bernadette Ackerl, Vanessa Reiter and Markus Rinnerberger
 
 ---
-Currently using: 
-- Next.js, 
+
+Currently using:
+
+- Next.js,
 - Postgresql,
-- Prisma 
-- GraphQL, 
+- Prisma
+- GraphQL,
 - Nexus,
 - Apollo Server and Client
 - SASS
@@ -51,8 +54,8 @@ start Prisma Studio to checkout you DB
 npm run viewDb
 ```
 
-
 ---
+
 This applicaton is deployed via Vercel | GitHub
 
 you can view it here: https://rego-tau.vercel.app/

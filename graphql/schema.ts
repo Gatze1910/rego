@@ -5,7 +5,13 @@ import * as types from './types'
 export const schema = makeSchema({
   types: types,
   outputs: {
-    typegen: join(process.cwd(), 'node_modules', '@types', 'nexus-typegen', 'index.d.ts'),
+    typegen: join(
+      process.cwd(),
+      'node_modules',
+      '@types',
+      'nexus-typegen',
+      'index.d.ts',
+    ),
     schema: join(process.cwd(), 'graphql', 'schema.graphql'),
   },
   contextType: {
@@ -13,7 +19,7 @@ export const schema = makeSchema({
     module: join(process.cwd(), 'graphql', 'context.ts'),
   },
 
-   /* All input arguments and return types are non-null by default
+  /* All input arguments and return types are non-null by default
    nonNullDefaults: {
     input: true,
     output: true,

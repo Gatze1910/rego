@@ -1,6 +1,6 @@
 //source: https://stackoverflow.com/questions/69850598/how-to-resolve-this-typescript-error-on-global-node-js-object
 declare global {
-  var prisma: PrismaClient; 
+  var prisma: PrismaClient
 }
 
 import { PrismaClient } from '@prisma/client'

@@ -7,7 +7,7 @@ async function main() {
     data: {
       name: 'Hansi',
       lastname: 'Tester',
-      email: 'test@hansi.com'
+      email: 'test@hansi.com',
     },
   })
 
@@ -22,7 +22,7 @@ async function main() {
 }
 
 main()
-  .catch(e => {
+  .catch((e) => {
     console.error(e)
     process.exit(1)
   })
