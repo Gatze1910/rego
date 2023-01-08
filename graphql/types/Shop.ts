@@ -1,4 +1,12 @@
-import { objectType, extendType, nonNull, intArg, stringArg } from 'nexus'
+import {
+  objectType,
+  extendType,
+  nonNull,
+  intArg,
+  stringArg,
+  floatArg,
+} from 'nexus'
+import { News } from './News'
 import { User } from './User'
 
 export const Shop = objectType({
@@ -9,8 +17,14 @@ export const Shop = objectType({
     t.string('name')
     t.string('street')
     t.int('postcode')
+    t.string('place')
+    t.float('latitude')
+    t.float('longitude')
     t.int('phone')
     t.string('email')
+    t.string('website')
+    t.string('openingHours')
+    t.string('categories')
     t.field('owner', {
       type: User,
       async resolve(_parent, _args, context) {
@@ -47,7 +61,12 @@ export const ShopsByUserIdQuery = extendType({
         ownerId: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
-        return ctx.prisma.shop.findMany({ where: { ownerId: args.ownerId } })
+        const shops = ctx.prisma.shop.findMany({
+          where: {
+            ownerId: args.ownerId,
+          },
+        })
+        return shops
       },
     })
   },
@@ -62,9 +81,15 @@ export const CreateShopMutation = extendType({
         name: nonNull(stringArg()),
         street: nonNull(stringArg()),
         postcode: nonNull(intArg()),
+        place: nonNull(stringArg()),
+        latitude: nonNull(floatArg()),
+        longitude: nonNull(floatArg()),
         ownerId: nonNull(intArg()),
         phone: intArg(),
         email: stringArg(),
+        website: stringArg(),
+        categories: stringArg(),
+        openingHours: stringArg(),
       },
       async resolve(_parent, args, ctx) {
         /** 
@@ -80,8 +105,14 @@ export const CreateShopMutation = extendType({
           name: args.name,
           street: args.street,
           postcode: args.postcode,
+          place: args.place,
+          website: args.website,
+          categories: args.categories,
+          longitude: args.longitude,
+          latitude: args.latitude,
           phone: args.phone,
           email: args.email,
+          openingHours: args.openingHours,
         }
 
         return await ctx.prisma.shop.create({
@@ -122,6 +153,12 @@ export const UpdateShopMutation = extendType({
         postcode: intArg(),
         phone: intArg(),
         email: stringArg(),
+        place: stringArg(),
+        latitude: floatArg(),
+        longitude: floatArg(),
+        website: stringArg(),
+        categories: stringArg(),
+        openingHours: stringArg(),
       },
       resolve(_parent, args, ctx) {
         return ctx.prisma.shop.update({
@@ -131,8 +168,14 @@ export const UpdateShopMutation = extendType({
             name: args.name,
             street: args.street,
             postcode: args.postcode,
+            place: args.place,
+            website: args.website,
+            categories: args.categories,
+            longitude: args.longitude,
+            latitude: args.latitude,
             phone: args.phone,
             email: args.email,
+            openingHours: args.openingHours,
           },
         })
       },

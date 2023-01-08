@@ -16,7 +16,10 @@ async function main() {
       name: 'erster Testshop',
       street: 'Hornerweg 24',
       postcode: 5541,
+      place: 'Altenmarkt',
       ownerId: 1,
+      latitude: 47.3639155,
+      longitude: 13.4424461,
     },
   })
 }

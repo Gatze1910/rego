@@ -7,20 +7,18 @@ export const User = objectType({
     t.int('id')
     t.string('name')
     t.string('lastname')
+    t.string('email')
     t.string('street')
     t.int('postcode')
-    t.int('phone')
-    t.string('email')
+    t.string('place')
     t.list.field('shops', {
       type: Shop,
       async resolve(_parent, _args, ctx) {
-        return await ctx.prisma.user
-          .findUnique({
-            where: {
-              id: _parent.id,
-            },
-          })
-          .shops()
+        return await ctx.prisma.user.findMany({
+          where: {
+            id: _parent.id,
+          },
+        })
       },
     })
   },
