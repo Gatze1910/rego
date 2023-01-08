@@ -24,7 +24,6 @@ export const Shop = objectType({
     t.string('email')
     t.string('website')
     t.string('openingHours')
-    t.string('categories')
     t.field('owner', {
       type: User,
       async resolve(_parent, _args, context) {
@@ -37,6 +36,16 @@ export const Shop = objectType({
           .owner()
       },
     })
+    t.field("categories", {
+      type: "String",
+      resolve(parent, _args, _ctx) {
+      const str = parent["categories"];
+        if (!str) {
+          return {};
+        }
+        return JSON.parse(str);
+      }
+    });
   },
 })
 

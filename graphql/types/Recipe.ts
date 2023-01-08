@@ -7,7 +7,16 @@ export const Recipe = objectType({
     t.int('userId')
     t.string('title')
     t.string('content')
-    t.string('categories')
+    t.field("categories", {
+        type: "String",
+        resolve(parent, _args, _context) {
+        const str = parent["categories"];
+          if (!str) {
+            return {};
+          }
+          return JSON.parse(str);
+        }
+      });
   },
 })
 
@@ -15,7 +24,7 @@ export const RecipeQuery = queryType({
   definition(t) {
     t.list.field('recipes', {
       type: 'Recipe',
-      resolve(_, __, context) {
+      resolve(_parent, _args, context) {
         return context.prisma.recipe.findMany()
       },
     })
