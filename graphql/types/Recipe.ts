@@ -7,16 +7,16 @@ export const Recipe = objectType({
     t.int('userId')
     t.string('title')
     t.string('content')
-    t.field("categories", {
-        type: "String",
-        resolve(parent, _args, _context) {
-        const str = parent["categories"];
-          if (!str) {
-            return {};
-          }
-          return JSON.parse(str);
+    t.field('categories', {
+      type: 'String',
+      resolve(parent, _args, _context) {
+        const str = parent['categories']
+        if (!str) {
+          return {}
         }
-      });
+        return JSON.parse(str)
+      },
+    })
   },
 })
 

@@ -36,16 +36,16 @@ export const Shop = objectType({
           .owner()
       },
     })
-    t.field("categories", {
-      type: "String",
+    t.field('categories', {
+      type: 'String',
       resolve(parent, _args, _ctx) {
-      const str = parent["categories"];
+        const str = parent['categories']
         if (!str) {
-          return {};
+          return {}
         }
-        return JSON.parse(str);
-      }
-    });
+        return JSON.parse(str)
+      },
+    })
   },
 })
 
