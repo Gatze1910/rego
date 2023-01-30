@@ -1,3 +1,5 @@
 {
-  "test": "das ist ein test"
+  "HOME": {
+    "HELLO": "hello {{value}}"
+  }
 }

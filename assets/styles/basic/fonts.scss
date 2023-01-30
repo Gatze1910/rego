@@ -1,0 +1,21 @@
+@font-face {
+    font-family: ABeeZee;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/ABeeZee-Regular.eot');
+    src: local(''),
+        url('../../fonts/ABeeZee-Regular.eot') format('embedded-opentype'),
+        url('../../fonts/ABeeZee-Regular.woff2') format('woff2'),
+        url('../../fonts/ABeeZee-Regular.woff') format('woff'),
+        url('../../fonts/ABeeZee-Regular.ttf') format('truetype'),
+        url('../../fonts/ABeeZee-Regular.svg') format('svg')
+}
+
+@font-face {
+    font-family: ABeeZee;
+    font-style: normal;
+    font-weight: 400;
+    src: local('ABeeZee'), local('ABeeZee-Regular'),
+    url(../../fonts/ABeeZee-Regular.woff2) format('woff2'),
+    url(../../fonts/ABeeZee-Regular.woff) format('woff');
+ }

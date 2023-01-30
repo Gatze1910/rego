@@ -1,5 +1,9 @@
+import useTranslation from 'next-translate/useTranslation'
+
 export const Custom500 = () => {
-  return <h1>500 - Server-side error occurred</h1>
+  const { t } = useTranslation('basic')
+
+  return <h1>{t('error.500')}</h1>
 }
 
 export default Custom500

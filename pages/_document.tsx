@@ -1,8 +1,9 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export const Document = () => {
+
   return (
-    <Html lang="en">
+    <Html lang="de">
       <Head />
       <body>
         <Main />
