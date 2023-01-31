@@ -1,9 +1,16 @@
 {
     "test": "ein test",
     "de": "Deutsch",
-    "en":"Englisch",
+    "en": "Englisch",
     "error": {
         "500": "500 Seite",
         "404": "404 Seite"
+    },
+    "nav": {
+        "map": "Karte",
+        "news": "Aktuelles",
+        "sell": "Verkaufen",
+        "buy": "Stöbern",
+        "recipe": "Rezepte"
     }
 }

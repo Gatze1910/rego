@@ -4,7 +4,9 @@ export const Document = () => {
 
   return (
     <Html lang="de">
-      <Head />
+      <Head>
+        <title>𝗥𝗘gionality to𝗚𝗢 🌿</title>
+      </Head>
       <body>
         <Main />
         <NextScript />
