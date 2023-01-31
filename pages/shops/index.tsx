@@ -14,7 +14,7 @@ export const Shops: NextPage = () => {
   const [lat, setLat] = useState<number>(47.80949)
   const [zoom, setZoom] = useState<number>(11)
 
-  const [shop, setShop] = useState<null|Shop>(null)
+  const [shop, setShop] = useState<null | Shop>(null)
   const [shops, setShops] = useState<Shop[]>([])
 
   const AllShopsQuery = gql`
@@ -26,7 +26,7 @@ export const Shops: NextPage = () => {
       }
     }
   `
-  const {data, loading, error} = useQuery(AllShopsQuery)
+  const { data, loading, error } = useQuery(AllShopsQuery)
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -44,7 +44,9 @@ export const Shops: NextPage = () => {
         .setLngLat({ lng: shop.longitude, lat: shop.latitude })
         .addTo(map.current)
       marker.getElement().id = shop.id.toString()
-      marker.getElement().addEventListener('click', () => {marker.getElement().id})
+      marker.getElement().addEventListener('click', () => {
+        marker.getElement().id
+      })
     })
   }, [shops])
 
@@ -70,10 +72,7 @@ export const Shops: NextPage = () => {
 
   return (
     <>
-      <div
-        ref={mapContainer}
-        className="map-container"
-      />
+      <div ref={mapContainer} className="map-container" />
     </>
   )
 }

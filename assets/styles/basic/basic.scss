@@ -1,19 +1,19 @@
 @import './fonts';
 
 // colors
-$primaryColor: #334D5C;
-$secondaryColor: #DC8744;
-$tertiaryColor: #F6C358;
+$primaryColor: #334d5c;
+$secondaryColor: #dc8744;
+$tertiaryColor: #f6c358;
 
 // font
 $headingFont: #000;
 $textFont: 'ABeeZee';
 
 body {
-    --vh: 100vh;
+  --vh: 100vh;
 }
 
 .test {
-    font-family: $textFont;
-    color: $secondaryColor;
+  font-family: $textFont;
+  color: $secondaryColor;
 }

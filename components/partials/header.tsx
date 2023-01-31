@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
 
 export const Header = () => {
@@ -8,14 +8,14 @@ export const Header = () => {
 
   return (
     <>
-      <div >
+      <div>
         <div>logo</div>
         <nav>nav</nav>
         <div>
           <Link href={router.pathname} locale="de">
             <h2>{t('de')}</h2>
           </Link>
-          <Link href={router.pathname}locale="en">
+          <Link href={router.pathname} locale="en">
             <h2>{t('en')}</h2>
           </Link>
         </div>
