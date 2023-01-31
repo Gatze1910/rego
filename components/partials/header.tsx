@@ -8,19 +8,38 @@ export const Header = () => {
 
   return (
     <>
-      <div>
+      <div className="uk-padding uk-flex uk-flex-between">
         <div>logo</div>
-        <nav>nav</nav>
+
+        <nav className="nav uk-flex">
+          <ul>
+            <li>
+              <Link href="">{t('nav.map')}</Link>
+            </li>
+            <li>
+              <Link href="">{t('nav.news')}</Link>
+            </li>
+            <li>
+              <Link href="">{t('nav.sell')}</Link>
+            </li>
+            <li>
+              <Link href="">{t('nav.buy')}</Link>
+            </li>
+            <li>
+              <Link href="">{t('nav.recipe')}</Link>
+            </li>
+          </ul>
+        </nav>
+
         <div>
           <Link href={router.pathname} locale="de">
-            <h2>{t('de')}</h2>
+            <p>{t('de')}</p>
           </Link>
-          <Link href={router.pathname} locale="en">
-            <h2>{t('en')}</h2>
+          <Link href={router.pathname}locale="en">
+            <p>{t('en')}</p>
           </Link>
         </div>
       </div>
-      <p>des is a Header</p>
     </>
   )
 }

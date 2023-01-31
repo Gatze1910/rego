@@ -1,5 +1,3 @@
-@import './fonts';
-
 // colors
 $primary-color: #334D5C;
 $secondary-color: #DC8744;
@@ -16,3 +14,10 @@ $text-font: 'ABeeZee';
 
     caret-color: $tertiary-color;
 }
+
+body {
+    color: $primary-color;
+}
+
+@import './uikit';
+@import './fonts';

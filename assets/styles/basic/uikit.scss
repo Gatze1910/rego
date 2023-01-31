@@ -1,0 +1,12 @@
+//////////////////////
+// uikit overwrites //
+//////////////////////
+a,
+.uk-link {
+    color: $primary-color;
+    text-decoration: underline;
+
+    &:hover {
+        color: $secondary-color;
+    }
+}
