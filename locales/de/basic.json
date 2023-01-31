@@ -1,21 +1,28 @@
 {
-    "test": "ein test",
-    "de": "Deutsch",
-    "en": "Englisch",
-    "error": {
-        "500": "500 Seite",
-        "404": "404 Seite"
-    },
-    "title": {
-        "long": "𝗥𝗘gionalität to𝗚𝗢 🌿",
-        "short": "𝗥𝗘𝗚𝗢 🌿",
-        "notFound": "Nicht gefunden"
-    },
-    "nav": {
-        "map": "Karte",
-        "news": "Aktuelles",
-        "recipe": "Rezepte",
-        "login": "Anmelden",
-        "logout": "Abmelden"
-    }
+  "test": "ein test",
+  "rego": "Regionalität ToGo",
+  "de": "DE",
+  "en": "EN",
+  "follow": "Folge uns",
+
+  "error": {
+    "500": "500 Seite",
+    "404": "404 Seite"
+  },
+
+  "title": {
+    "long": "𝗥𝗘gionalität to𝗚𝗢 🌿",
+    "short": "𝗥𝗘𝗚𝗢 🌿",
+    "notFound": "Nicht gefunden"
+  },
+
+  "nav": {
+    "map": "Karte",
+    "news": "Aktuelles",
+    "recipe": "Rezepte",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
+  }
 }

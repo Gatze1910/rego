@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext'
 export const Header = () => {
   const { user, logOut } = useAuth()
   const router = useRouter()
+  const { locale } = useRouter()
   const { t } = useTranslation('basic')
 
   const menuItems = [
@@ -28,10 +29,10 @@ export const Header = () => {
       id: 4,
       name: 'nav.login',
       link: '/login',
-    }
+    },
   ]
 
-   const handleLogout = async () => {
+  const handleLogout = async () => {
     try {
       await logOut()
       router.push('/login')
@@ -47,36 +48,36 @@ export const Header = () => {
 
         <nav className="nav uk-flex">
           <ul>
-          {!user.uid ? (
-                menuItems.map((item) => {
-
-                  return (
+            {!user.uid ? (
+              menuItems.map((item) => {
+                return (
                   <li key={item.id}>
                     <Link href={item?.link}>{t(item?.name)}</Link>
                   </li>
-                  )
-                })
-              ) : (
-                <>
-                  <li>
-                    <Link href="/shops/create">register a shop</Link>
-                  </li>
-                  <li>
-                    <a onClick={handleLogout}>{t('nav.logout')}</a>
-                  </li>
-                </>
-              )}
+                )
+              })
+            ) : (
+              <>
+                <li>
+                  <Link href="/shops/create">register a shop</Link>
+                </li>
+                <li>
+                  <a onClick={handleLogout}>{t('nav.logout')}</a>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
 
-        <div>
+        {locale == 'en' ? (
           <Link href={router.pathname} locale="de">
-            <p>{t('de')}</p>
+            {t('de')}
           </Link>
-          <Link href={router.pathname}locale="en">
-            <p>{t('en')}</p>
+        ) : (
+          <Link href={router.pathname} locale="en">
+            {t('en')}
           </Link>
-        </div>
+        )}
       </div>
     </>
   )

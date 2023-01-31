@@ -1,4 +1,4 @@
-import ProtectedRoute from "../../components/basic/ProtectedRoute"
+import ProtectedRoute from '../../components/basic/ProtectedRoute'
 
 const CreateShop = () => {
   return (

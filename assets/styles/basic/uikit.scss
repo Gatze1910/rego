@@ -3,10 +3,37 @@
 //////////////////////
 a,
 .uk-link {
-    color: $primary-color;
-    text-decoration: underline;
+  color: $primary-color;
 
-    &:hover {
-        color: $secondary-color;
-    }
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.uk-input {
+  color: $primary-color;
+  caret-color: $primary-color;
+  transition: border-width 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &:focus {
+    color: $primary-color;
+    border-color: $primary-color;
+    border-width: 2px;
+  }
+}
+
+.uk-form-danger {
+  color: $secondary-color;
+  caret-color: $secondary-color;
+  border-color: $secondary-color;
+
+  &:focus {
+    color: $secondary-color;
+    border-color: $secondary-color;
+  }
+}
+
+.uk-form-label {
+  color: $primary-color;
+  display: block;
 }
