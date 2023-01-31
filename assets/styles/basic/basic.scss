@@ -1,19 +1,18 @@
 @import './fonts';
 
 // colors
-$primaryColor: #334D5C;
-$secondaryColor: #DC8744;
-$tertiaryColor: #F6C358;
+$primary-color: #334D5C;
+$secondary-color: #DC8744;
+$tertiary-color: #F6C358;
 
 // font
-$headingFont: #000;
-$textFont: 'ABeeZee';
+$heading-font: 'Satisfy';
+$text-font: 'ABeeZee';
 
-body {
-    --vh: 100vh;
-}
+* {
+    &::selection {
+        background-color: $tertiary-color;
+    }
 
-.test {
-    font-family: $textFont;
-    color: $secondaryColor;
+    caret-color: $tertiary-color;
 }
