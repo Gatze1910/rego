@@ -2,6 +2,7 @@
 $primary-color: #334D5C;
 $secondary-color: #DC8744;
 $tertiary-color: #F6C358;
+$background-color: #F9F9F9;
 
 // font
 $heading-font: 'Satisfy';
@@ -17,6 +18,7 @@ $text-font: 'ABeeZee';
 
 body {
     color: $primary-color;
+    background: $background-color;
 }
 
 @import './uikit';

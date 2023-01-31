@@ -1,12 +1,11 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export const Document = () => {
+
   return (
     <Html lang="de">
-      <Head>
-        <title>𝗥𝗘gionality to𝗚𝗢 🌿</title>
-      </Head>
-      <body>
+      <Head />
+      <body className="uk-padding uk-padding-remove-vertical">
         <Main />
         <NextScript />
       </body>

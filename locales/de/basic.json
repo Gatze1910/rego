@@ -6,11 +6,16 @@
         "500": "500 Seite",
         "404": "404 Seite"
     },
+    "title": {
+        "long": "𝗥𝗘gionalität to𝗚𝗢 🌿",
+        "short": "𝗥𝗘𝗚𝗢 🌿",
+        "notFound": "Nicht gefunden"
+    },
     "nav": {
         "map": "Karte",
         "news": "Aktuelles",
-        "sell": "Verkaufen",
-        "buy": "Stöbern",
-        "recipe": "Rezepte"
+        "recipe": "Rezepte",
+        "login": "Anmelden",
+        "logout": "Abmelden"
     }
 }
