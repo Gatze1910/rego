@@ -1,4 +1,11 @@
-export const CreateShop = () => {
-  return <h1>Hier das Create-Shop-Form entstehen</h1>
+import ProtectedRoute from "../../components/basic/ProtectedRoute"
+
+const CreateShop = () => {
+  return (
+    <ProtectedRoute>
+      <h2>You are logged in! You are able to create a shop</h2>
+    </ProtectedRoute>
+  )
 }
+
 export default CreateShop
