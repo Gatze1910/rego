@@ -1,5 +1,3 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { gql, useQuery } from '@apollo/client'
 
 const AllUsersQuery = gql`
@@ -28,7 +26,7 @@ export default function Data() {
 
   return (
     <>
-      <main className={styles.main}>
+      <main>
         <div>
           <h1>
             Versuch Daten zu laden via Apollo Client mit Prisma und gql...
