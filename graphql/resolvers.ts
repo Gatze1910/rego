@@ -3,5 +3,8 @@ export const resolvers = {
     shops: (_parent, _args, context) => {
       return context.prisma.shop.findMany()
     },
+    news: (_parent, _args, context) => {
+      return context.prisma.shop.findMany()
+    },
   },
 }

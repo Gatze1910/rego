@@ -6,14 +6,14 @@ import {
   stringArg,
   floatArg,
 } from 'nexus'
+import { createTextChangeRange } from 'typescript'
 import { News } from './News'
-import { User } from './User'
 
 export const Shop = objectType({
   name: 'Shop',
   definition(t) {
     t.int('id')
-    t.int('ownerId')
+    t.string('ownerUuid')
     t.string('name')
     t.string('street')
     t.int('postcode')
@@ -24,18 +24,14 @@ export const Shop = objectType({
     t.string('email')
     t.string('website')
     t.string('openingHours')
-    t.field('owner', {
-      type: User,
-      async resolve(_parent, _args, context) {
-        return await context.prisma.shop
-          .findFirst({
-            where: {
-              ownerId: _parent.id,
-            },
-          })
-          .owner()
-      },
-    })
+    t.list.field("news", { 
+      type: "News",
+      resolve: (parent, args, context, info) => {
+          return context.prisma.shop.findUnique({
+              where: { id: parent.id }
+          }).news();
+      }    
+  })
     t.field('categories', {
       type: 'String',
       resolve(parent, _args, _ctx) {
@@ -61,26 +57,6 @@ export const ShopsQuery = extendType({
   },
 })
 
-export const ShopsByUserIdQuery = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.list.field('shopsByUserId', {
-      type: 'Shop',
-      args: {
-        ownerId: nonNull(intArg()),
-      },
-      resolve(_parent, args, ctx) {
-        const shops = ctx.prisma.shop.findMany({
-          where: {
-            ownerId: args.ownerId,
-          },
-        })
-        return shops
-      },
-    })
-  },
-})
-
 export const CreateShopMutation = extendType({
   type: 'Mutation',
   definition(t) {
@@ -93,7 +69,7 @@ export const CreateShopMutation = extendType({
         place: nonNull(stringArg()),
         latitude: nonNull(floatArg()),
         longitude: nonNull(floatArg()),
-        ownerId: nonNull(intArg()),
+        ownerUuid: nonNull(stringArg()),
         phone: intArg(),
         email: stringArg(),
         website: stringArg(),
@@ -110,7 +86,7 @@ export const CreateShopMutation = extendType({
         */
 
         const newShop = {
-          ownerId: args.ownerId,
+          ownerUuid: args.ownerUuid,
           name: args.name,
           street: args.street,
           postcode: args.postcode,
@@ -156,7 +132,7 @@ export const UpdateShopMutation = extendType({
       type: 'Shop',
       args: {
         id: nonNull(intArg()),
-        ownerId: intArg(),
+        ownerUuid: stringArg(),
         name: stringArg(),
         street: stringArg(),
         postcode: intArg(),
@@ -173,7 +149,7 @@ export const UpdateShopMutation = extendType({
         return ctx.prisma.shop.update({
           where: { id: args.id },
           data: {
-            ownerId: args.ownerId,
+            ownerUuid: args.ownerUuid,
             name: args.name,
             street: args.street,
             postcode: args.postcode,

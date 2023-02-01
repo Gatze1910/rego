@@ -4,7 +4,7 @@ export const Recipe = objectType({
   name: 'Recipe',
   definition(t) {
     t.int('id')
-    t.int('userId')
+    t.int('shopId')
     t.string('title')
     t.string('content')
     t.field('categories', {
