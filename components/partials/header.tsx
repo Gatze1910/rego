@@ -18,7 +18,7 @@ export const Header = () => {
     {
       id: 2,
       name: 'nav.news',
-      link: '/',
+      link: '/news',
     },
     {
       id: 3,

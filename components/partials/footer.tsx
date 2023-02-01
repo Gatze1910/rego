@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import { useAuth } from '../../context/AuthContext'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 export const Footer = () => {
   const { t } = useTranslation('basic')
@@ -66,10 +67,10 @@ export const Footer = () => {
             </ul>
           </nav>
 
-          <div>
+          <div className="uk-inline">
             <a href="https://instagram.com">
               {t('follow')}
-              <img src="/assets/icons/instagram.png" alt="instagram" />
+              <span className="uk-margin-small-left uk-form-icon-flip" uk-icon="icon: instagram"></span>
             </a>
           </div>
         </div>

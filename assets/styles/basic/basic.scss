@@ -1,9 +1,15 @@
 // colors
 $primary-color: #334d5c;
+$primary-color-variant: #243742;
 $secondary-color: #dc8744;
+$secondary-color-variant: #d67429;
 $secondary-color-opaque: #dc86442c;
 $tertiary-color: #f6c358;
+$tertiary-color-variant: #f4b225;
 $background-color: #f9f9f9;
+$border-color: #ccc;
+$disabled-color: #999;
+$white: #fff;
 
 // font
 $heading-font: 'Satisfy';
@@ -19,6 +25,10 @@ body {
   color: $primary-color;
   background: $background-color;
   overflow-x: hidden;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  display: none;
 }
 
 @import './uikit';

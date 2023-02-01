@@ -4,7 +4,7 @@ export const Document = () => {
   return (
     <Html lang="de">
       <Head />
-      <body className="uk-padding uk-padding-remove-vertical">
+      <body>
         <Main />
         <NextScript />
       </body>

@@ -58,6 +58,7 @@ export const Shops: NextPage = () => {
       zoom: zoom,
     })
     getLocation()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

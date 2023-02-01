@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { ButtonPrimary, ButtonSecondary } from '../components/basic/button'
 
 export const Home = () => {
   return (
@@ -13,12 +14,6 @@ export const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <div>
-            <p>Bernadette Ackerl, Vanessa Reiter und Markus Rinnerberger</p>
-          </div>
-        </div>
-
         <div>
           <p>wir sind gerade beim Entwicklen von</p>
           <h1>ReGo - Regionalität to go</h1>
@@ -53,6 +48,20 @@ export const Home = () => {
               placeholder="10"
             />
           </div>
+          <textarea className='uk-textarea uk-form-danger'></textarea>
+          <input type="radio" name="test" value="test" className='uk-radio' />
+          <input type="radio" name="test" value="test" className='uk-radio' />
+          <input type="checkbox" name="test" className='uk-checkbox' />
+          <div uk-form-custom="target: true">
+            <input type="file" aria-label="Custom controls" />
+            <input className="uk-input" type="text" placeholder="Select file" aria-label="Custom controls" />
+          </div>
+          <ButtonPrimary onClick={() => { alert('funktioniert!') }}>Button</ButtonPrimary>
+          <ButtonSecondary disabled={true}>Button</ButtonSecondary>
+          <select className='uk-select'>
+            <option value="test">Test</option>
+            <option value="test">Test</option>
+          </select>
         </form>
       </main>
     </>

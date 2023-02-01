@@ -1,6 +1,29 @@
 //////////////////////
 // uikit overwrites //
 //////////////////////
+h1,
+.uk-h1 {
+  font-family: $heading-font;
+  color: $secondary-color;
+}
+
+h2,
+.uk-h2 {
+  text-transform: uppercase;
+  color: $secondary-color;
+}
+
+h3,
+.uk-h3 {
+  color: $secondary-color;
+}
+
+h4,
+.uk-h4 {
+  font-size: 20px;
+  margin: 0;
+}
+
 a,
 .uk-link {
   color: $primary-color;
@@ -10,7 +33,8 @@ a,
   }
 }
 
-.uk-input {
+.uk-input,
+.uk-textarea {
   color: $primary-color;
   caret-color: $primary-color;
   transition: border-width 0.1s ease-in-out, border-color 0.1s ease-in-out;
@@ -36,4 +60,79 @@ a,
 .uk-form-label {
   color: $primary-color;
   display: block;
+}
+
+.uk-radio {
+  background-color: $white;
+
+  &:focus {
+    border-color: $primary-color;
+  }
+
+  &:checked {
+    background-color: $primary-color;
+    border-color: $primary-color;
+
+    &:focus {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.uk-checkbox {
+  background-color: $white;
+
+  &:focus {
+    border-color: $primary-color;
+    background-color: $white;
+  }
+
+  &:checked {
+    background-color: $primary-color;
+
+    &:focus {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.uk-button {
+  &.uk-button-primary {
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color-variant;
+    }
+  }
+
+  &.uk-button-secondary {
+    background-color: $secondary-color;
+
+    &:hover {
+      background-color: $secondary-color-variant;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid $border-color;
+    color: $disabled-color;
+  }
+}
+
+.uk-select {
+  transition: border-width 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &:focus {
+    border-color: $primary-color;
+    border-width: 2px;
+  }
+
+  option {
+
+    &:checked {
+      color: $white !important;
+      background-color: $primary-color !important;
+    }
+  }
 }
