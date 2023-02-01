@@ -1,0 +1,12 @@
+.footer {
+  position: relative;
+
+  .wave {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .content {
+    z-index: 10;
+  }
+}

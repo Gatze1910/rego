@@ -1,22 +1,24 @@
 // colors
-$primary-color: #334D5C;
-$secondary-color: #DC8744;
-$tertiary-color: #F6C358;
+$primary-color: #334d5c;
+$secondary-color: #dc8744;
+$secondary-color-opaque: #dc86442c;
+$tertiary-color: #f6c358;
+$background-color: #f9f9f9;
 
 // font
 $heading-font: 'Satisfy';
 $text-font: 'ABeeZee';
 
 * {
-    &::selection {
-        background-color: $tertiary-color;
-    }
-
-    caret-color: $tertiary-color;
+  &::selection {
+    background-color: $tertiary-color;
+  }
 }
 
 body {
-    color: $primary-color;
+  color: $primary-color;
+  background: $background-color;
+  overflow-x: hidden;
 }
 
 @import './uikit';
