@@ -2,6 +2,9 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
 import { useAuth } from '../../context/AuthContext'
+import logo from '../../assets/icons/logo-small.svg'
+import Image from 'next/image'
+
 
 export const Header = () => {
   const { user, logOut } = useAuth()
@@ -43,8 +46,15 @@ export const Header = () => {
 
   return (
     <>
-      <div className="uk-padding uk-flex uk-flex-between">
-        <div>logo</div>
+      <div className="header uk-position-fixed uk-width-1-1 uk-padding uk-flex uk-flex-between uk-flex-middle">
+        <div>
+          <Image className="img-container"
+            src={logo}
+            alt="lbbla"
+            width={40}
+            height={40}
+          />
+        </div>
 
         <nav className="nav uk-flex">
           <ul>

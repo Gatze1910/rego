@@ -1,10 +1,17 @@
 //////////////////////
 // uikit overwrites //
 //////////////////////
+
+.uk-text-danger {
+  color: $secondary-color !important;
+}
+
 h1,
 .uk-h1 {
   font-family: $heading-font;
   color: $secondary-color;
+  font-size: 50px;
+  margin-bottom: 40px;
 }
 
 h2,
@@ -31,6 +38,19 @@ a,
   &:hover {
     color: $secondary-color;
   }
+}
+
+.uk-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.uk-section {
+  background: transparent;
+}
+
+.uk-grid-row-large {
+  row-gap: 50px;
 }
 
 .uk-input,

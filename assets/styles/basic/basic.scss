@@ -31,5 +31,9 @@ body {
   display: none;
 }
 
+.flex-gap {
+  gap: 20px;
+}
+
 @import './uikit';
 @import './fonts';

@@ -43,7 +43,7 @@ export const Footer = () => {
         <path fill="#DC8744" fill-opacity="1" d="M0,32L60,64C120,96,240,160,360,181.3C480,203,600,181,720,149.3C840,117,960,75,1080,85.3C1200,96,1320,160,1380,192L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
       </svg> */}
 
-        <div className="content uk-padding uk-flex uk-flex-between">
+        <div className="content uk-padding uk-flex uk-flex-between uk-flex-middle">
           <div>{t('rego')}</div>
 
           <nav className="nav">

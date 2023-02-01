@@ -16,7 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ApolloProvider client={apolloClient}>
       <AuthContextProvider>
         <Header />
-        <div className="uk-padding uk-padding-remove-vertical">
+        <div className="uk-container uk-container-large">
           <Component className="uk-padding uk-padding-remove-vertical" {...pageProps} />
         </div>
         <Footer />

@@ -4,18 +4,17 @@
   "de": "DE",
   "en": "EN",
   "follow": "Folge uns",
-
   "error": {
     "500": "500 Seite",
     "404": "404 Seite"
   },
-
   "title": {
     "long": "𝗥𝗘gionalität to𝗚𝗢 🌿",
-    "short": "𝗥𝗘𝗚𝗢 🌿",
-    "notFound": "Nicht gefunden"
+    "short": "𝗥𝗘𝗚𝗢 🌿 • {{subtitle}}",
+    "notFound": "Nicht gefunden",
+    "login": "Anmelden",
+    "register": "Registrieren"
   },
-
   "nav": {
     "map": "Karte",
     "news": "Aktuelles",
