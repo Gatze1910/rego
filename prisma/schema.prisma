@@ -24,7 +24,7 @@ model Shop {
   email        String?  @unique
   website      String?
   openingHours String?
-  categories   Json?
+  categories   String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }

@@ -3,29 +3,57 @@
 
 
 type Mutation {
-  createShop(categories: String, email: String, latitude: Float!, longitude: Float!, name: String!, openingHours: String, ownerUuid: String!, phone: Int, place: String!, postcode: Int!, street: String!, website: String): Shop!
+  createPost(content: String!, shopId: Int!, title: String!): News!
+  createProducts(content: String, image: String, shopId: Int!, title: String!): Product!
+  createRecipe(content: String!, image: String, shopId: Int!, title: String!): Recipe!
+  createShop(categories: String, email: String, image: String, latitude: Float!, longitude: Float!, name: String!, openingHours: String, ownerUuid: String!, phone: Int, place: String!, postcode: Int!, street: String!, website: String): Shop!
+  deletePost(id: Int!): News!
+  deleteProduct(id: Int!): Product!
+  deleteRecipe(id: Int!): Recipe!
   deleteShop(id: Int!): Shop!
-  updateShop(categories: String, email: String, id: Int!, latitude: Float, longitude: Float, name: String, openingHours: String, ownerUuid: String, phone: Int, place: String, postcode: Int, street: String, website: String): Shop!
+  updatePost(content: String, id: Int!, title: String): Shop!
+  updateProduct(content: String, id: Int!, image: String, title: String): Product!
+  updateRecipe(content: String, id: Int!, image: String, title: String): Shop!
+  updateShop(categories: String, email: String, id: Int!, image: String, latitude: Float, longitude: Float, name: String, openingHours: String, ownerUuid: String, phone: Int, place: String, postcode: Int, street: String, website: String): Shop!
 }
 
 type News {
   content: String
   id: Int
-  shopId: Int
+  shop: Shop
+  title: String
+}
+
+input NewsInputType {
+  content: String!
+  shopId: Int!
+  title: String!
+}
+
+type Product {
+  content: String
+  id: Int
+  image: String
+  shop: Shop
   title: String
 }
 
 type Query {
-  news: [News]!
+  news: [News]
+  post(id: Int!): Shop
+  product(id: Int!): Product
+  products: [Product]
+  recipe(id: Int!): Recipe
   recipes: [Recipe]
-  shops: [Shop]!
+  shop(id: Int!): Shop
+  shops: [Shop]
 }
 
 type Recipe {
-  categories: String
   content: String
   id: Int
-  shopId: Int
+  image: String
+  shop: Shop
   title: String
 }
 
@@ -33,6 +61,7 @@ type Shop {
   categories: String
   email: String
   id: Int
+  image: String
   latitude: Float
   longitude: Float
   name: String
@@ -42,6 +71,8 @@ type Shop {
   phone: Int
   place: String
   postcode: Int
+  products: [Product]
+  recipes: [Recipe]
   street: String
   website: String
 }
