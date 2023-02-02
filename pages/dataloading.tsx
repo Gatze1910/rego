@@ -38,28 +38,34 @@ export default function Data() {
           {data.shops.map((shop: any) => (
             <li key={shop.id}>
               <b>{shop.name}</b>
-              {shop.news.length > 0 ? 
-                <p>das sind alle News von {shop.name}</p> :
-                <p>dieser Shop hat noch keine News gepostet</p> }
-                {shop.news.map((news: News) => (
-                  <ul key={news.id}>
-                    <b>{news.title}:</b>
-                    <i> {news.content}</i>
-                  </ul>
-                ))}
-            
-            {shop.recipes.length > 0 ? 
-              <p>das sind alle Rezepte von {shop.name}</p> :
-              <p>dieser Shop hat noch keine Rezepte</p> }
+              {shop.news.length > 0 ? (
+                <p>das sind alle News von {shop.name}</p>
+              ) : (
+                <p>dieser Shop hat noch keine News gepostet</p>
+              )}
+              {shop.news.map((news: News) => (
+                <ul key={news.id}>
+                  <b>{news.title}:</b>
+                  <i> {news.content}</i>
+                </ul>
+              ))}
+
+              {shop.recipes.length > 0 ? (
+                <p>das sind alle Rezepte von {shop.name}</p>
+              ) : (
+                <p>dieser Shop hat noch keine Rezepte</p>
+              )}
               {shop.recipes.map((recipe: Recipe) => (
                 <ul key={recipe.id}>
                   <b>{recipe.title}:</b>
                   <i> {recipe.content}</i>
                 </ul>
               ))}
-{shop.products.length > 0 ? 
-              <p>das sind alle Produkte von {shop.name}</p> :
-              <p>dieser Shop hat noch keine Produkte</p> }
+              {shop.products.length > 0 ? (
+                <p>das sind alle Produkte von {shop.name}</p>
+              ) : (
+                <p>dieser Shop hat noch keine Produkte </p>
+              )}
               {shop.products.map((product: Product) => (
                 <ul key={product.id}>
                   <b>{product.title}:</b>
