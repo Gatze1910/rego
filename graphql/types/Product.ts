@@ -60,7 +60,7 @@ export const ProductsMutation = extendType({
   type: 'Mutation',
   definition(t) {
     // create a product
-    t.nonNull.field('createProducts', {
+    t.nonNull.field('createProduct', {
       type: Product,
       args: {
         shopId: nonNull(intArg()),

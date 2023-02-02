@@ -4,7 +4,7 @@
 
 type Mutation {
   createPost(content: String!, shopId: Int!, title: String!): News!
-  createProducts(content: String, image: String, shopId: Int!, title: String!): Product!
+  createProduct(content: String, image: String, shopId: Int!, title: String!): Product!
   createRecipe(content: String!, image: String, shopId: Int!, title: String!): Recipe!
   createShop(categories: String, email: String, image: String, latitude: Float!, longitude: Float!, name: String!, openingHours: String, ownerUuid: String!, phone: Int, place: String!, postcode: Int!, street: String!, website: String): Shop!
   deletePost(id: Int!): News!
