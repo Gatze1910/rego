@@ -7,81 +7,78 @@ import {
   floatArg,
 } from 'nexus'
 import { News } from './News'
-import { User } from './User'
+import { Recipe } from './Recipe'
 
 export const Shop = objectType({
   name: 'Shop',
   definition(t) {
+    // here define all fields which can be queried if the Type is Shop
     t.int('id')
-    t.int('ownerId')
+    t.string('ownerUuid')
     t.string('name')
     t.string('street')
     t.int('postcode')
     t.string('place')
     t.float('latitude')
     t.float('longitude')
+    t.list.field('news', {
+      type: News,
+      resolve: (parent, _args, context) => {
+        return context.prisma.shop
+          .findUnique({
+            where: { id: parent.id },
+          })
+          .news()
+      },
+    })
+    t.list.field('recipes', {
+      type: Recipe,
+      resolve: (parent, _args, context) => {
+        return context.prisma.shop
+          .findUnique({
+            where: { id: parent.id },
+          })
+          .recipes()
+      },
+    })
+    t.string('image')
     t.int('phone')
     t.string('email')
     t.string('website')
     t.string('openingHours')
-    t.field('owner', {
-      type: User,
-      async resolve(_parent, _args, context) {
-        return await context.prisma.shop
-          .findFirst({
-            where: {
-              ownerId: _parent.id,
-            },
-          })
-          .owner()
-      },
-    })
-    t.field('categories', {
-      type: 'String',
-      resolve(parent, _args, _ctx) {
-        const str = parent['categories']
-        if (!str) {
-          return {}
-        }
-        return JSON.parse(str)
-      },
-    })
+    t.string('categories')
   },
 })
 
-export const ShopsQuery = extendType({
+export const ShopQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.field('shops', {
+    // get all shops
+    t.list.field('shops', {
       type: 'Shop',
       resolve(_parent, _args, ctx) {
         return ctx.prisma.shop.findMany()
       },
     })
-  },
-})
 
-export const ShopsByUserIdQuery = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.list.field('shopsByUserId', {
+    // get shop by id
+    t.field('shop', {
       type: 'Shop',
       args: {
-        ownerId: nonNull(intArg()),
+        id: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
-        const shops = ctx.prisma.shop.findMany({
+        return ctx.prisma.shop.findUnique({
           where: {
-            ownerId: args.ownerId,
+            id: args.id,
           },
         })
-        return shops
       },
     })
   },
 })
 
-export const CreateShopMutation = extendType({
+export const ShopMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('createShop', {
@@ -93,99 +90,89 @@ export const CreateShopMutation = extendType({
         place: nonNull(stringArg()),
         latitude: nonNull(floatArg()),
         longitude: nonNull(floatArg()),
-        ownerId: nonNull(intArg()),
+        image: stringArg(),
         phone: intArg(),
         email: stringArg(),
         website: stringArg(),
-        categories: stringArg(),
         openingHours: stringArg(),
+        categories: stringArg(),
       },
-      async resolve(_parent, args, ctx) {
-        /** 
+      resolve(_parent, args, ctx) {
         if (!ctx.user) {
           throw new Error(`You need to be logged in to perform an action`)
+          return
         }
 
-        dann bei new shop irgendwie von ctx also session den user als user id setzen bei ownerId
-        */
-
-        const newShop = {
-          ownerId: args.ownerId,
-          name: args.name,
-          street: args.street,
-          postcode: args.postcode,
-          place: args.place,
-          website: args.website,
-          categories: args.categories,
-          longitude: args.longitude,
-          latitude: args.latitude,
-          phone: args.phone,
-          email: args.email,
-          openingHours: args.openingHours,
-        }
-
-        return await ctx.prisma.shop.create({
-          data: newShop,
+        return ctx.prisma.shop.create({
+          data: {
+            ownerUuid: ctx.user.sub,
+            name: args.name,
+            street: args.street,
+            postcode: args.postcode,
+            place: args.place,
+            latitude: args.latitude,
+            longitude: args.longitude,
+            image: args.image,
+            phone: args.phone,
+            email: args.email,
+            website: args.website,
+            openingHours: args.openingHours,
+            categories: args.categories,
+          },
         })
       },
     })
-  },
-})
 
-export const DeleteShopMutation = extendType({
-  type: 'Mutation',
-  definition(t) {
+    // update a shop
+    t.nonNull.field('updateShop', {
+      type: Shop,
+      args: {
+        id: nonNull(intArg()),
+        ownerUuid: stringArg(),
+        name: stringArg(),
+        street: stringArg(),
+        postcode: intArg(),
+        place: stringArg(),
+        latitude: floatArg(),
+        longitude: floatArg(),
+        image: stringArg(),
+        phone: intArg(),
+        email: stringArg(),
+        website: stringArg(),
+        openingHours: stringArg(),
+        categories: stringArg(),
+      },
+      resolve(_parent, args, ctx) {
+        return ctx.prisma.shop.update({
+          where: { id: args.id },
+          data: {
+            ownerUuid: args.ownerUuid,
+            name: args.name,
+            street: args.street,
+            postcode: args.postcode,
+            place: args.place,
+            latitude: args.latitude,
+            longitude: args.longitude,
+            image: args.image,
+            phone: args.phone,
+            email: args.email,
+            website: args.website,
+            openingHours: args.openingHours,
+            categories: args.categories,
+          },
+        })
+      },
+    })
+
+    // delete a shop
     t.nonNull.field('deleteShop', {
-      type: 'Shop',
+      type: Shop,
       args: {
         id: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
         return ctx.prisma.shop.delete({
           where: { id: args.id },
-        })
-      },
-    })
-  },
-})
-
-export const UpdateShopMutation = extendType({
-  type: 'Mutation',
-  definition(t) {
-    t.nonNull.field('updateShop', {
-      type: 'Shop',
-      args: {
-        id: nonNull(intArg()),
-        ownerId: intArg(),
-        name: stringArg(),
-        street: stringArg(),
-        postcode: intArg(),
-        phone: intArg(),
-        email: stringArg(),
-        place: stringArg(),
-        latitude: floatArg(),
-        longitude: floatArg(),
-        website: stringArg(),
-        categories: stringArg(),
-        openingHours: stringArg(),
-      },
-      resolve(_parent, args, ctx) {
-        return ctx.prisma.shop.update({
-          where: { id: args.id },
-          data: {
-            ownerId: args.ownerId,
-            name: args.name,
-            street: args.street,
-            postcode: args.postcode,
-            place: args.place,
-            website: args.website,
-            categories: args.categories,
-            longitude: args.longitude,
-            latitude: args.latitude,
-            phone: args.phone,
-            email: args.email,
-            openingHours: args.openingHours,
-          },
         })
       },
     })
