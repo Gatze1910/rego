@@ -5,23 +5,23 @@ import '../assets/styles/style.scss'
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
 import apolloClient from '../lib/apollo'
-import { AuthContextProvider } from '../context/AuthContext'
 import { Header } from '../components/partials/header'
 import { Footer } from '../components/partials/footer'
+import { UserProvider } from '@auth0/nextjs-auth0/client'
 
 const App = ({ Component, pageProps }: AppProps) => {
   Uikit.use(Icons)
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <AuthContextProvider>
-        <Header />
-        <div className="uk-container uk-container-large">
-          <Component className="uk-padding uk-padding-remove-vertical" {...pageProps} />
-        </div>
-        <Footer />
-      </AuthContextProvider>
-    </ApolloProvider>
+    <UserProvider>
+      <ApolloProvider client={apolloClient}>
+          <Header />
+          <div className="uk-container uk-container-large">
+            <Component className="uk-padding uk-padding-remove-vertical" {...pageProps} />
+          </div>
+          <Footer />
+      </ApolloProvider>
+    </UserProvider>
   )
 }
 

@@ -3,9 +3,9 @@
 
 
 type Mutation {
-  createShop(categories: String, email: String, latitude: Float!, longitude: Float!, name: String!, openingHours: String, ownerId: Int!, phone: Int, place: String!, postcode: Int!, street: String!, website: String): Shop!
+  createShop(categories: String, email: String, image: String, latitude: Float!, longitude: Float!, name: String!, openingHours: String, phone: Int, place: String!, postcode: Int!, street: String!, website: String): Shop!
   deleteShop(id: Int!): Shop!
-  updateShop(categories: String, email: String, id: Int!, latitude: Float, longitude: Float, name: String, openingHours: String, ownerId: Int, phone: Int, place: String, postcode: Int, street: String, website: String): Shop!
+  updateShop(categories: String, email: String, id: Int!, image: String, latitude: Float, longitude: Float, name: String, openingHours: String, ownerUuid: String, phone: Int, place: String, postcode: Int, street: String, website: String): Shop!
 }
 
 type News {
@@ -18,8 +18,8 @@ type News {
 type Query {
   news: [News]!
   recipes: [Recipe]
-  shops: [Shop]!
-  shopsByUserId(ownerId: Int!): [Shop]!
+  shop(id: Int!): Shop
+  shops: [Shop]
   users: [User]!
 }
 
@@ -35,15 +35,17 @@ type Shop {
   categories: String
   email: String
   id: Int
+  image: String
   latitude: Float
   longitude: Float
   name: String
+  news: [News]
   openingHours: String
-  owner: User
-  ownerId: Int
+  ownerUuid: String
   phone: Int
   place: String
   postcode: Int
+  recipes: [Recipe]
   street: String
   website: String
 }
