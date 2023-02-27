@@ -12,5 +12,9 @@ export async function middleware(req: NextRequest) {
 }
 // im config angeben welche pages geprüft werden sollten
 export const config = {
-  matcher: '/shops/create',
+  matcher: [
+    '/shops/create',
+    '/shops/:path/edit',
+    '/shops/:path/products/:path*',
+  ],
 }
