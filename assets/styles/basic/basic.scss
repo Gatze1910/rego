@@ -21,6 +21,10 @@ $text-font: 'ABeeZee';
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: $primary-color;
   background: $background-color;
@@ -35,5 +39,25 @@ body {
   gap: 20px;
 }
 
+.flex-gap-medium {
+  gap: 40px;
+}
+
+.flex-gap-large {
+  gap: 70px;
+}
+
+.box-shadow {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.height-fit {
+  height: fit-content;
+}
+
 @import './uikit';
 @import './fonts';
+
+.test-border {
+  border: 1px solid black;
+}

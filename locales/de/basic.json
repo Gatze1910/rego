@@ -13,7 +13,8 @@
     "short": "𝗥𝗘𝗚𝗢 🌿 • {{subtitle}}",
     "notFound": "Nicht gefunden",
     "login": "Anmelden",
-    "register": "Registrieren"
+    "register": "Registrieren",
+    "createShop": "Shop erstellen"
   },
   "nav": {
     "map": "Karte",
@@ -21,6 +22,7 @@
     "recipe": "Rezepte",
     "login": "Anmelden",
     "logout": "Abmelden",
+    "profile": "Profil",
     "imprint": "Impressum",
     "privacy": "Datenschutz"
   }

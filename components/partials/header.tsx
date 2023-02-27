@@ -15,7 +15,7 @@ export const Header = () => {
     {
       id: 1,
       name: 'nav.map',
-      link: '/',
+      link: '/shops',
     },
     {
       id: 2,
@@ -31,8 +31,8 @@ export const Header = () => {
 
   return (
     <>
-      <div className="header uk-position-fixed uk-width-1-1 uk-padding uk-flex uk-flex-between uk-flex-middle">
-        <div>
+      <div className="header uk-position-fixed uk-width-1-1 uk-padding uk-padding-remove-vertical uk-flex uk-flex-between uk-flex-middle">
+        <Link href="/">
           <Image
             className="img-container"
             src={logo}
@@ -40,28 +40,28 @@ export const Header = () => {
             width={40}
             height={40}
           />
-        </div>
+        </Link>
 
         <nav className="nav uk-flex">
           <ul>
+            {menuItems.map((item) => {
+              return (
+                <li key={item.id}>
+                  <Link href={item?.link}>{t(item?.name)}</Link>
+                </li>
+              )
+            })}
+
             {!user ? (
               <>
                 <li>
                   <Link href="/api/auth/login">{t('nav.login')}</Link>
                 </li>
-
-                {menuItems.map((item) => {
-                  return (
-                    <li key={item.id}>
-                      <Link href={item?.link}>{t(item?.name)}</Link>
-                    </li>
-                  )
-                })}
               </>
             ) : (
               <>
                 <li>
-                  <Link href="/shops/create">register a shop</Link>
+                  <Link href="/shops/create">{t('nav.profile')}</Link>
                 </li>
                 <li>
                   <Link href="/api/auth/logout">{t('nav.logout')}</Link>

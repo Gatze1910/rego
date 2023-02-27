@@ -3,7 +3,6 @@ import prisma from '../lib/prisma'
 import { getSession } from '@auth0/nextjs-auth0'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-//read the docs :)
 export type Context = {
   prisma: PrismaClient
   user?: any

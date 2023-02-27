@@ -1,21 +1,9 @@
 {
-  "locales": [
-    "de",
-    "en"
-  ],
+  "locales": ["de", "en"],
   "defaultLocale": "de",
   "pages": {
-    "*": [
-      "common",
-      "basic",
-      "form"
-    ],
-    "/": [
-      "home",
-      "example"
-    ],
-    "/about": [
-      "about"
-    ]
+    "*": ["common", "basic", "form", "landingPage"],
+    "/": ["home", "example"],
+    "/about": ["about"]
   }
 }
