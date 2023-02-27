@@ -15,11 +15,14 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <UserProvider>
       <ApolloProvider client={apolloClient}>
-          <Header />
-          <div className="uk-container uk-container-large">
-            <Component className="uk-padding uk-padding-remove-vertical" {...pageProps} />
-          </div>
-          <Footer />
+        <Header />
+        <div className="body-wrapper">
+          <Component
+            className="uk-padding- uk-padding-remove-vertical"
+            {...pageProps}
+          />
+        </div>
+        <Footer />
       </ApolloProvider>
     </UserProvider>
   )

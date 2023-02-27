@@ -49,6 +49,10 @@ a,
   background: transparent;
 }
 
+.uk-container-large {
+  max-width: 1210px;
+}
+
 .uk-grid-row-large {
   row-gap: 50px;
 }
@@ -149,10 +153,19 @@ a,
   }
 
   option {
-
     &:checked {
       color: $white !important;
       background-color: $primary-color !important;
     }
   }
+}
+
+.uk-totop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: white;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: $secondary-color;
 }

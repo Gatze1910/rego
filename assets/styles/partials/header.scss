@@ -1,10 +1,13 @@
 .header {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  //z-index: 100;
-  //background: $background-color;
+  top: 0;
+  height: 80px;
+  z-index: 100;
+  background: $background-color;
 }
 
-.testheadersticky {}
+.testheadersticky {
+}
 
 .nav {
   ul {
