@@ -11,11 +11,14 @@ export const Product = () => {
             alt="lbbla"
             fill={true}
           />
+
+          <div className="product-banner uk-position-top-left">
+            Banner text
+          </div>
         </div>
         <div className="uk-padding-small uk-padding-remove-horizontal">
           <h4>Eier</h4>
           <p>Von unseren glücklichen Hühnern</p>
-          <h4>€ 5,00</h4>
         </div>
       </div>
     </>

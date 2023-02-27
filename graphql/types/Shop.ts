@@ -210,7 +210,6 @@ export const CreateShopMutation = extendType({
         phone: intArg(),
         email: stringArg(),
         website: stringArg(),
-        categories: stringArg(),
         openingHours: stringArg(),
         image: stringArg(),
       },
@@ -218,6 +217,7 @@ export const CreateShopMutation = extendType({
        
         if (!ctx.user) {
           throw new Error(`You need to be logged in to perform an action`)
+          return
         }
 
         dann bei new shop irgendwie von ctx also session den user als user id setzen bei ownerId
@@ -261,28 +261,25 @@ export const DeleteShopMutation = extendType({
         })
       },
     })
-  },
-})
 
-export const UpdateShopMutation = extendType({
-  type: 'Mutation',
-  definition(t) {
+    // update a shop
     t.nonNull.field('updateShop', {
-      type: 'Shop',
+      type: Shop,
       args: {
         id: nonNull(intArg()),
         ownerUuid: stringArg(),
         name: stringArg(),
         street: stringArg(),
         postcode: intArg(),
-        phone: intArg(),
-        email: stringArg(),
         place: stringArg(),
         latitude: floatArg(),
         longitude: floatArg(),
+        image: stringArg(),
+        phone: intArg(),
+        email: stringArg(),
         website: stringArg(),
-        categories: stringArg(),
         openingHours: stringArg(),
+        categories: stringArg(),
       },
       resolve(_parent, args, ctx) {
         return ctx.prisma.shop.update({
@@ -293,14 +290,28 @@ export const UpdateShopMutation = extendType({
             street: args.street,
             postcode: args.postcode,
             place: args.place,
-            website: args.website,
-            categories: args.categories,
-            longitude: args.longitude,
             latitude: args.latitude,
+            longitude: args.longitude,
+            image: args.image,
             phone: args.phone,
             email: args.email,
+            website: args.website,
             openingHours: args.openingHours,
+            categories: args.categories,
           },
+        })
+      },
+    })
+
+    // delete a shop
+    t.nonNull.field('deleteShop', {
+      type: Shop,
+      args: {
+        id: nonNull(intArg()),
+      },
+      resolve(_parent, args, ctx) {
+        return ctx.prisma.shop.delete({
+          where: { id: args.id },
         })
       },
     })

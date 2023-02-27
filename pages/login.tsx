@@ -1,17 +1,25 @@
+import useTranslation from 'next-translate/useTranslation'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { Input, Submit } from '../components/basic/formfields'
 import { useAuth } from '../context/AuthContext'
 
-interface LoginType {
+export interface LoginFields {
   email: string
   password: string
 }
+
 const LoginPage = () => {
+
+  const tF = useTranslation('form').t
+  const tB = useTranslation('basic').t
+
   const { logIn } = useAuth()
   const router = useRouter()
 
-  const methods = useForm<LoginType>({ mode: 'onBlur' })
+  const methods = useForm<LoginFields>({ mode: 'onChange' })
 
   const {
     register,
@@ -19,7 +27,7 @@ const LoginPage = () => {
     formState: { errors },
   } = methods
 
-  const onSubmit = async (data: LoginType) => {
+  const onSubmit = async (data: LoginFields) => {
     try {
       await logIn(data.email, data.password)
       router.push('/shops/create')
@@ -30,42 +38,46 @@ const LoginPage = () => {
     }
   }
 
-  return (
-    <div>
-      <h2>Log In</h2>
-      <FormProvider {...methods}>
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <div>
-              <label htmlFor="">Email</label>
-            </div>
+  return (<>
+    <Head>
+      <title>
+        {tB('title.short', { subtitle: tB('title.login') })}</title>
+    </Head>
+    <h1>{tB('title.login')}</h1>
+    <FormProvider {...methods}>
+      <form className="uk-margin-medium-top" action="" onSubmit={handleSubmit(onSubmit)}>
 
-            <input
-              type="email"
-              {...register('email', { required: 'Email is required' })}
-            />
-            {errors.email && <p>{errors.email.message}</p>}
-          </div>
-          <div>
-            <div>
-              <label htmlFor="">Password</label>
-            </div>
+        <Input
+          id="email"
+          type="email"
+          placeholder="mail@provider.com"
+          icon="mail" flipicon
+          label="E-Mail"
+          validation={{
+            field: 'email',
+            register,
+            error: errors.email,
+            option: { required: tF('error.required'), pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: tF('error.pattern') } }
+          }}
+        />
 
-            <input
-              type="password"
-              {...register('password', { required: 'Password is required' })}
-            />
-            {errors.password && <p>{errors.password.message}</p>}
-          </div>
+        <Input
+          id="password"
+          type="password"
+          icon="lock" flipicon
+          label="Passwort"
+          validation={{
+            field: 'password',
+            register,
+            error: errors.password,
+            option: { required: tF('error.required'), minLength: { value: 6, message: tF('error.minLength', { count: 6 }) } }
+          }}
+        />
 
-          <div>
-            <button type="submit">
-              <p>submit</p>
-            </button>
-          </div>
-        </form>
-      </FormProvider>
-    </div>
+        <Submit id="login" value="Login" />
+      </form>
+    </FormProvider>
+  </>
   )
 }
 

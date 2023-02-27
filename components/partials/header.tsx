@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
-import { useAuth } from '../../context/AuthContext'
+import logo from '../../assets/icons/logo-small.svg'
+import Image from 'next/image'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 export const Header = () => {
-  const { user, logOut } = useAuth()
+  const { user } = useUser()
   const router = useRouter()
   const { locale } = useRouter()
   const { t } = useTranslation('basic')
@@ -25,44 +27,44 @@ export const Header = () => {
       name: 'nav.recipe',
       link: '/',
     },
-    {
-      id: 4,
-      name: 'nav.login',
-      link: '/login',
-    },
   ]
-
-  const handleLogout = async () => {
-    try {
-      await logOut()
-      router.push('/login')
-    } catch (error: any) {
-      console.log(error.message)
-    }
-  }
 
   return (
     <>
-      <div className="uk-padding uk-flex uk-flex-between">
-        <div>logo</div>
+      <div className="header uk-position-fixed uk-width-1-1 uk-padding uk-flex uk-flex-between uk-flex-middle">
+        <div>
+          <Image
+            className="img-container"
+            src={logo}
+            alt="lbbla"
+            width={40}
+            height={40}
+          />
+        </div>
 
         <nav className="nav uk-flex">
           <ul>
-            {!user.uid ? (
-              menuItems.map((item) => {
-                return (
-                  <li key={item.id}>
-                    <Link href={item?.link}>{t(item?.name)}</Link>
-                  </li>
-                )
-              })
+            {!user ? (
+              <>
+                <li>
+                  <Link href="/api/auth/login">{t('nav.login')}</Link>
+                </li>
+
+                {menuItems.map((item) => {
+                  return (
+                    <li key={item.id}>
+                      <Link href={item?.link}>{t(item?.name)}</Link>
+                    </li>
+                  )
+                })}
+              </>
             ) : (
               <>
                 <li>
                   <Link href="/shops/create">register a shop</Link>
                 </li>
                 <li>
-                  <a onClick={handleLogout}>{t('nav.logout')}</a>
+                  <Link href="/api/auth/logout">{t('nav.logout')}</Link>
                 </li>
               </>
             )}

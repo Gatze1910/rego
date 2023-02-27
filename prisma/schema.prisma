@@ -21,7 +21,7 @@ model Shop {
   recipes      Recipe[]
   image        String?     
   phone        Int?
-  email        String?  @unique
+  email        String?   @unique
   website      String?
   openingHours String?
   categories   String?
