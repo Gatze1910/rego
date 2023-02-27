@@ -1,23 +1,24 @@
 import {
   extendType,
-  inputObjectType,
   intArg,
   nonNull,
   objectType,
+  queryType,
   stringArg,
 } from 'nexus'
 import { Shop } from './Shop'
 
-export const News = objectType({
-  name: 'News',
+export const Product = objectType({
+  name: 'Product',
   definition(t) {
     t.int('id')
     t.string('title')
     t.string('content')
+    t.string('image')
     t.field('shop', {
       type: Shop,
       resolve: (parent, _args, ctx) => {
-        return ctx.prisma.news
+        return ctx.prisma.recipe
           .findUnique({
             where: { id: parent.id },
           })
@@ -27,35 +28,25 @@ export const News = objectType({
   },
 })
 
-// in case if we need to specify the input for a news entry
-export const NewsInputType = inputObjectType({
-  name: 'NewsInputType',
-  definition(t) {
-    t.nonNull.int('shopId')
-    t.nonNull.string('title')
-    t.nonNull.string('content')
-  },
-})
-
-export const NewsQuery = extendType({
+export const ProductQuery = extendType({
   type: 'Query',
   definition(t) {
-    // get all news
-    t.list.field('news', {
-      type: News,
+    // get all products
+    t.list.field('products', {
+      type: Product,
       resolve(_parent, _args, context) {
-        return context.prisma.news.findMany()
+        return context.prisma.product.findMany()
       },
     })
 
-    // get post (one new) by id
-    t.field('post', {
-      type: Shop,
+    // get one product by id
+    t.field('product', {
+      type: Product,
       args: {
         id: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
-        return ctx.prisma.shop.findUnique({
+        return ctx.prisma.product.findUnique({
           where: {
             id: args.id,
           },
@@ -65,55 +56,59 @@ export const NewsQuery = extendType({
   },
 })
 
-export const NewsMutation = extendType({
+export const ProductsMutation = extendType({
   type: 'Mutation',
   definition(t) {
-    // create a post
-    t.nonNull.field('createPost', {
-      type: News,
+    // create a product
+    t.nonNull.field('createProduct', {
+      type: Product,
       args: {
         shopId: nonNull(intArg()),
         title: nonNull(stringArg()),
-        content: nonNull(stringArg()),
+        content: stringArg(),
+        image: stringArg(),
       },
       resolve(_parent, args, ctx) {
-        return ctx.prisma.news.create({
+        return ctx.prisma.product.create({
           data: {
             shopId: args.shopId,
             title: args.title,
             content: args.content,
+            image: args.image,
           },
         })
       },
     })
 
-    // update a post
-    t.nonNull.field('updatePost', {
-      type: Shop,
+    // update a product
+    t.nonNull.field('updateProduct', {
+      type: Product,
       args: {
         id: nonNull(intArg()),
         title: stringArg(),
         content: stringArg(),
+        image: stringArg(),
       },
       resolve(_parent, args, ctx) {
-        return ctx.prisma.news.update({
+        return ctx.prisma.product.update({
           where: { id: args.id },
           data: {
             title: args.title,
             content: args.content,
+            image: args.image,
           },
         })
       },
     })
 
-    // delete a post
-    t.nonNull.field('deletePost', {
-      type: News,
+    // delete a product
+    t.nonNull.field('deleteProduct', {
+      type: Product,
       args: {
         id: nonNull(intArg()),
       },
       resolve(_parent, args, ctx) {
-        return ctx.prisma.news.delete({
+        return ctx.prisma.product.delete({
           where: { id: args.id },
         })
       },

@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Shop {
-  id           Int       @id @default(autoincrement())
-  ownerUuid    String
+  id           Int      @id @default(autoincrement())
+  ownerUuid    String   
   name         String
   street       String
   postcode     Int
@@ -19,14 +19,14 @@ model Shop {
   news         News[]
   products     Product[]
   recipes      Recipe[]
-  image        String?
+  image        String?     
   phone        Int?
   email        String?   @unique
   website      String?
   openingHours String?
   categories   String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model News {
@@ -51,12 +51,12 @@ model Product {
 }
 
 model Recipe {
-  id        Int      @id @default(autoincrement())
-  shop      Shop     @relation(fields: [shopId], references: [id])
-  shopId    Int
-  title     String
-  content   String
-  image     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  shop       Shop     @relation(fields: [shopId], references: [id])
+  shopId     Int
+  title      String
+  content    String
+  image      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
