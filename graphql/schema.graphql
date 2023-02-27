@@ -6,7 +6,7 @@ type Mutation {
   createPost(content: String!, shopId: Int!, title: String!): News!
   createProduct(content: String, image: String, shopId: Int!, title: String!): Product!
   createRecipe(content: String!, image: String, shopId: Int!, title: String!): Recipe!
-  createShop(categories: String, email: String, image: String, latitude: Float!, longitude: Float!, name: String!, openingHours: String, ownerUuid: String!, phone: Int, place: String!, postcode: Int!, street: String!, website: String): Shop!
+  createShop(categories: String, email: String, image: String, latitude: Float!, longitude: Float!, name: String!, openingHours: String, phone: Int, place: String!, postcode: Int!, street: String!, website: String): Shop!
   deletePost(id: Int!): News!
   deleteProduct(id: Int!): Product!
   deleteRecipe(id: Int!): Recipe!
@@ -14,7 +14,7 @@ type Mutation {
   updatePost(content: String, id: Int!, title: String): Shop!
   updateProduct(content: String, id: Int!, image: String, title: String): Product!
   updateRecipe(content: String, id: Int!, image: String, title: String): Shop!
-  updateShop(categories: String, email: String, id: Int!, image: String, latitude: Float, longitude: Float, name: String, openingHours: String, ownerUuid: String, phone: Int, place: String, postcode: Int, street: String, website: String): Shop!
+  updateShop(categories: String, email: String, id: Int!, image: String, latitude: Float, longitude: Float, name: String, openingHours: String, phone: Int, place: String, postcode: Int, street: String, website: String): Shop!
 }
 
 type News {

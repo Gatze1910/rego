@@ -10,10 +10,37 @@ import {
 } from '../../../components/basic/button'
 import { gql, useQuery } from '@apollo/client'
 
+const GetShopData = gql`
+  query Shop($id: Int!) {
+    shop(id: $id) {
+      name
+    }
+  }
+`
+
+/* const GetShopData = gql`
+  query Shop {
+    shop(id: 1) {
+      name
+    }
+  }
+` */
+
 export const Shop = () => {
   const router = useRouter()
   const { id } = router.query
+  const newId: number = +id
   const { t } = useTranslation('common')
+  const { loading, error, data } = useQuery(GetShopData, {
+    variables: { id: newId },
+  })
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Currently there is no production database available..</p>
+
+  console.log('data', data)
+  console.log('shop', data.shop)
+  console.log('name', data.shop.name)
 
   return (
     <>
@@ -30,7 +57,7 @@ export const Shop = () => {
             </div>
 
             <div className="uk-width-2-5">
-              <h2>Bauernhof Rudi</h2>
+              {/* <h2>{data.shop.name}</h2> */}
               <p>
                 Bauernhofstraße 1<br />
                 9020 Klagenfurt

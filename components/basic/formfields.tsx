@@ -1,8 +1,11 @@
-import { InputHTMLAttributes, SelectHTMLAttributes } from 'react'
+import {
+  InputHTMLAttributes,
+  SelectHTMLAttributes,
+  TextareaHTMLAttributes,
+} from 'react'
 import { FieldError, RegisterOptions, UseFormRegister } from 'react-hook-form'
 import { LoginFields } from '../../pages/login'
 import { ShopFields } from '../../pages/shops/create'
-import { RegisterFields } from '../../pages/users/register'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: string
@@ -16,6 +19,11 @@ interface InputValidation {
   register: UseFormRegister<any>
   error: FieldError
   option?: RegisterOptions<any, any>
+}
+
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string
+  validation: InputValidation
 }
 
 export const Input = (props: InputProps) => {
@@ -40,7 +48,7 @@ export const Input = (props: InputProps) => {
           }
           {...props.validation.register(
             props.validation.field,
-            props.validation.option,
+            props.validation.option
           )}
         />
       </div>
@@ -55,7 +63,7 @@ export const Input = (props: InputProps) => {
 
 export const FileInput = (props: Omit<InputProps, 'validation'>) => {
   return (
-    <div className="uk-margin-top">
+    <div className="uk-margin-top uk-flex uk-flex-center">
       {props.label ? (
         <label className="uk-form-label" htmlFor={props.id}>
           {props.label}
@@ -89,15 +97,30 @@ export const FileInput = (props: Omit<InputProps, 'validation'>) => {
 
 export const Select = (props: SelectHTMLAttributes<HTMLSelectElement>) => {
   return (
-    <select className="uk-select" {...props}>
-      {props.children}
-    </select>
+    <div className="uk-margin-top">
+      <select className={'uk-select ' + props.className} {...props}>
+        {props.children}
+      </select>
+    </div>
   )
 }
 
 export const Search = (props: InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <input type="text" {...props} className={'uk-input ' + props.className} />
+  )
+}
+
+export const Textarea = (props: TextareaProps) => {
+  return (
+    <div className="uk-margin-top">
+      {props.label ? (
+        <label className="uk-form-label" htmlFor={props.id}>
+          {props.label}
+        </label>
+      ) : null}
+      <textarea {...props} className={'uk-input ' + props.className}></textarea>
+    </div>
   )
 }
 

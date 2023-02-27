@@ -11,16 +11,11 @@ export const Footer = () => {
   const menuItems = [
     {
       id: 1,
-      name: 'nav.map',
-      link: '/shops',
-    },
-    {
-      id: 2,
       name: 'nav.imprint',
       link: '/imprint',
     },
     {
-      id: 3,
+      id: 2,
       name: 'nav.privacy',
       link: '/privacy',
     },

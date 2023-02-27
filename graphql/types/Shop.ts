@@ -95,7 +95,6 @@ export const ShopMutation = extendType({
     t.nonNull.field('createShop', {
       type: Shop,
       args: {
-        ownerUuid: nonNull(stringArg()),
         name: nonNull(stringArg()),
         street: nonNull(stringArg()),
         postcode: nonNull(intArg()),
@@ -110,15 +109,14 @@ export const ShopMutation = extendType({
         categories: stringArg(),
       },
       resolve(_parent, args, ctx) {
-        /** 
         if (!ctx.user) {
           throw new Error(`You need to be logged in to perform an action`)
           return
         }
-        */
+
         return ctx.prisma.shop.create({
           data: {
-            ownerUuid: args.ownerUuid,
+            ownerUuid: ctx.user.sub,
             name: args.name,
             street: args.street,
             postcode: args.postcode,
@@ -141,7 +139,6 @@ export const ShopMutation = extendType({
       type: Shop,
       args: {
         id: nonNull(intArg()),
-        ownerUuid: stringArg(),
         name: stringArg(),
         street: stringArg(),
         postcode: intArg(),
@@ -156,10 +153,14 @@ export const ShopMutation = extendType({
         categories: stringArg(),
       },
       resolve(_parent, args, ctx) {
+        if (!ctx.user) {
+          throw new Error(`You need to be logged in to perform an action`)
+          return
+        }
         return ctx.prisma.shop.update({
           where: { id: args.id },
           data: {
-            ownerUuid: args.ownerUuid,
+            ownerUuid: ctx.user.sub,
             name: args.name,
             street: args.street,
             postcode: args.postcode,
@@ -191,130 +192,3 @@ export const ShopMutation = extendType({
     })
   },
 })
-
-//separate extendTypes will keep them as well, just in case it's better to have the mutations separately
-/*
-export const CreateShopMutation = extendType({
-  type: 'Mutation',
-  definition(t) {
-    t.nonNull.field('createShop', {
-      type: Shop,
-      args: {
-        name: nonNull(stringArg()),
-        street: nonNull(stringArg()),
-        postcode: nonNull(intArg()),
-        place: nonNull(stringArg()),
-        latitude: nonNull(floatArg()),
-        longitude: nonNull(floatArg()),
-        ownerUuid: nonNull(stringArg()),
-        phone: intArg(),
-        email: stringArg(),
-        website: stringArg(),
-        openingHours: stringArg(),
-        image: stringArg(),
-      },
-      resolve(_parent, args, ctx) {
-       
-        if (!ctx.user) {
-          throw new Error(`You need to be logged in to perform an action`)
-          return
-        }
-
-        dann bei new shop irgendwie von ctx also session den user als user id setzen bei ownerId
-      
-
-        const newShop = {
-          ownerUuid: args.ownerUuid,
-          name: args.name,
-          street: args.street,
-          postcode: args.postcode,
-          place: args.place,
-          website: args.website,
-          categories: args.categories,
-          longitude: args.longitude,
-          latitude: args.latitude,
-          phone: args.phone,
-          email: args.email,
-          openingHours: args.openingHours,
-          image: args.image,
-        }
-
-        return ctx.prisma.shop.create({
-          data: newShop,
-        })
-      },
-    })
-  },
-})
-
-export const DeleteShopMutation = extendType({
-  type: 'Mutation',
-  definition(t) {
-    t.nonNull.field('deleteShop', {
-      type: 'Shop',
-      args: {
-        id: nonNull(intArg()),
-      },
-      resolve(_parent, args, ctx) {
-        return ctx.prisma.shop.delete({
-          where: { id: args.id },
-        })
-      },
-    })
-
-    // update a shop
-    t.nonNull.field('updateShop', {
-      type: Shop,
-      args: {
-        id: nonNull(intArg()),
-        ownerUuid: stringArg(),
-        name: stringArg(),
-        street: stringArg(),
-        postcode: intArg(),
-        place: stringArg(),
-        latitude: floatArg(),
-        longitude: floatArg(),
-        image: stringArg(),
-        phone: intArg(),
-        email: stringArg(),
-        website: stringArg(),
-        openingHours: stringArg(),
-        categories: stringArg(),
-      },
-      resolve(_parent, args, ctx) {
-        return ctx.prisma.shop.update({
-          where: { id: args.id },
-          data: {
-            ownerUuid: args.ownerUuid,
-            name: args.name,
-            street: args.street,
-            postcode: args.postcode,
-            place: args.place,
-            latitude: args.latitude,
-            longitude: args.longitude,
-            image: args.image,
-            phone: args.phone,
-            email: args.email,
-            website: args.website,
-            openingHours: args.openingHours,
-            categories: args.categories,
-          },
-        })
-      },
-    })
-
-    // delete a shop
-    t.nonNull.field('deleteShop', {
-      type: Shop,
-      args: {
-        id: nonNull(intArg()),
-      },
-      resolve(_parent, args, ctx) {
-        return ctx.prisma.shop.delete({
-          where: { id: args.id },
-        })
-      },
-    })
-  },
-})
-*/

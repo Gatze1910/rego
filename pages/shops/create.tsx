@@ -2,7 +2,12 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import { gql, useMutation } from '@apollo/client'
 import { ChangeEvent, useState } from 'react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { FileInput, Input, Submit } from '../../components/basic/formfields'
+import {
+  FileInput,
+  Input,
+  Submit,
+  Textarea,
+} from '../../components/basic/formfields'
 import { FormProvider, useForm } from 'react-hook-form'
 import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
@@ -17,6 +22,10 @@ const ADD_SHOP = gql`
     $place: String!
     $latitude: Float!
     $longitude: Float!
+    $phone: String
+    $email: String
+    $website: String
+    $openingHours: String
   ) {
     createShop(
       name: $name
@@ -25,6 +34,10 @@ const ADD_SHOP = gql`
       place: $place
       latitude: $latitude
       longitude: $longitude
+      phone: $phone
+      email: $email
+      website: $website
+      openingHours: $openingHours
     ) {
       id
     }
@@ -70,6 +83,10 @@ const CreateShop = () => {
         place: data.place,
         latitude: 45.22,
         longitude: 23.45,
+        phone: data.phone,
+        email: data.email,
+        website: data.website,
+        openingHours: data.openingHours,
       },
     })
   }
@@ -89,7 +106,7 @@ const CreateShop = () => {
       console.log(data)
       let path = data.path
       setImage(
-        'https://rvplealboqicxmexeqdd.supabase.co/storage/v1/object/public/shop/public/Contacta-2022-Web-238.jpg',
+        'https://rvplealboqicxmexeqdd.supabase.co/storage/v1/object/public/shop/public/Contacta-2022-Web-238.jpg'
       )
     } else if (error) {
       console.log(error)
@@ -110,7 +127,7 @@ const CreateShop = () => {
           action=""
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="uk-grid uk-grid-small">
+          <div className="uk-grid uk-grid-small uk-flex-middle">
             <div className="uk-width-1-2@m">
               <Input
                 id="name"
@@ -231,10 +248,21 @@ const CreateShop = () => {
                   error: errors.website,
                 }}
               />
+
+              <Textarea
+                id="openingHours"
+                placeholder="Gar nicht"
+                label="Öffnungszeiten"
+                validation={{
+                  field: 'openingHours',
+                  register,
+                  error: errors.openingHours,
+                }}
+              />
             </div>
-            <div className="uk-width-1-2@m uk-margin-top">
+            <div className="uk-width-1-2@m">
               <div className="uk-flex uk-flex-center">
-                <div className="uk-width-1-2">
+                <div className="uk-width-1-2 profile-picture">
                   {image ? (
                     <img src={image} alt={'profile picture'} />
                   ) : (
@@ -244,11 +272,9 @@ const CreateShop = () => {
                     placeholder="Bild auswählen"
                     icon="image"
                     flipicon
-                    label="Bild"
                     accept="image/*"
                     onChange={(e) => {
                       handleImageUpload(e)
-                      console.log('test')
                     }}
                   />
                 </div>
