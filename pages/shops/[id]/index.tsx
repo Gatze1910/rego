@@ -41,10 +41,6 @@ export const Shop = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Currently there is no production database available..</p>
 
-  console.log('data', data)
-  console.log('shop', data.shop)
-  console.log('name', data.shop.name)
-
   return (
     <>
       <div className="uk-section">
@@ -77,7 +73,7 @@ export const Shop = () => {
                 0650/123 456
               </p>
 
-              <div className="uk-flex uk-flex-between">
+              <div className="uk-flex flex-gap-medium">
                 <ButtonPrimary>Auf Karte anzeigen</ButtonPrimary>
                 <ButtonPrimary>Route berechnen</ButtonPrimary>
               </div>

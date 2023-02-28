@@ -119,7 +119,14 @@ export const Textarea = (props: TextareaProps) => {
           {props.label}
         </label>
       ) : null}
-      <textarea {...props} className={'uk-input ' + props.className}></textarea>
+      <textarea
+        {...props}
+        className={'uk-input ' + props.className}
+        {...props.validation.register(
+          props.validation.field,
+          props.validation.option
+        )}
+      ></textarea>
     </div>
   )
 }

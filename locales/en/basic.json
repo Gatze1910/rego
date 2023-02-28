@@ -1,7 +1,7 @@
 {
   "test": "a test",
-  "de": "German",
-  "en": "English",
+  "de": "DE",
+  "en": "EN",
   "error": {
     "500": "500 page",
     "404": "404 page"

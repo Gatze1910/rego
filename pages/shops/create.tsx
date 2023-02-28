@@ -1,6 +1,5 @@
-import { useUser } from '@auth0/nextjs-auth0/client'
 import { gql, useMutation } from '@apollo/client'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import {
   FileInput,
@@ -13,12 +12,17 @@ import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import Image from 'next/image'
 import insta from '../../assets/icons/instagram.png'
+import mapboxgl from 'mapbox-gl'
+import { v4 } from 'uuid'
+import { Categories } from '../../components/partials/categories'
+
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
 const ADD_SHOP = gql`
   mutation createShop(
     $name: String!
     $street: String!
-    $postcode: Int!
+    $postcode: String!
     $place: String!
     $latitude: Float!
     $longitude: Float!
@@ -26,6 +30,8 @@ const ADD_SHOP = gql`
     $email: String
     $website: String
     $openingHours: String
+    $image: String
+    $categories: String
   ) {
     createShop(
       name: $name
@@ -38,6 +44,8 @@ const ADD_SHOP = gql`
       email: $email
       website: $website
       openingHours: $openingHours
+      image: $image
+      categories: $categories
     ) {
       id
     }
@@ -46,22 +54,30 @@ const ADD_SHOP = gql`
 
 export interface ShopFields {
   name: string
-  postcode: number
+  postcode: string
   street: string
   place: string
   image: string
-  phone: number
+  phone: string
   email: string
   website: string
   openingHours: string
   categories: string
 }
 
+async function getGeo(streetname: string, postcode: string, place: string) {
+  const searchText = `${streetname}%20${postcode}%20${place}`
+  const data = await fetch(
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=${mapboxgl.accessToken}`
+  )
+  const parsedData = await data.json()
+  return parsedData.features[0].center
+}
+
 const CreateShop = () => {
   const tF = useTranslation('form').t
   const tB = useTranslation('basic').t
 
-  const { user } = useUser()
   const supabase = createBrowserSupabaseClient()
   const [image, setImage] = useState(null)
   const [shop, { data, loading, error }] = useMutation(ADD_SHOP)
@@ -74,43 +90,35 @@ const CreateShop = () => {
     formState: { errors },
   } = methods
 
-  const onSubmit = async (data: ShopFields) => {
-    shop({
-      variables: {
-        name: data.name,
-        street: data.street,
-        postcode: Number(data.postcode),
-        place: data.place,
-        latitude: 45.22,
-        longitude: 23.45,
-        phone: data.phone,
-        email: data.email,
-        website: data.website,
-        openingHours: data.openingHours,
-      },
-    })
-  }
+  const onSubmit = async (shopData: ShopFields) => {
+    const geoValues = await getGeo(
+      shopData.street,
+      shopData.postcode,
+      shopData.place
+    )
 
-  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    let file
-
-    if (e.target.files) {
-      file = e.target.files[0]
-    }
-
+    let randomuuid = v4()
+    let filename =
+      process.env.NEXT_PUBLIC_SUPABASE_PICTURE_STORAGE + randomuuid + image.name
     const { data, error } = await supabase.storage
       .from('shop')
-      .upload('public/' + file?.name, file as File)
+      .upload('public/' + randomuuid + image.name, image as File)
 
-    if (data) {
-      console.log(data)
-      let path = data.path
-      setImage(
-        'https://rvplealboqicxmexeqdd.supabase.co/storage/v1/object/public/shop/public/Contacta-2022-Web-238.jpg'
-      )
-    } else if (error) {
-      console.log(error)
-    }
+    shop({
+      variables: {
+        name: shopData.name,
+        street: shopData.street,
+        postcode: shopData.postcode,
+        place: shopData.place,
+        latitude: geoValues[1],
+        longitude: geoValues[0],
+        phone: shopData.phone,
+        email: shopData.email,
+        website: shopData.website,
+        openingHours: shopData.openingHours,
+        image: filename,
+      },
+    })
   }
 
   return (
@@ -159,6 +167,10 @@ const CreateShop = () => {
                   error: errors.street,
                   option: {
                     required: tF('error.required'),
+                    minLength: {
+                      value: 5,
+                      message: tF('error.minLength', { count: '5' }),
+                    },
                   },
                 }}
               />
@@ -182,6 +194,10 @@ const CreateShop = () => {
                           value: /^[0-9]+$/,
                           message: tF('error.pattern'),
                         },
+                        minLength: {
+                          value: 4,
+                          message: tF('error.minLength', { count: '4' }),
+                        },
                       },
                     }}
                   />
@@ -201,6 +217,10 @@ const CreateShop = () => {
                       error: errors.place,
                       option: {
                         required: tF('error.required'),
+                        minLength: {
+                          value: 2,
+                          message: tF('error.minLength', { count: '2' }),
+                        },
                       },
                     }}
                   />
@@ -223,7 +243,7 @@ const CreateShop = () => {
 
               <Input
                 id="phone"
-                type="phone"
+                type="tel"
                 placeholder="0650/232432434"
                 icon="receiver"
                 flipicon
@@ -251,7 +271,7 @@ const CreateShop = () => {
 
               <Textarea
                 id="openingHours"
-                placeholder="Gar nicht"
+                placeholder="MO - FR, von 09:00 - 15:00 Uhr"
                 label="Öffnungszeiten"
                 validation={{
                   field: 'openingHours',
@@ -260,11 +280,15 @@ const CreateShop = () => {
                 }}
               />
             </div>
+
             <div className="uk-width-1-2@m">
               <div className="uk-flex uk-flex-center uk-margin-top">
                 <div className="uk-width-1-2 profile-picture">
                   {image ? (
-                    <img src={image} alt={'profile picture'} />
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={'profile picture'}
+                    />
                   ) : (
                     <Image src={insta} alt={'profile picture'} />
                   )}
@@ -274,13 +298,20 @@ const CreateShop = () => {
                     flipicon
                     accept="image/*"
                     onChange={(e) => {
-                      handleImageUpload(e)
+                      if (e.target.files && e.target.files.length > 0) {
+                        setImage(e.target.files[0])
+                      }
                     }}
                   />
                 </div>
               </div>
             </div>
           </div>
+
+          <div>
+            <Categories />
+          </div>
+
           <Submit id="register" value="Shop erstellen" />
         </form>
       </FormProvider>

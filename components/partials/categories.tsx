@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import insta from '../../assets/icons/instagram.png'
+import { CATEGORIES } from '../../assets/categories.js'
 
 const testjson = [
   {
@@ -34,7 +35,7 @@ export const Categories = () => {
       </div> */}
 
       <div className="flex-gap uk-flex">
-        {testjson.map((item) => {
+        {CATEGORIES.map((item) => {
           return (
             <div
               key={item.id}

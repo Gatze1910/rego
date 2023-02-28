@@ -1,14 +1,17 @@
+import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import { ButtonPrimary, ButtonSecondary } from '../components/basic/button'
 
 export const Home = () => {
+  const { t } = useTranslation('basic')
+
   return (
     <>
       <Head>
-        <title>ReGo</title>
+        <title>{t('title.long')}</title>
         <meta
           name="description"
-          content="MMP3 - FH Salzburg - ReGo - Bernadette Ackerl, Vanessa Reiter und Markus Rinnerberger"
+          content="MMP3 - FH Salzburg - REGO - Bernadette Ackerl, Vanessa Reiter und Markus Rinnerberger"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
