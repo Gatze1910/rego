@@ -14,8 +14,10 @@ import Image from 'next/image'
 import insta from '../../assets/icons/instagram.png'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
-import { Categories } from '../../components/partials/categories'
-
+import { Categories, Category } from '../../components/partials/categories'
+import { CATEGORIES } from '../../assets/categories'
+import { redirect } from 'next/navigation'
+import Router from 'next/router'
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
 const ADD_SHOP = gql`
@@ -80,6 +82,7 @@ const CreateShop = () => {
 
   const supabase = createBrowserSupabaseClient()
   const [image, setImage] = useState(null)
+  const [categories, setCategories] = useState<number[]>([])
   const [shop, { data, loading, error }] = useMutation(ADD_SHOP)
 
   const methods = useForm<ShopFields>({ mode: 'onChange' })
@@ -96,13 +99,17 @@ const CreateShop = () => {
       shopData.postcode,
       shopData.place
     )
-
-    let randomuuid = v4()
-    let filename =
-      process.env.NEXT_PUBLIC_SUPABASE_PICTURE_STORAGE + randomuuid + image.name
-    const { data, error } = await supabase.storage
-      .from('shop')
-      .upload('public/' + randomuuid + image.name, image as File)
+    let filename: string
+    if (image) {
+      let randomuuid = v4()
+      filename =
+        process.env.NEXT_PUBLIC_SUPABASE_PICTURE_STORAGE +
+        randomuuid +
+        image.name
+      await supabase.storage
+        .from('shop')
+        .upload('public/' + randomuuid + image.name, image as File)
+    }
 
     shop({
       variables: {
@@ -116,8 +123,11 @@ const CreateShop = () => {
         email: shopData.email,
         website: shopData.website,
         openingHours: shopData.openingHours,
+        categories: JSON.stringify(categories),
         image: filename,
       },
+    }).then((shopResponse) => {
+      Router.push('/shops/' + shopResponse.data.createShop.id)
     })
   }
 
@@ -308,8 +318,35 @@ const CreateShop = () => {
             </div>
           </div>
 
-          <div>
-            <Categories />
+          <div className="uk-margin-medium-top">
+            <p>Ausgewählte Kategorien werden farblich markiert</p>
+            <div className="flex-gap uk-flex uk-flex-wrap">
+              {CATEGORIES.map((category) => {
+                return (
+                  <Category
+                    key={category.id}
+                    category={category}
+                    isSelected={categories.includes(category.id)}
+                    onCategoryClick={() => {
+                      const inCurrentCategories = categories.includes(
+                        category.id
+                      )
+
+                      if (inCurrentCategories) {
+                        setCategories((selectedCategories) =>
+                          selectedCategories.filter(
+                            (selectedCategory) =>
+                              selectedCategory !== category.id
+                          )
+                        )
+                      } else {
+                        setCategories([...categories, category.id])
+                      }
+                    }}
+                  />
+                )
+              })}
+            </div>
           </div>
 
           <Submit id="register" value="Shop erstellen" />
