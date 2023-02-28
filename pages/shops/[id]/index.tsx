@@ -7,6 +7,7 @@ import insta from '../../../assets/icons/instagram.png'
 import {
   ButtonPrimary,
   ButtonSecondary,
+  ButtonLink,
 } from '../../../components/basic/button'
 import { gql, useQuery } from '@apollo/client'
 
@@ -17,17 +18,17 @@ const GetShopData = gql`
       street
       postcode
       place
+      latitude
+      longitude
+      image
+      phone
+      email
+      website
+      openingHours
+      categories
     }
   }
 `
-
-/* const GetShopData = gql`
-  query Shop {
-    shop(id: 1) {
-      name
-    }
-  }
-` */
 
 export const Shop = () => {
   const router = useRouter()
@@ -45,34 +46,46 @@ export const Shop = () => {
     <>
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <div className="uk-flex">
-            <div className="uk-width-3-5 uk-position-relative">
-              <Image
-                className="uk-padding-large uk-padding-remove-vertical uk-padding-remove-left"
-                src={insta}
-                alt="lbbla"
-                fill={true}
-              />
+          <div className="uk-flex uk-flex-middle">
+            <div className="uk-width-1-2 uk-margin-large-right profile-picture">
+              {!data.shop.image ? (
+                <Image
+                  className="background-orange uk-padding"
+                  src={insta}
+                  alt={'blubbl'}
+                />
+              ) : (
+                <img
+                  className="profile-picture uk-width-1-2 uk-margin-large-right"
+                  src={data.shop.image}
+                />
+              )}
             </div>
-
-            <div className="uk-width-2-5">
+            <div>
               <h2>{data.shop.name}</h2>
               <p>
                 {data.shop.street}
                 <br />
                 {data.shop.postcode} {data.shop.place}
               </p>
+              {data.shop.website && <p>{data.shop.website}</p>}
+              {data.shop.openingHours && (
+                <>
+                  <h3>Öffnungszeiten</h3>
+                  <p>{data.shop.openingHours}</p>
+                </>
+              )}
 
-              <h3>Öffnungszeiten</h3>
-              <p>Jeden Samstag von 13:00 bis 14:00 Uhr</p>
-
-              <h3>Kontakt</h3>
-              <p>
-                Rudi@bauernhof.at
-                <br />
-                0650/123 456
-              </p>
-
+              {(data.shop.email || data.shop.phone) && (
+                <>
+                  <h3>Kontakt</h3>
+                  <p>
+                    {data.shop.email && data.shop.email}
+                    <br />
+                    {data.shop.phone && data.shop.phone}
+                  </p>
+                </>
+              )}
               <div className="uk-flex flex-gap-medium">
                 <ButtonPrimary>Auf Karte anzeigen</ButtonPrimary>
                 <ButtonPrimary>Route berechnen</ButtonPrimary>

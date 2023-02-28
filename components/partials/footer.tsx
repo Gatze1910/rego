@@ -31,7 +31,9 @@ export const Footer = () => {
       </svg> */}
 
             <div className="content uk-flex uk-flex-between uk-flex-middle">
-              <div>{t('rego')}</div>
+              <div>
+                © {t('rego')} {new Date().getFullYear()}
+              </div>
 
               <nav className="nav">
                 <ul>
@@ -42,15 +44,6 @@ export const Footer = () => {
                       </li>
                     )
                   })}
-                  {!user ? (
-                    <li>
-                      <Link href="/api/auth/login">{t('nav.login')}</Link>
-                    </li>
-                  ) : (
-                    <li>
-                      <Link href="/api/auth/logout">{t('nav.logout')}</Link>
-                    </li>
-                  )}
                 </ul>
               </nav>
 

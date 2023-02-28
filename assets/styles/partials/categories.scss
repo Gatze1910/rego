@@ -1,8 +1,12 @@
-.categorietest {
-    width: 50px;
-    border-radius: 10px;
+.category {
+  width: 60px;
+  height: 90px;
+  border-radius: 10px;
 
-    p {
-        color: black;
-    }
+  p {
+    padding-top: 5px;
+    font-size: 14px;
+    color: black;
+    line-height: 1.2;
+  }
 }

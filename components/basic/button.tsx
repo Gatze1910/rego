@@ -11,7 +11,7 @@ interface ButtonProps {
 
 interface LinkProps {
   href: string
-  //to?: Next.LocationDescription<any>,
+  target?: string
   children: ReactNode
 }
 
