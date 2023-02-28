@@ -1,6 +1,4 @@
 {
-  "test": "test",
-  "password": "Passwort",
   "error": {
     "required": "verpflichtendes Feld",
     "minLength": "mindestens {{count}} Zeichen",

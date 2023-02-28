@@ -1,6 +1,6 @@
 {
   "test": "ein test",
-  "rego": "Regionalität ToGo",
+  "rego": "Regional ToGo",
   "de": "DE",
   "en": "EN",
   "follow": "Folge uns",
@@ -9,7 +9,7 @@
     "404": "404 Seite"
   },
   "title": {
-    "long": "𝗥𝗘gionalität to𝗚𝗢 🌿",
+    "long": "𝗥𝗘gional to𝗚𝗢 🌿",
     "short": "𝗥𝗘𝗚𝗢 🌿 • {{subtitle}}",
     "notFound": "Nicht gefunden",
     "login": "Anmelden",
@@ -22,7 +22,7 @@
     "recipe": "Rezepte",
     "login": "Anmelden",
     "logout": "Abmelden",
-    "profile": "Profil",
+    "myShops": "Meine Shops",
     "imprint": "Impressum",
     "privacy": "Datenschutz"
   }

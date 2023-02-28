@@ -261,7 +261,7 @@ const CreateShop = () => {
               />
             </div>
             <div className="uk-width-1-2@m">
-              <div className="uk-flex uk-flex-center">
+              <div className="uk-flex uk-flex-center uk-margin-top">
                 <div className="uk-width-1-2 profile-picture">
                   {image ? (
                     <img src={image} alt={'profile picture'} />

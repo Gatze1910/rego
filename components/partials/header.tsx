@@ -61,7 +61,7 @@ export const Header = () => {
             ) : (
               <>
                 <li>
-                  <Link href="/shops/create">{t('nav.profile')}</Link>
+                  <Link href="/myshops">{t('nav.myShops')}</Link>
                 </li>
                 <li>
                   <Link href="/api/auth/logout">{t('nav.logout')}</Link>

@@ -16,5 +16,6 @@ export const config = {
     '/shops/create',
     '/shops/:path/edit',
     '/shops/:path/products/:path*',
+    '/myshops',
   ],
 }

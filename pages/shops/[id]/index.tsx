@@ -14,6 +14,9 @@ const GetShopData = gql`
   query Shop($id: Int!) {
     shop(id: $id) {
       name
+      street
+      postcode
+      place
     }
   }
 `
@@ -57,12 +60,11 @@ export const Shop = () => {
             </div>
 
             <div className="uk-width-2-5">
-              {/* <h2>{data.shop.name}</h2> */}
+              <h2>{data.shop.name}</h2>
               <p>
-                Bauernhofstraße 1<br />
-                9020 Klagenfurt
+                {data.shop.street}
                 <br />
-                Österreich
+                {data.shop.postcode} {data.shop.place}
               </p>
 
               <h3>Öffnungszeiten</h3>

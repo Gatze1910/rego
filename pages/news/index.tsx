@@ -1,9 +1,16 @@
 import { Post } from '../../components/partials/post'
 import { Input, Select, Search } from '../../components/basic/formfields'
+import Head from 'next/head'
+import useTranslation from 'next-translate/useTranslation'
 
 export const News = () => {
+  const { t } = useTranslation('basic')
+
   return (
     <>
+      <Head>
+        <title>{t('title.short', { subtitle: t('nav.news') })}</title>
+      </Head>
       <div className="uk-section uk-padding-remove-bottom">
         <div className="uk-container uk-container-small">
           <div className="uk-text-center">
