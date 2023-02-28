@@ -7,7 +7,7 @@ async function main() {
     data: {
       name: 'zweiter Testshop',
       street: 'Hornerweg 24',
-      postcode: 5541,
+      postcode: '5541',
       place: 'Altenmarkt',
       ownerUuid: '0ZLqb20tCGOO8dbj4xS9oGA0dUf2',
       latitude: 47.3639155,
@@ -46,7 +46,7 @@ async function main() {
     data: {
       name: 'dritter Testshop',
       street: 'test 24',
-      postcode: 5550,
+      postcode: '5550',
       place: 'testort',
       ownerUuid: '0ZLqb20tCGOO8dbj4xS9oGA0dUf2',
       latitude: 38.3639155,

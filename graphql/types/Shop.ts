@@ -18,7 +18,7 @@ export const Shop = objectType({
     t.string('ownerUuid')
     t.string('name')
     t.string('street')
-    t.int('postcode')
+    t.string('postcode')
     t.string('place')
     t.float('latitude')
     t.float('longitude')
@@ -53,7 +53,7 @@ export const Shop = objectType({
       },
     })
     t.string('image')
-    t.int('phone')
+    t.string('phone')
     t.string('email')
     t.string('website')
     t.string('openingHours')
@@ -97,12 +97,12 @@ export const ShopMutation = extendType({
       args: {
         name: nonNull(stringArg()),
         street: nonNull(stringArg()),
-        postcode: nonNull(intArg()),
+        postcode: nonNull(stringArg()),
         place: nonNull(stringArg()),
         latitude: nonNull(floatArg()),
         longitude: nonNull(floatArg()),
         image: stringArg(),
-        phone: intArg(),
+        phone: stringArg(),
         email: stringArg(),
         website: stringArg(),
         openingHours: stringArg(),
@@ -141,12 +141,12 @@ export const ShopMutation = extendType({
         id: nonNull(intArg()),
         name: stringArg(),
         street: stringArg(),
-        postcode: intArg(),
+        postcode: stringArg(),
         place: stringArg(),
         latitude: floatArg(),
         longitude: floatArg(),
         image: stringArg(),
-        phone: intArg(),
+        phone: stringArg(),
         email: stringArg(),
         website: stringArg(),
         openingHours: stringArg(),
