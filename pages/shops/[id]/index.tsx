@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import { Product } from '../../../components/partials/product'
-import { Categories } from '../../../components/partials/categories'
+import { Category, Categories } from '../../../components/partials/categories'
 import Image from 'next/image'
 import insta from '../../../assets/icons/instagram.png'
 import {
@@ -10,6 +10,7 @@ import {
   ButtonLink,
 } from '../../../components/basic/button'
 import { gql, useQuery } from '@apollo/client'
+import { CATEGORIES } from '../../../assets/categories.js'
 
 const GetShopData = gql`
   query Shop($id: Int!) {
@@ -41,6 +42,12 @@ export const Shop = () => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Currently there is no production database available..</p>
+
+  const categoryArray = JSON.parse(data.shop.categories)
+
+  const activeCategories = CATEGORIES.filter((category) =>
+    categoryArray?.includes(category.id)
+  )
 
   return (
     <>
@@ -95,11 +102,24 @@ export const Shop = () => {
         </div>
       </div>
 
-      <div className="uk-section">
-        <div className="uk-container uk-container-large">
-          <Categories />
+      {activeCategories.length > 0 && (
+        <div className="uk-section">
+          <div className="uk-container uk-container-large">
+            <div className="flex-gap uk-flex uk-flex-wrap">
+              {activeCategories.map((a) => {
+                return (
+                  <Category
+                    category={a}
+                    isSelected={true}
+                    onCategoryClick={() => {}}
+                    key={a.id}
+                  />
+                )
+              })}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="uk-section">
         <div className="uk-container uk-container-large">
