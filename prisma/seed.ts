@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 async function main() {
   await prisma.shop.create({
     data: {
-      name: 'zweiter Testshop',
+      name: 'Paradis in den Bergen',
       street: 'Hornerweg 24',
       postcode: '5541',
       place: 'Altenmarkt',
@@ -19,8 +19,8 @@ async function main() {
     data: {
       id: 1,
       shopId: 1,
-      title: 'ich bin die erste Neuigkeit',
-      content: 'so happy to be the first new',
+      title: 'Sale Sale Sale',
+      content: 'Alles muss raus!',
     },
   })
 
@@ -28,8 +28,8 @@ async function main() {
     data: {
       id: 1,
       shopId: 1,
-      title: 'ich bin das erste Rezept',
-      content: 'so happy to be the first recipe',
+      title: 'Schokokuchen',
+      content: 'schnell und einfach zubereitet',
     },
   })
 
@@ -37,22 +37,21 @@ async function main() {
     data: {
       id: 1,
       shopId: 1,
-      title: 'ich bin das erste Produkt',
+      title: 'Erdbeertraum',
       content: 'mega leckere Erdbeermarmelade',
     },
   })
 
   await prisma.shop.create({
     data: {
-      name: 'dritter Testshop',
-      street: 'test 24',
-      postcode: '5550',
-      place: 'testort',
+      name: 'Fritz Fischis',
+      street: 'Fritzbach 24',
+      postcode: '5555',
+      place: 'Fürstenfeld',
       ownerUuid: '0ZLqb20tCGOO8dbj4xS9oGA0dUf2',
       latitude: 38.3639155,
       longitude: 20.4424461,
-      categories:
-        '[{"id":1,"img":"instagram.png","color":"red","text":"essen"},{"id":2,"img":"instagram.png","color":"blue","text":"nahrung"}]',
+      categories: '[1,2,3]',
     },
   })
 }
