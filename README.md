@@ -5,7 +5,7 @@ This is going to be the MMP3-Project during our MultiMediaTechnology bachelor st
 Creators: Bernadette Ackerl, Vanessa Reiter and Markus Rinnerberger
 
 ---
-
+Hallo
 Currently using:
 
 - Next.js,
