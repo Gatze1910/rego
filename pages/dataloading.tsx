@@ -1,20 +1,21 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { gql, useQuery } from '@apollo/client'
+import { News, Product, Recipe, Shop } from '@prisma/client'
 
 const AllUsersQuery = gql`
   query {
-    users {
-      id
+    shops {
       name
-      lastname
-      shops {
-        id
-        name
-        street
-        owner {
-          name
-        }
+      news {
+        title
+        content
+      }
+      products {
+        title
+        content
+      }
+      recipes {
+        title
+        content
       }
     }
   }
@@ -28,20 +29,47 @@ export default function Data() {
 
   return (
     <>
-      <main className={styles.main}>
+      <main>
         <div>
           <h1>
-            Versuch Daten zu laden via Apollo Client mit Prisma und gql...
+            Versuch Daten zu laden via Apollo Client mit Prisma und GraphQL von
+            Supabase
           </h1>
-          {data.users.map((user: any) => (
-            <li key={user.id}>
-              <b>{user.name}</b>
-              <i> {user.lastname}</i>
-              <p>das sind alle Shops von {user.name}</p> <br></br>
-              {user.shops.map((shop: any) => (
-                <ul key={shop.id}>
-                  <b>{shop.name}</b>
-                  <i> {shop.street}</i>
+          {data.shops.map((shop: any) => (
+            <li key={shop.id}>
+              <b>{shop.name}</b>
+              {shop.news.length > 0 ? (
+                <p>das sind alle News von {shop.name}</p>
+              ) : (
+                <p>dieser Shop hat noch keine News gepostet</p>
+              )}
+              {shop.news.map((news: News) => (
+                <ul key={news.id}>
+                  <b>{news.title}:</b>
+                  <i> {news.content}</i>
+                </ul>
+              ))}
+
+              {shop.recipes.length > 0 ? (
+                <p>das sind alle Rezepte von {shop.name}</p>
+              ) : (
+                <p>dieser Shop hat noch keine Rezepte</p>
+              )}
+              {shop.recipes.map((recipe: Recipe) => (
+                <ul key={recipe.id}>
+                  <b>{recipe.title}:</b>
+                  <i> {recipe.content}</i>
+                </ul>
+              ))}
+              {shop.products.length > 0 ? (
+                <p>das sind alle Produkte von {shop.name}</p>
+              ) : (
+                <p>dieser Shop hat noch keine Produkte </p>
+              )}
+              {shop.products.map((product: Product) => (
+                <ul key={product.id}>
+                  <b>{product.title}:</b>
+                  <i> {product.content}</i>
                 </ul>
               ))}
             </li>

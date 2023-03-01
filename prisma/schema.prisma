@@ -7,38 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  lastname  String
-  email     String   @unique
-  shops     Shop[]
-  recipes   Recipe[]
-  street    String?
-  postcode  Int?
-  place     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model Shop {
-  id           Int      @id @default(autoincrement())
-  owner        User     @relation(fields: [ownerId], references: [id])
-  ownerId      Int
+  id           Int       @id @default(autoincrement())
+  ownerUuid    String
   name         String
   street       String
-  postcode     Int
+  postcode     String
   place        String
   latitude     Float
   longitude    Float
   news         News[]
-  phone        Int?
-  email        String?  @unique
+  products     Product[]
+  recipes      Recipe[]
+  image        String?
+  phone        String?
+  email        String?
   website      String?
   openingHours String?
-  categories   Json?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  categories   String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
 
 model News {
@@ -51,13 +39,24 @@ model News {
   updatedAt DateTime @updatedAt
 }
 
+model Product {
+  id        Int      @id @default(autoincrement())
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  shopId    Int
+  title     String
+  content   String?
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Recipe {
-  id         Int      @id @default(autoincrement())
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
-  title      String
-  content    String
-  categories Json?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  shopId    Int
+  title     String
+  content   String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

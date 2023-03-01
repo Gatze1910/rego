@@ -1,19 +1,75 @@
-@import './fonts';
-
 // colors
-$primaryColor: #334D5C;
-$secondaryColor: #DC8744;
-$tertiaryColor: #F6C358;
+$primary-color: #334d5c;
+$primary-color-variant: #243742;
+$secondary-color: #dc8744;
+$secondary-color-variant: #d67429;
+$secondary-color-opaque: #dc86442c;
+$tertiary-color: #f6c358;
+$tertiary-color-variant: #f4b225;
+$background-color: #f9f9f9;
+$border-color: #ccc;
+$disabled-color: #999;
+$white: #fff;
 
 // font
-$headingFont: #000;
-$textFont: 'ABeeZee';
+$heading-font: 'Satisfy';
+$text-font: 'ABeeZee';
 
-body {
-    --vh: 100vh;
+* {
+  &::selection {
+    background-color: $tertiary-color;
+  }
 }
 
-.test {
-    font-family: $textFont;
-    color: $secondaryColor;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: $primary-color;
+  background: $background-color;
+  overflow-x: hidden;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
+.flex-gap {
+  gap: 20px;
+}
+
+.flex-gap-medium {
+  gap: 40px;
+}
+
+.flex-gap-large {
+  gap: 70px;
+}
+
+.box-shadow {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.height-fit {
+  height: fit-content;
+}
+
+.profile-picture {
+  img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+}
+
+.background-orange {
+  background: $secondary-color-opaque;
+}
+
+@import './uikit';
+@import './fonts';
+
+.test-border {
+  border: 1px solid black;
 }

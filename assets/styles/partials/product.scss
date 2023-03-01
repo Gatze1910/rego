@@ -1,0 +1,17 @@
+.product-container {
+
+    .img-container {
+        background: $secondary-color-opaque;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+
+    .product-banner {
+        background: $secondary-color;
+        top: 20px;
+        left: -10px;
+        padding: 10px 15px;
+        color: $white;
+        text-transform: uppercase;
+    }
+}

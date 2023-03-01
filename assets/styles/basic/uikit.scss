@@ -1,0 +1,171 @@
+//////////////////////
+// uikit overwrites //
+//////////////////////
+
+.uk-text-danger {
+  color: $secondary-color !important;
+}
+
+h1,
+.uk-h1 {
+  font-family: $heading-font;
+  color: $secondary-color;
+  font-size: 50px;
+  margin-bottom: 40px;
+}
+
+h2,
+.uk-h2 {
+  text-transform: uppercase;
+  color: $secondary-color;
+}
+
+h3,
+.uk-h3 {
+  color: $secondary-color;
+}
+
+h4,
+.uk-h4 {
+  font-size: 20px;
+  margin: 0;
+}
+
+a,
+.uk-link {
+  color: $primary-color;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.uk-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.uk-section {
+  background: transparent;
+}
+
+.uk-container-large {
+  max-width: 1210px;
+}
+
+.uk-grid-row-large {
+  row-gap: 50px;
+}
+
+.uk-input,
+.uk-textarea {
+  color: $primary-color;
+  caret-color: $primary-color;
+  transition: border-width 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &:focus {
+    color: $primary-color;
+    border-color: $primary-color;
+    border-width: 2px;
+  }
+}
+
+.uk-form-danger {
+  color: $secondary-color;
+  caret-color: $secondary-color;
+  border-color: $secondary-color;
+
+  &:focus {
+    color: $secondary-color;
+    border-color: $secondary-color;
+  }
+}
+
+.uk-form-label {
+  color: $primary-color;
+  display: block;
+}
+
+.uk-radio {
+  background-color: $white;
+
+  &:focus {
+    border-color: $primary-color;
+  }
+
+  &:checked {
+    background-color: $primary-color;
+    border-color: $primary-color;
+
+    &:focus {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.uk-checkbox {
+  background-color: $white;
+
+  &:focus {
+    border-color: $primary-color;
+    background-color: $white;
+  }
+
+  &:checked {
+    background-color: $primary-color;
+
+    &:focus {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.uk-button {
+  &.uk-button-primary {
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color-variant;
+    }
+  }
+
+  &.uk-button-secondary {
+    background-color: $secondary-color;
+
+    &:hover {
+      background-color: $secondary-color-variant;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid $border-color;
+    color: $disabled-color;
+  }
+}
+
+.uk-select {
+  transition: border-width 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+  &:focus {
+    border-color: $primary-color;
+    border-width: 2px;
+  }
+
+  option {
+    &:checked {
+      color: $white !important;
+      background-color: $primary-color !important;
+    }
+  }
+}
+
+.uk-totop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: white;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: $secondary-color;
+}

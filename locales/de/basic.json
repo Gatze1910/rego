@@ -1,9 +1,29 @@
 {
-    "test": "ein test",
-    "de": "Deutsch",
-    "en":"Englisch",
-    "error": {
-        "500": "500 Seite",
-        "404": "404 Seite"
-    }
+  "test": "ein test",
+  "rego": "ReGo",
+  "de": "DE",
+  "en": "EN",
+  "follow": "Folge uns",
+  "error": {
+    "500": "500 Seite",
+    "404": "404 Seite"
+  },
+  "title": {
+    "long": "𝗥𝗘gional to𝗚𝗢 🌿",
+    "short": "𝗥𝗘𝗚𝗢 🌿 • {{subtitle}}",
+    "notFound": "Nicht gefunden",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "createShop": "Shop erstellen"
+  },
+  "nav": {
+    "map": "Karte",
+    "news": "Aktuelles",
+    "recipe": "Rezepte",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "myShops": "Meine Shops",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
+  }
 }
