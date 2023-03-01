@@ -46,6 +46,7 @@ export const Shops: NextPage = () => {
     if (selectedShop) {
       setLat(selectedShop.latitude)
       setLng(selectedShop.longitude)
+      setZoom(13)
     }
 
     var elem = document.getElementById('shop-container')
@@ -93,7 +94,7 @@ export const Shops: NextPage = () => {
   }, [data])
 
   useEffect(() => {
-    map.current.flyTo({ center: [lng, lat] })
+    map.current.flyTo({ center: [lng, lat], zoom })
   }, [lng, lat, zoom])
 
   return (
