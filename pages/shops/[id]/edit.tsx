@@ -401,7 +401,7 @@ export const EditShop = () => {
               </div>
             </div>
 
-            <Submit id="register" value="Speichern" />
+            <Submit id="save" value="Speichern" />
           </form>
         </FormProvider>
       </div>
