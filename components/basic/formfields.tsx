@@ -4,7 +4,6 @@ import {
   TextareaHTMLAttributes,
 } from 'react'
 import { FieldError, RegisterOptions, UseFormRegister } from 'react-hook-form'
-import { LoginFields } from '../../pages/login'
 import { ShopFields } from '../../pages/shops/create'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
