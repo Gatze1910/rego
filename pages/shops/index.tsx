@@ -16,7 +16,7 @@ export const Shops: NextPage = () => {
   const [lat, setLat] = useState<number>(47.80949)
   const [zoom, setZoom] = useState<number>(11)
 
-  const [shop, setShop] = useState<null | Shop>(null)
+  const [shopId, setShopId] = useState<number | null>(null)
   const [shops, setShops] = useState<Shop[]>([])
 
   const AllShopsQuery = gql`
@@ -39,8 +39,14 @@ export const Shops: NextPage = () => {
     }
   }
 
-  const markerClick = (shop) => {
-    setShop(shop)
+  const markerClick = (shopId) => {
+    setShopId(shopId)
+
+    const selectedShop = data?.shops.find((s) => s.id === shopId)
+    if (selectedShop) {
+      setLat(selectedShop.latitude)
+      setLng(selectedShop.longitude)
+    }
 
     var elem = document.getElementById('shop-container')
     elem.classList.remove('noshow')
@@ -58,7 +64,7 @@ export const Shops: NextPage = () => {
         .setLngLat({ lng: shop.longitude, lat: shop.latitude })
         .addTo(map.current)
       marker.getElement().id = shop.id.toString()
-      marker.getElement().addEventListener('click', () => markerClick(shop))
+      marker.getElement().addEventListener('click', () => markerClick(shop.id))
     })
   }, [shops])
 
@@ -76,6 +82,13 @@ export const Shops: NextPage = () => {
   useEffect(() => {
     if (data) {
       setShops(data.shops)
+
+      const selectedShopId = window.location.hash.replace('#', '')
+
+      if (selectedShopId && selectedShopId.match(/^[0-9]*$/)) {
+        const numericSelectedShopId = Number(selectedShopId)
+        markerClick(numericSelectedShopId)
+      }
     }
   }, [data])
 
@@ -87,10 +100,17 @@ export const Shops: NextPage = () => {
     <>
       <div ref={mapContainer} className="map-container" />
       <div className="mini-view box-shadow">
-        <div className="box-shadow"><Search placeholder="Suche"></Search></div>
+        <div className="box-shadow">
+          <Search placeholder="Suche"></Search>
+        </div>
         <div className="noshow uk-padding" id="shop-container">
-          <span onClick={() => { markerClose() }} uk-icon=" icon: close"></span>
-          {shop && <MiniView>{shop.id}</MiniView>}
+          <span
+            onClick={() => {
+              markerClose()
+            }}
+            uk-icon=" icon: close"
+          ></span>
+          {shopId && <MiniView>{shopId}</MiniView>}
         </div>
       </div>
     </>

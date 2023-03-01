@@ -1,14 +1,10 @@
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import { Product } from '../../../components/partials/product'
-import { Category, Categories } from '../../../components/partials/categories'
+import { Category } from '../../../components/partials/categories'
 import Image from 'next/image'
 import insta from '../../../assets/icons/instagram.png'
-import {
-  ButtonPrimary,
-  ButtonSecondary,
-  ButtonLink,
-} from '../../../components/basic/button'
+import { ButtonPrimary } from '../../../components/basic/button'
 import { gql, useQuery } from '@apollo/client'
 import { CATEGORIES } from '../../../assets/categories.js'
 
@@ -94,7 +90,9 @@ export const Shop = () => {
                 </>
               )}
               <div className="uk-flex flex-gap-medium">
-                <ButtonPrimary>Auf Karte anzeigen</ButtonPrimary>
+                <ButtonPrimary onClick={() => router.push('/shops#' + id)}>
+                  Auf Karte anzeigen
+                </ButtonPrimary>
                 <ButtonPrimary>Route berechnen</ButtonPrimary>
               </div>
             </div>
