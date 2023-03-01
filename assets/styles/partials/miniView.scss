@@ -1,0 +1,30 @@
+.mini-view {
+    background: white;
+    width: 35%;
+    position: absolute;
+    top: 80px;
+    left: 0;
+
+    h4 {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    span {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.noshow {
+    display: none;
+}

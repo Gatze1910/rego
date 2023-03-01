@@ -3,6 +3,8 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { useEffect, useRef, useState } from 'react'
 import { gql, useQuery, useLazyQuery } from '@apollo/client'
+import { MiniView } from '../../components/partials/miniView'
+import { Search } from '../../components/basic/formfields'
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
@@ -37,6 +39,18 @@ export const Shops: NextPage = () => {
     }
   }
 
+  const markerClick = (shop) => {
+    setShop(shop)
+
+    var elem = document.getElementById('shop-container')
+    elem.classList.remove('noshow')
+  }
+
+  const markerClose = () => {
+    var elem = document.getElementById('shop-container')
+    elem.classList.add('noshow')
+  }
+
   useEffect(() => {
     shops.forEach((shop) => {
       const marker = new mapboxgl.Marker()
@@ -44,9 +58,7 @@ export const Shops: NextPage = () => {
         .setLngLat({ lng: shop.longitude, lat: shop.latitude })
         .addTo(map.current)
       marker.getElement().id = shop.id.toString()
-      marker.getElement().addEventListener('click', () => {
-        marker.getElement().id
-      })
+      marker.getElement().addEventListener('click', () => markerClick(shop))
     })
   }, [shops])
 
@@ -74,6 +86,13 @@ export const Shops: NextPage = () => {
   return (
     <>
       <div ref={mapContainer} className="map-container" />
+      <div className="mini-view box-shadow">
+        <div className="box-shadow"><Search placeholder="Suche"></Search></div>
+        <div className="noshow uk-padding" id="shop-container">
+          <span onClick={() => { markerClose() }} uk-icon=" icon: close"></span>
+          {shop && <MiniView>{shop.id}</MiniView>}
+        </div>
+      </div>
     </>
   )
 }
