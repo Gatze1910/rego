@@ -30,6 +30,7 @@ const GetShopData = gql`
 `
 
 export const MiniView = (props: ViewProps) => {
+    
     const { loading, error, data } = useQuery(GetShopData, {
         variables: { id: props.children },
     })
@@ -111,7 +112,7 @@ export const MiniView = (props: ViewProps) => {
                 </div>
             )}
 
-            <div className="uk-flex flex-gap">
+            <div className="uk-flex flex-gap uk-flex-wrap">
                 <ButtonLink href={shopUrl}>Shop besuchen</ButtonLink>
                 <ButtonLink href="">Route berechnen</ButtonLink>
             </div>
