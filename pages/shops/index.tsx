@@ -111,7 +111,7 @@ export const Shops: NextPage = () => {
             }}
             uk-icon=" icon: close"
           ></span>
-          {shopId && <MiniView>{shopId}</MiniView>}
+          {shopId && <MiniView shopId={shopId}/>}
         </div>
       </div>
     </>
