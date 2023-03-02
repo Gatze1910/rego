@@ -4,9 +4,14 @@
         "recipe": "Recipes",
         "profile": "Shop overview",
         "myshops": "Here you can see all your shops",
-        "products": "Our products at a glance"
+        "products": "Our products at a glance",
+        "imprint": "Imprint",
+        "privacy": "Privacy policy"
     },
     "text": {
-        "news": "english"
+        "news": "You are looking for exciting events or want to discover the latest offers? Then you've come to the right place! Your favorite stores can share their latest happenings with you here. In addition, you can discover new stores through promotions that you may not have heard of before.",
+        "recipe": "Here at our Recipes, store owners can share recipes that taste great with their own homemade and homegrown products.",
+        "imprint": "Stay tuned for our imprint",
+        "privacy": "Stay tuned for our privacy policy"
     }
 }

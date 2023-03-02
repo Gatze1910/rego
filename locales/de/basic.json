@@ -28,10 +28,18 @@
     "newShop": "neuen Shop erstellen",
     "view": "ansehen",
     "edit": "bearbeiten",
-    "visit": "besuchen",
+    "visit": "Shop besuchen",
     "route": "Route berechnen",
     "map": "auf Karte anzeigen",
     "filter": "Filter",
     "sort": "Sortieren"
+  },
+  "alt": {
+    "shop": "Shop",
+    "profile": "Profilbild",
+    "logo": "logo",
+    "category": "ReGo Kategorie",
+    "post": "ReGo Beitrag",
+    "product": "ReGo Produkt"
   }
 }

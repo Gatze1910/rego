@@ -11,7 +11,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import Image from 'next/image'
-import insta from '../../assets/icons/instagram.png'
+import shopImage from '../../assets/icons/shop.png'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
 import { Categories, Category } from '../../components/partials/categories'
@@ -77,10 +77,7 @@ async function getGeo(streetname: string, postcode: string, place: string) {
 }
 
 const CreateShop = () => {
-  const { t } = useTranslation('form')
-
-  const tF = useTranslation('form').t
-  const tB = useTranslation('basic').t
+  const { t } = useTranslation()
 
   const supabase = createBrowserSupabaseClient()
   const [image, setImage] = useState(null)
@@ -136,10 +133,10 @@ const CreateShop = () => {
   return (
     <div className="uk-section uk-container uk-container-large">
       <Head>
-        <title>{tB('title.short', { subtitle: tB('title.createShop') })}</title>
+        <title>{t('basic:title.short', { subtitle: t('basic:title.createShop') })}</title>
       </Head>
 
-      <h1>{tB('title.createShop')}</h1>
+      <h1>{t('basic:title.createShop')}</h1>
 
       <FormProvider {...methods}>
         <form
@@ -161,7 +158,7 @@ const CreateShop = () => {
                   register,
                   error: errors.name,
                   option: {
-                    required: tF('error.required'),
+                    required: t('form:error.required'),
                   },
                 }}
               />
@@ -178,10 +175,10 @@ const CreateShop = () => {
                   register,
                   error: errors.street,
                   option: {
-                    required: tF('error.required'),
+                    required: t('form:error.required'),
                     minLength: {
                       value: 5,
-                      message: tF('error.minLength', { count: '5' }),
+                      message: t('form:error.minLength', { count: '5' }),
                     },
                   },
                 }}
@@ -201,14 +198,14 @@ const CreateShop = () => {
                       register,
                       error: errors.postcode,
                       option: {
-                        required: tF('error.required'),
+                        required: t('form:error.required'),
                         pattern: {
                           value: /^[0-9]+$/,
-                          message: tF('error.pattern'),
+                          message: t('form:error.pattern'),
                         },
                         minLength: {
                           value: 4,
-                          message: tF('error.minLength', { count: '4' }),
+                          message: t('form:error.minLength', { count: '4' }),
                         },
                       },
                     }}
@@ -228,10 +225,10 @@ const CreateShop = () => {
                       register,
                       error: errors.place,
                       option: {
-                        required: tF('error.required'),
+                        required: t('form:error.required'),
                         minLength: {
                           value: 2,
-                          message: tF('error.minLength', { count: '2' }),
+                          message: t('form:error.minLength', { count: '2' }),
                         },
                       },
                     }}
@@ -299,10 +296,10 @@ const CreateShop = () => {
                   {image ? (
                     <img
                       src={URL.createObjectURL(image)}
-                      alt={'profile picture'}
+                      alt={t('basic:alt.profile')}
                     />
                   ) : (
-                    <Image src={insta} alt={'profile picture'} />
+                    <Image src={shopImage} alt={t('basic:alt.shop')} />
                   )}
                   <FileInput
                     placeholder={t('placeholder.image')}
@@ -321,7 +318,7 @@ const CreateShop = () => {
           </div>
 
           <div className="uk-margin-medium-top">
-            <p>Ausgewählte Kategorien werden farblich markiert</p>
+            <p>{t('form:label.categories')}</p>
             <div className="flex-gap uk-flex uk-flex-wrap">
               {CATEGORIES.map((category) => {
                 return (

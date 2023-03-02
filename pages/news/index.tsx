@@ -12,7 +12,7 @@ export const News = () => {
   return (
     <>
       <Head>
-        <title>{t('basic:title.short', { subtitle: t('nav.news') })}</title>
+        <title>{t('basic:title.short', { subtitle: t('basic:nav.news') })}</title>
       </Head>
       <div className="uk-section uk-padding-remove-bottom">
         <div className="uk-container uk-container-small">

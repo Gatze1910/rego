@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import { ButtonLink } from '../components/basic/button'
 import Image from 'next/image'
-import insta from '../assets/icons/instagram.png'
+import shopImage from '../assets/icons/shop.png'
 import { gql, useLazyQuery } from '@apollo/client'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { useEffect } from 'react'
@@ -44,15 +44,14 @@ export const MyShops = () => {
       </Head>
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>Deine Shopübersicht</h1>
-          <p>Hier kannst du einen Shop erstellen</p>
-          <ButtonLink href="/shops/create">neuen Shop erstellen</ButtonLink>
+          <h1>{t('text:heading.profile')}</h1>
+          <ButtonLink href="/shops/create">{t('basic:button.newShop')}</ButtonLink>
         </div>
       </div>
 
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>Das sind deine Shops</h1>
+          <h1>{t('text:heading.myshops')}</h1>
 
           <div className="uk-grid uk-child-width-1-1 uk-child-width-1-2@l uk-margin-remove" uk-grid>
             {shopsResult.data.shopsByOwner.map((shop) =>
@@ -61,13 +60,13 @@ export const MyShops = () => {
                 {/* eslint-disable */}
                 {!shop.image ? (
                   <Image
-                    src={insta}
-                    alt={'profile picture'}
+                    src={shopImage}
+                    alt={t('basic:alt.shop')}
                   />
                 ) : (
                   <img
                     src={shop.image}
-                    alt={"profile picture"}
+                    alt={t('basic:alt.profile')}
                   />
                 )}
                 {/* eslint-enable */}
@@ -76,8 +75,8 @@ export const MyShops = () => {
                 <h3>{shop.name}</h3>
                 <p>{shop.street}<br />{shop.postcode} {shop.place}</p>
                 <div className="uk-flex flex-gap">
-                  <ButtonLink href={`/shops/${shop.id}`}>ansehen</ButtonLink>
-                  <ButtonLink href={`/shops/${shop.id}/edit`}>bearbeiten</ButtonLink>
+                  <ButtonLink href={`/shops/${shop.id}`}>{t('basic:button.view')}</ButtonLink>
+                  <ButtonLink href={`/shops/${shop.id}/edit`}>{t('basic:button.edit')}</ButtonLink>
                 </div>
               </div>
             </div>))}
