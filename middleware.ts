@@ -12,9 +12,7 @@ export async function middleware(req: NextRequest) {
   }
 
   if (url.pop() === 'edit') {
-    console.log('hallo')
     const result = await checkIfUserIsShopOwner(user.user.sub, url.pop())
-    console.log(result)
     if (!result) {
       return NextResponse.redirect(new URL('/403', req.url))
     }
