@@ -343,6 +343,7 @@ export const EditShop = () => {
               <div className="uk-width-1-2@m">
                 <div className="uk-flex uk-flex-center uk-margin-top">
                   <div className="uk-width-1-2 profile-picture">
+                    {/* eslint-disable */}
                     {image ? <img
                       src={URL.createObjectURL(image)}
                       alt={'profile picture'}
@@ -354,6 +355,7 @@ export const EditShop = () => {
                     ) : (
                       <Image src={insta} alt={'profile picture'} />
                     )}
+                    {/* eslint-enable */}
                     <FileInput
                       placeholder="Bild auswählen"
                       icon="image"

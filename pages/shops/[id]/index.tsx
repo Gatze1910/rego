@@ -55,6 +55,7 @@ export const Shop = () => {
         <div className="uk-container uk-container-large">
           <div className="uk-flex uk-flex-middle">
             <div className="uk-width-1-2 uk-margin-large-right profile-picture">
+              {/* eslint-disable */}
               {!data.shop.image ? (
                 <Image
                   className="background-orange uk-padding"
@@ -67,6 +68,7 @@ export const Shop = () => {
                   src={data.shop.image}
                 />
               )}
+              {/* eslint-enable */}
             </div>
             <div>
               <h2>{data.shop.name}</h2>
