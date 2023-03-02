@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation'
 import logo from '../../assets/icons/logo-small.svg'
 import Image from 'next/image'
 import { useUser } from '@auth0/nextjs-auth0/client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 export const Header = () => {
@@ -15,7 +15,6 @@ export const Header = () => {
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   useEffect(() => {
-    console.log(document.querySelectorAll('a'))
     document.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuOpen(false)))
   }, [user])
 
