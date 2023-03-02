@@ -1,53 +1,30 @@
-.miniview-search {
-    position: fixed;
+.mini-view {
+    background: white;
+    width: 35%;
+    position: absolute;
     top: 80px;
     left: 0;
-    width: 500px;
-    z-index: 100;
-}
 
-.miniview-box {
-    position: fixed;
-    top: 120px;
-    width: 500px;
-    background: white;
-    z-index: 10;
+    h4 {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
 
-    .miniview-view {
-        span {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+    p {
+        margin: 0;
+    }
 
-            &:hover {
-                cursor: pointer;
-            }
+    span {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+
+        &:hover {
+            cursor: pointer;
         }
     }
-
 }
 
-@media (max-width: 1200px) {
-    .miniview-search {
-        top: 60px;
-    }
-
-    .miniview-box {
-        top: 100px;
-    }
-}
-
-@media (max-width: 959px) {
-    .miniview-box {
-        position: relative;
-        top: 0;
-        width: 100%;
-        align-items: center;
-    }
-}
-
-@media (max-width: 767px) {
-    .miniview-search {
-        width: 100%;
-    }
+.noshow {
+    display: none;
 }
