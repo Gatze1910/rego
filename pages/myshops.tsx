@@ -24,15 +24,15 @@ export const MyShops = () => {
         <div className="uk-container uk-container-large">
           <h1>Das sind deine Shops</h1>
 
-          <div className="uk-grid uk-child-width-1-2 uk-margin-remove" uk-grid>
-            <div className="uk-padding uk-padding-remove-left uk-flex uk-flex-middle flex-gap-medium">
+          <div className="uk-grid uk-child-width-1-1 uk-child-width-1-2@l uk-margin-remove" uk-grid>
+            <div className="myshops uk-padding uk-padding-remove-left uk-flex uk-flex-middle flex-gap-medium">
               <Image
                 className="uk-width-1-3"
                 src={insta}
                 alt={'profile picture'}
               />
               <div>
-                <h3>Shop Name</h3>
+                <h3>Shop Namasdffe</h3>
                 <div className="uk-flex flex-gap">
                   <ButtonLink href="/shops/1">ansehen</ButtonLink>
                   <ButtonLink href="/shops/1/edit">bearbeiten</ButtonLink>
@@ -40,14 +40,14 @@ export const MyShops = () => {
               </div>
             </div>
 
-            <div className="uk-padding uk-padding-remove-left uk-flex uk-flex-middle flex-gap-medium">
+            <div className="myshops uk-padding uk-padding-remove-left uk-flex uk-flex-middle flex-gap-medium">
               <Image
                 className="uk-width-1-3"
                 src={insta}
                 alt={'profile picture'}
               />
               <div>
-                <h3>Shop Name</h3>
+                <h3>Shop Namasdffe</h3>
                 <div className="uk-flex flex-gap">
                   <ButtonLink href="/shops/1">ansehen</ButtonLink>
                   <ButtonLink href="/shops/1/edit">bearbeiten</ButtonLink>
@@ -55,14 +55,14 @@ export const MyShops = () => {
               </div>
             </div>
 
-            <div className="uk-padding uk-padding-remove-left uk-flex uk-flex-middle flex-gap-medium">
+            <div className="myshops uk-padding uk-padding-remove-left uk-flex uk-flex-middle flex-gap-medium">
               <Image
                 className="uk-width-1-3"
                 src={insta}
                 alt={'profile picture'}
               />
               <div>
-                <h3>Shop Name</h3>
+                <h3>Shop Namasdffe</h3>
                 <div className="uk-flex flex-gap">
                   <ButtonLink href="/shops/1">ansehen</ButtonLink>
                   <ButtonLink href="/shops/1/edit">bearbeiten</ButtonLink>
