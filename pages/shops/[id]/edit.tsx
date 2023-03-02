@@ -18,6 +18,7 @@ import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
 import { CATEGORIES } from '../../../assets/categories'
 import Router from 'next/router'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
@@ -96,6 +97,8 @@ async function getGeo(streetname: string, postcode: string, place: string) {
 }
 
 export const EditShop = () => {
+  const {user} = useUser()
+  
   const router = useRouter()
   const { id } = router.query
 
