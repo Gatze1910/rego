@@ -14,7 +14,8 @@
     "notFound": "Nicht gefunden",
     "login": "Anmelden",
     "register": "Registrieren",
-    "createShop": "Shop erstellen"
+    "createShop": "Shop erstellen",
+    "editShop": "Shop bearbeiten"
   },
   "nav": {
     "map": "Karte",
