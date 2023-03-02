@@ -1,4 +1,5 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
+import fetch from 'cross-fetch';
 
 if (process.env.NODE_ENV === 'production') {
   var apolloClient = new ApolloClient({
@@ -7,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   })
 } else {
   var apolloClient = new ApolloClient({
-    uri: 'http://localhost:3000/api/graphql',
+    link: new HttpLink({ uri: 'http://localhost:3000/api/graphql', fetch }),
     cache: new InMemoryCache(),
   })
 }
