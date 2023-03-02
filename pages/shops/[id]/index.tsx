@@ -53,8 +53,8 @@ export const Shop = () => {
     <>
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <div className="uk-flex uk-flex-middle">
-            <div className="uk-width-1-2 uk-margin-large-right profile-picture">
+          <div className="uk-grid uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle">
+            <div className="profile-picture">
               {/* eslint-disable */}
               {!data.shop.image ? (
                 <Image
@@ -64,7 +64,7 @@ export const Shop = () => {
                 />
               ) : (
                 <img
-                  className="profile-picture uk-width-1-2 uk-margin-large-right"
+                  className="uk-width-1-2 uk-margin-large-right"
                   src={data.shop.image}
                 />
               )}
