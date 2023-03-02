@@ -86,6 +86,21 @@ export const ShopQuery = extendType({
         })
       },
     })
+
+    // get shops by ownerUuid
+    t.list.field('shopsByOwner', {
+      type: 'Shop',
+      args: {
+        ownerUuid: nonNull(stringArg()),
+      },
+      resolve(_parent, args, ctx) {
+        return ctx.prisma.shop.findMany({
+          where: {
+            ownerUuid: args.ownerUuid,
+          },
+        })
+      },
+    })
   },
 })
 
