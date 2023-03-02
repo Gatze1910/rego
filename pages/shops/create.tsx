@@ -18,6 +18,7 @@ import { Categories, Category } from '../../components/partials/categories'
 import { CATEGORIES } from '../../assets/categories'
 import { redirect } from 'next/navigation'
 import Router from 'next/router'
+import { toast } from 'react-toastify'
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
 const ADD_SHOP = gql`
@@ -108,9 +109,18 @@ const CreateShop = () => {
         process.env.NEXT_PUBLIC_SUPABASE_PICTURE_STORAGE +
         randomuuid +
         image.name
-      await supabase.storage
-        .from('shop')
-        .upload('public/' + randomuuid + image.name, image as File)
+      try {
+        await supabase.storage
+          .from('shop')
+          .upload('public/' + image.name, image as File)
+        toast.success('bild erfolgreich hochgeladen', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        })
+      } catch {
+        toast.error('da hat was nicht geklappt', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        })
+      }
     }
 
     shop({
