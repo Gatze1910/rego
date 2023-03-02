@@ -1,9 +1,33 @@
 {
-  "locales": ["de", "en"],
+  "locales": [
+    "de",
+    "en"
+  ],
   "defaultLocale": "de",
   "pages": {
-    "*": ["common", "basic", "form", "landingPage"],
-    "/": ["home", "example"],
-    "/about": ["about"]
+    "*": [
+      "common",
+      "text",
+      "basic",
+      "form",
+      "landingPage"
+    ],
+    "/": [
+      "home",
+      "example",
+      "common",
+      "text",
+      "basic",
+      "form",
+      "landingPage"
+    ],
+    "/about": [
+      "about",
+      "common",
+      "text",
+      "basic",
+      "form",
+      "landingPage"
+    ]
   }
 }

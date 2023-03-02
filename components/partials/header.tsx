@@ -98,7 +98,7 @@ export const Header = () => {
             width={40}
             height={40}
           />
-          <span>Regional to Go</span>
+          <span>{t('rego')}</span>
         </Link>
         <div>
           <span uk-icon={'icon: ' + (menuOpen ? 'close' : 'menu')} onClick={() => { setMenuOpen(!menuOpen) }} className="hamburger"></span>

@@ -12,12 +12,12 @@ export const Custom404 = () => {
   return (
     <>
       <Head>
-        <title>{t('title.short', { subtitle: t('title.notFound') })}</title>
+        <title>{t('title.short', { subtitle: t('title.404') })}</title>
       </Head>
 
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>{t('error.404')}</h1>
+          <h1>{t('title.404')}</h1>
         </div>
       </div>
 

@@ -3,5 +3,31 @@
     "required": "verpflichtendes Feld",
     "minLength": "mindestens {{count}} Zeichen",
     "pattern": "kein korrektes Format"
+  },
+  "label": {
+    "name": "Shopname",
+    "street": "Straße",
+    "postcode": "Postleitzahl",
+    "place": "Ort",
+    "email": "E-Mail",
+    "phone": "Telefonnummer",
+    "web": "Website",
+    "hours": "Öffnungszeiten",
+    "categories": "Ausgewählte Kategorien werden farblich markiert",
+    "search": "Suche"
+  },
+  "placeholder": {
+    "name": "Mustershop",
+    "street": "Musterstraße 1",
+    "postcode": "5020",
+    "place": "Salzburg",
+    "email": "mail@provider.at",
+    "phone": "0650/233 4558",
+    "web": "https://my-website.at",
+    "hours": "MO - FR, von 09:00 - 15:00 Uhr",
+    "image": "Bild auswählen"
+  },
+  "button": {
+    "shop": "Shop erstellen"
   }
 }

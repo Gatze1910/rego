@@ -1,7 +1,33 @@
 {
-  "test": "test",
   "error": {
-    "required": "* required",
-    "minLength": "* too short"
+    "required": "required field",
+    "minLength": "at least {{count}} characters",
+    "pattern": "format is not correct"
+  },
+  "label": {
+    "name": "Shopname",
+    "street": "Street",
+    "postcode": "Postcode",
+    "place": "Place",
+    "email": "Email",
+    "phone": "Phone number",
+    "web": "website",
+    "hours": "Opening hours",
+    "categories": "Selected categories are highlighted in color",
+    "search": "Search"
+  },
+  "placeholder": {
+    "name": "Sample shop",
+    "street": "Sample Street 1",
+    "postcode": "5020",
+    "place": "Salzburg",
+    "email": "mail@provider.at",
+    "phone": "0650/233 4558",
+    "web": "https://my-website.at",
+    "hours": "MO - FR, from 09:00 - 15:00",
+    "image": "Select image "
+  },
+  "button": {
+    "shop": "create shop"
   }
 }

@@ -31,7 +31,7 @@ export const Shop = () => {
   const router = useRouter()
   const { id } = router.query
   const newId: number = +id
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
   const { loading, error, data } = useQuery(GetShopData, {
     variables: { id: newId },
   })
@@ -76,14 +76,14 @@ export const Shop = () => {
               {data.shop.website && <p>{data.shop.website}</p>}
               {data.shop.openingHours && (
                 <>
-                  <h3>Öffnungszeiten</h3>
+                  <h3>{t('basic:hours')}</h3>
                   <p>{data.shop.openingHours}</p>
                 </>
               )}
 
               {(data.shop.email || data.shop.phone) && (
                 <>
-                  <h3>Kontakt</h3>
+                  <h3>{t('basic:contact')}</h3>
                   <p>
                     {data.shop.email && data.shop.email}
                     <br />
@@ -93,9 +93,9 @@ export const Shop = () => {
               )}
               <div className="uk-flex flex-gap-medium">
                 <ButtonPrimary onClick={() => router.push('/shops#' + id)}>
-                  Auf Karte anzeigen
+                  {t('basic:button.map')}
                 </ButtonPrimary>
-                <ButtonPrimary>Route berechnen</ButtonPrimary>
+                <ButtonPrimary>{t('basic:button.route')}</ButtonPrimary>
               </div>
             </div>
           </div>
@@ -123,8 +123,8 @@ export const Shop = () => {
 
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h2>Unsere Produkte im Überblick</h2>
-          <ButtonPrimary>filter</ButtonPrimary>
+          <h2>{t('text:heading.products')}</h2>
+          <ButtonPrimary>{t('basic:button.filter')}</ButtonPrimary>
 
           <div className="uk-flex uk-margin-medium-top">
             <div className="uk-grid uk-grid-large uk-width-1-1 uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-row-large">

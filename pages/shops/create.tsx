@@ -77,6 +77,8 @@ async function getGeo(streetname: string, postcode: string, place: string) {
 }
 
 const CreateShop = () => {
+  const { t } = useTranslation('form')
+
   const tF = useTranslation('form').t
   const tB = useTranslation('basic').t
 
@@ -150,10 +152,10 @@ const CreateShop = () => {
               <Input
                 id="name"
                 type="text"
-                placeholder="Mustershop"
+                placeholder={t('placeholder.name')}
                 icon="user"
                 flipicon
-                label="Name des Shops"
+                label={t('label.name')}
                 validation={{
                   field: 'name',
                   register,
@@ -167,10 +169,10 @@ const CreateShop = () => {
               <Input
                 id="street"
                 type="text"
-                placeholder="Musterstraße 12"
+                placeholder={t('placeholder.street')}
                 icon="location"
                 flipicon
-                label="Adresse"
+                label={t('label.street')}
                 validation={{
                   field: 'street',
                   register,
@@ -190,10 +192,10 @@ const CreateShop = () => {
                   <Input
                     id="postcode"
                     type="text"
-                    placeholder="5020"
+                    placeholder={t('placeholder.postcode')}
                     icon="location"
                     flipicon
-                    label="Postleitzahl"
+                    label={t('label.postcode')}
                     validation={{
                       field: 'postcode',
                       register,
@@ -217,10 +219,10 @@ const CreateShop = () => {
                   <Input
                     id="place"
                     type="text"
-                    placeholder="Salzburg"
+                    placeholder={t('placeholder.place')}
                     icon="location"
                     flipicon
-                    label="Ort"
+                    label={t('label.place')}
                     validation={{
                       field: 'place',
                       register,
@@ -240,10 +242,10 @@ const CreateShop = () => {
               <Input
                 id="email"
                 type="text"
-                placeholder="mail@provider.at"
+                placeholder={t('placeholder.email')}
                 icon="mail"
                 flipicon
-                label="E-Mail"
+                label={t('label.email')}
                 validation={{
                   field: 'email',
                   register,
@@ -254,10 +256,10 @@ const CreateShop = () => {
               <Input
                 id="phone"
                 type="tel"
-                placeholder="0650/232432434"
+                placeholder={t('placeholder.phone')}
                 icon="receiver"
                 flipicon
-                label="Telefonnummer"
+                label={t('label.phone')}
                 validation={{
                   field: 'phone',
                   register,
@@ -268,10 +270,10 @@ const CreateShop = () => {
               <Input
                 id="website"
                 type="text"
-                placeholder="https://my-website.at"
+                placeholder={t('placeholder.web')}
                 icon="link"
                 flipicon
-                label="Webseite"
+                label={t('label.web')}
                 validation={{
                   field: 'website',
                   register,
@@ -281,8 +283,8 @@ const CreateShop = () => {
 
               <Textarea
                 id="openingHours"
-                placeholder="MO - FR, von 09:00 - 15:00 Uhr"
-                label="Öffnungszeiten"
+                placeholder={t('placeholder.hours')}
+                label={t('label.hours')}
                 validation={{
                   field: 'openingHours',
                   register,
@@ -303,7 +305,7 @@ const CreateShop = () => {
                     <Image src={insta} alt={'profile picture'} />
                   )}
                   <FileInput
-                    placeholder="Bild auswählen"
+                    placeholder={t('placeholder.image')}
                     icon="image"
                     flipicon
                     accept="image/*"
@@ -349,7 +351,7 @@ const CreateShop = () => {
             </div>
           </div>
 
-          <Submit id="register" value="Shop erstellen" />
+          <Submit id="register" value={t('button.shop')} />
         </form>
       </FormProvider>
     </div>
