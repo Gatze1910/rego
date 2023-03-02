@@ -19,6 +19,8 @@ export const Shops: NextPage = () => {
   const [shopId, setShopId] = useState<number | null>(null)
   const [shops, setShops] = useState<Shop[]>([])
 
+  const [miniView, setMiniView] = useState<boolean>(false)
+
   const AllShopsQuery = gql`
     query {
       shops {
@@ -41,21 +43,18 @@ export const Shops: NextPage = () => {
 
   const markerClick = (shopId) => {
     setShopId(shopId)
+    setMiniView(true)
 
     const selectedShop = data?.shops.find((s) => s.id === shopId)
     if (selectedShop) {
       setLat(selectedShop.latitude)
       setLng(selectedShop.longitude)
       setZoom(13)
-    }
-
-    var elem = document.getElementById('shop-container')
-    elem.classList.remove('noshow')
+    }    
   }
 
   const markerClose = () => {
-    var elem = document.getElementById('shop-container')
-    elem.classList.add('noshow')
+    setMiniView(false)
   }
 
   useEffect(() => {
@@ -100,20 +99,18 @@ export const Shops: NextPage = () => {
   return (
     <>
       <div ref={mapContainer} className="map-container" />
-      <div className="mini-view box-shadow">
-        <div className="box-shadow">
-          <Search placeholder="Suche"></Search>
-        </div>
-        <div className="noshow uk-padding" id="shop-container">
-          <span
-            onClick={() => {
-              markerClose()
-            }}
-            uk-icon=" icon: close"
-          ></span>
-          {shopId && <MiniView shopId={shopId}/>}
-        </div>
+      <div className="miniview-search box-shadow">
+        <Search placeholder="Suche"></Search>
       </div>
+      
+      {miniView && 
+      <div className="miniview-box">
+        <div className="uk-padding miniview-view">
+          <span onClick={() => { markerClose() }} uk-icon=" icon: close"></span>
+          {shopId && <MiniView shopId={shopId} />}
+        </div>
+        </div>
+        }  
     </>
   )
 }
