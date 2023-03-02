@@ -49,8 +49,8 @@ export const Shop = () => {
     <>
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <div className="uk-flex uk-flex-middle">
-            <div className="uk-width-1-2 uk-margin-large-right profile-picture">
+          <div className="uk-grid uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle">
+            <div>
               {!data.shop.image ? (
                 <Image
                   className="background-orange uk-padding"
@@ -59,12 +59,12 @@ export const Shop = () => {
                 />
               ) : (
                 <img
-                  className="profile-picture uk-width-1-2 uk-margin-large-right"
+                  className="profile-picture uk-margin-large-right"
                   src={data.shop.image}
                 />
               )}
             </div>
-            <div>
+            <div className="uk-padding">
               <h2>{data.shop.name}</h2>
               <p>
                 {data.shop.street}
@@ -109,7 +109,7 @@ export const Shop = () => {
                   <Category
                     category={a}
                     isSelected={true}
-                    onCategoryClick={() => {}}
+                    onCategoryClick={() => { }}
                     key={a.id}
                   />
                 )
@@ -125,7 +125,7 @@ export const Shop = () => {
           <ButtonPrimary>filter</ButtonPrimary>
 
           <div className="uk-flex uk-margin-medium-top">
-            <div className="uk-grid uk-grid-large uk-width-1-1 uk-child-width-1-3 uk-grid-row-large">
+            <div className="uk-grid uk-grid-large uk-width-1-1 uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-row-large">
               <Product />
               <Product />
               <Product />

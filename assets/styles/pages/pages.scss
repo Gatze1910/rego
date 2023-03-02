@@ -1,5 +1,10 @@
 @import './shops';
+@import './myshops';
 
 .body-wrapper {
   margin-top: 80px;
+
+    @media (max-width: 1200px) {
+      margin-top: 60px;
+    }
 }

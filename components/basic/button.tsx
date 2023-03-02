@@ -20,7 +20,7 @@ export const ButtonPrimary = (props: ButtonProps) => {
     <>
       <button
         className={
-          'uk-margin-medium-top uk-button' +
+          'uk-margin-small-top uk-button' +
           (props.disabled ? '' : ' uk-button-primary')
         }
         type={props.type}
@@ -38,7 +38,7 @@ export const ButtonSecondary = (props: ButtonProps) => {
     <>
       <button
         className={
-          'uk-margin-medium-top uk-button' +
+          'uk-margin-small-top uk-button' +
           (props.disabled ? '' : ' uk-button-secondary')
         }
         type={props.type}
