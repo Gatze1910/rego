@@ -1,14 +1,10 @@
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
 import { Product } from '../../../components/partials/product'
-import { Category, Categories } from '../../../components/partials/categories'
+import { Category } from '../../../components/partials/categories'
 import Image from 'next/image'
 import insta from '../../../assets/icons/instagram.png'
-import {
-  ButtonPrimary,
-  ButtonSecondary,
-  ButtonLink,
-} from '../../../components/basic/button'
+import { ButtonPrimary } from '../../../components/basic/button'
 import { gql, useQuery } from '@apollo/client'
 import { CATEGORIES } from '../../../assets/categories.js'
 
@@ -70,7 +66,7 @@ export const Shop = () => {
               )}
               {/* eslint-enable */}
             </div>
-            <div>
+            <div className="uk-padding">
               <h2>{data.shop.name}</h2>
               <p>
                 {data.shop.street}
@@ -96,7 +92,9 @@ export const Shop = () => {
                 </>
               )}
               <div className="uk-flex flex-gap-medium">
-                <ButtonPrimary>Auf Karte anzeigen</ButtonPrimary>
+                <ButtonPrimary onClick={() => router.push('/shops#' + id)}>
+                  Auf Karte anzeigen
+                </ButtonPrimary>
                 <ButtonPrimary>Route berechnen</ButtonPrimary>
               </div>
             </div>
@@ -113,7 +111,7 @@ export const Shop = () => {
                   <Category
                     category={a}
                     isSelected={true}
-                    onCategoryClick={() => {}}
+                    onCategoryClick={() => { }}
                     key={a.id}
                   />
                 )
@@ -129,7 +127,7 @@ export const Shop = () => {
           <ButtonPrimary>filter</ButtonPrimary>
 
           <div className="uk-flex uk-margin-medium-top">
-            <div className="uk-grid uk-grid-large uk-width-1-1 uk-child-width-1-3 uk-grid-row-large">
+            <div className="uk-grid uk-grid-large uk-width-1-1 uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-row-large">
               <Product />
               <Product />
               <Product />

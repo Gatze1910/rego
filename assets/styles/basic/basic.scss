@@ -63,8 +63,24 @@ body {
   }
 }
 
-.background-orange {
+.background-orange-opaque {
   background: $secondary-color-opaque;
+}
+
+.background-orange {
+  background: $secondary-color;
+  color: white;
+
+  a {
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.hamburger {
+  cursor: pointer;
 }
 
 @import './uikit';
