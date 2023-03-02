@@ -1,14 +1,14 @@
 import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
-import { ButtonPrimary, ButtonSecondary } from '../components/basic/button'
+import { Categories } from '../components/partials/categories'
 
 export const Home = () => {
-  const { t } = useTranslation('basic')
+  const { t } = useTranslation()
 
   return (
     <>
       <Head>
-        <title>{t('title.long')}</title>
+        <title>{t('basic:title.long')}</title>
         <meta
           name="description"
           content="MMP3 - FH Salzburg - REGO - Bernadette Ackerl, Vanessa Reiter und Markus Rinnerberger"
@@ -18,30 +18,43 @@ export const Home = () => {
       </Head>
       <main>
         <div className="uk-section">
-          <div className="uk-container uk-container-large">
-            <h1 className="uk-text-center">ReGo - Regional to go</h1>
+          <div className="uk-container uk-container-small">
+            <h1 className="uk-text-center">{t('landingPage:heading.title')}</h1>
 
             <div className="uk-text-center">
-              <h2>Das ist ReGo</h2>
               <p>
-                Mit ReGo soll regionales und nachhaltiges Einkaufen
-                (wieder)entdeckt werden. Jeder, der gerne seine Produkte
-                verkaufen möchte, egal ob Obst-Stand oder Hofladen, hat hier die
-                Möglichkeit sein Profil zu erstellen, sodass man zeigen kann
-                „hey mich gibt’s auch“. Die potenziellen Käufer können Shops in
-                ihrer Region entdecken und über Routen den geplanten
-                Nachmittagsspaziergang mit einem regionalen Einkauf verbinden.
+                {t('landingPage:text.title')}
               </p>
             </div>
           </div>
         </div>
 
-        <div>
-          <p>wir sind gerade beim Entwicklen von</p>
-          <h1>ReGo - Regional to go</h1>
-          <p>besuche uns bald wieder</p>
+        <div className="uk-section">
+          <div className="uk-container uk-container-large">
+            <h2>{t('landingPage:heading.category')}</h2>
+            <p className="uk-margin-medium-bottom">{t('landingPage:text.category')}</p>
+            <Categories />
+          </div>
         </div>
-     
+
+        <div className="uk-section">
+          <div className="background-orange">
+            <div className="uk-section">
+              <div className="uk-container uk-container-small">
+                <h2>{t('landingPage:heading.concept')}</h2>
+                <p>{t('landingPage:text.concept')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="uk-section">
+          <div className="uk-container uk-container-small">
+            <h2>{t('landingPage:heading.team')}</h2>
+            <p>{t('landingPage:text.team')}</p>
+          </div>
+        </div>
+
       </main>
     </>
   )
