@@ -22,6 +22,9 @@ const customJestConfig = {
     '@/(.*)$': '<rootDir>/src/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
+  setupFiles: [
+    '<rootDir>/text-encoder.mock.ts',
+  ],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

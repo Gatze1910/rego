@@ -7,7 +7,7 @@ import { Category } from '../partials/categories'
 import { CATEGORIES } from '../../assets/categories'
 
 interface ViewProps {
-    children: ReactNode
+    shopId: Number
 }
 
 const GetShopData = gql`
@@ -31,7 +31,7 @@ const GetShopData = gql`
 
 export const MiniView = (props: ViewProps) => {
     const { loading, error, data } = useQuery(GetShopData, {
-        variables: { id: props.children },
+        variables: { id: props.shopId },
     })
 
     if (loading) return <p>Loading...</p>
@@ -43,7 +43,7 @@ export const MiniView = (props: ViewProps) => {
         categoryArray?.includes(category.id)
     )
 
-    var shopUrl = "/shops/" + props.children
+    var shopUrl = "/shops/" + props.shopId
 
     return (
         <>
@@ -118,3 +118,5 @@ export const MiniView = (props: ViewProps) => {
         </>
     )
 }
+
+export default MiniView
