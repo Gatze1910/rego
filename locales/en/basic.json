@@ -1,11 +1,45 @@
 {
-  "test": "a test",
+  "rego": "Regional To Go",
   "de": "DE",
   "en": "EN",
-  "error": {
-    "500": "500 page",
-    "404": "404 page"
+  "follow": "Follow us",
+  "hours": "Opening hours",
+  "contact": "Contact",
+  "title": {
+    "long": "𝗥𝗘gional To 𝗚𝗢 🌿",
+    "short": "𝗥𝗘𝗚𝗢 🌿 • {{subtitle}}",
+    "404": "404 - Page not found",
+    "403": "403 - No access rights",
+    "500": "500 - Server Error",
+    "createShop": "Create shop",
+    "editShop": "Edit shop"
   },
-  "title_long": "𝗥𝗘gionality to𝗚𝗢 🌿",
-  "title_short": "𝗥𝗘𝗚𝗢 🌿"
+  "nav": {
+    "map": "Map",
+    "news": "News",
+    "recipe": "Recipes",
+    "login": "Login",
+    "logout": "Logout",
+    "myShops": "My Shops",
+    "imprint": "Imprint",
+    "privacy": "Privacy policy"
+  },
+  "button": {
+    "newShop": "Create new shop",
+    "view": "View",
+    "edit": "Edit",
+    "visit": "Visit",
+    "route": "Calculate route",
+    "map": "Show on map",
+    "filter": "Filter",
+    "sort": "Sort"
+  },
+  "alt": {
+    "shop": "Shop",
+    "profile": "profile picture",
+    "logo": "logo",
+    "category": "ReGo Category",
+    "post": "ReGo Post",
+    "product": "ReGo Product"
+  }
 }

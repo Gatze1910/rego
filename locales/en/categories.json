@@ -1,0 +1,21 @@
+{
+    "beef": "beef",
+    "pig": "pig",
+    "sheep": "sheep",
+    "poultry": "poultry",
+    "fish": "fish",
+    "noPlastic": "no plastic",
+    "beverages": "beverages",
+    "alcohol": "alcohol",
+    "dairyProducts": "dairy products",
+    "longOpened": "long opened",
+    "glutenFree": "gluten free",
+    "pastries": "pastries",
+    "vegetarian": "vegetarian",
+    "fruits": "fruits",
+    "clothing": "clothing",
+    "handmade": "handmade",
+    "herbs": "herbs",
+    "vegan": "vegan",
+    "bio": "bio"
+}

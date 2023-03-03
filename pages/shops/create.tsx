@@ -11,13 +11,16 @@ import { FormProvider, useForm } from 'react-hook-form'
 import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import Image from 'next/image'
-import insta from '../../assets/icons/instagram.png'
+import shopImage from '../../assets/icons/shop.png'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
 import { Categories, Category } from '../../components/partials/categories'
-import { CATEGORIES } from '../../assets/categories'
+import { CATEGORIES } from '../../assets/categories/categories'
 import { redirect } from 'next/navigation'
 import Router from 'next/router'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
 const ADD_SHOP = gql`
@@ -77,8 +80,7 @@ async function getGeo(streetname: string, postcode: string, place: string) {
 }
 
 const CreateShop = () => {
-  const tF = useTranslation('form').t
-  const tB = useTranslation('basic').t
+  const { t } = useTranslation()
 
   const supabase = createBrowserSupabaseClient()
   const [image, setImage] = useState(null)
@@ -99,45 +101,73 @@ const CreateShop = () => {
       shopData.postcode,
       shopData.place
     )
+    let imageUploadError = false
     let filename: string
+
     if (image) {
       let randomuuid = v4()
       filename =
         process.env.NEXT_PUBLIC_SUPABASE_PICTURE_STORAGE +
         randomuuid +
         image.name
-      await supabase.storage
-        .from('shop')
-        .upload('public/' + randomuuid + image.name, image as File)
+      try {
+        await supabase.storage
+          .from('shop')
+          .upload('public/' + randomuuid + image.name, image as File)
+          .then((res) => {
+            if (res.error) throw new Error('error')
+          })
+      } catch (error) {
+        imageUploadError = true
+        console.log(error)
+        toast.error('Image upload was not successful', {
+          position: toast.POSITION.TOP_RIGHT,
+        })
+      }
     }
 
-    shop({
-      variables: {
-        name: shopData.name,
-        street: shopData.street,
-        postcode: shopData.postcode,
-        place: shopData.place,
-        latitude: geoValues[1],
-        longitude: geoValues[0],
-        phone: shopData.phone,
-        email: shopData.email,
-        website: shopData.website,
-        openingHours: shopData.openingHours,
-        categories: JSON.stringify(categories),
-        image: filename,
-      },
-    }).then((shopResponse) => {
-      Router.push('/shops/' + shopResponse.data.createShop.id)
-    })
+    if (imageUploadError) return
+
+    try {
+      shop({
+        variables: {
+          name: shopData.name,
+          street: shopData.street,
+          postcode: shopData.postcode,
+          place: shopData.place,
+          latitude: geoValues[1],
+          longitude: geoValues[0],
+          phone: shopData.phone,
+          email: shopData.email,
+          website: shopData.website,
+          openingHours: shopData.openingHours,
+          categories: JSON.stringify(categories),
+          image: filename,
+        },
+      }).then((shopResponse) => {
+        Router.push('/shops/' + shopResponse.data.createShop.id)
+      })
+    } catch (error) {
+      toast.error(
+        'An error occurred during saving of your shop creation, please try again',
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
+      )
+    }
   }
 
   return (
     <div className="uk-section uk-container uk-container-large">
       <Head>
-        <title>{tB('title.short', { subtitle: tB('title.createShop') })}</title>
+        <title>
+          {t('basic:title.short', { subtitle: t('basic:title.createShop') })}
+        </title>
       </Head>
 
-      <h1>{tB('title.createShop')}</h1>
+      <h1>{t('basic:title.createShop')}</h1>
+
+      <ToastContainer />
 
       <FormProvider {...methods}>
         <form
@@ -150,16 +180,16 @@ const CreateShop = () => {
               <Input
                 id="name"
                 type="text"
-                placeholder="Mustershop"
+                placeholder={t('form:placeholder.name')}
                 icon="user"
                 flipicon
-                label="Name des Shops"
+                label={t('form:label.name')}
                 validation={{
                   field: 'name',
                   register,
                   error: errors.name,
                   option: {
-                    required: tF('error.required'),
+                    required: t('form:error.required'),
                   },
                 }}
               />
@@ -167,19 +197,19 @@ const CreateShop = () => {
               <Input
                 id="street"
                 type="text"
-                placeholder="Musterstraße 12"
+                placeholder={t('form:placeholder.street')}
                 icon="location"
                 flipicon
-                label="Adresse"
+                label={t('form:label.street')}
                 validation={{
                   field: 'street',
                   register,
                   error: errors.street,
                   option: {
-                    required: tF('error.required'),
+                    required: t('form:error.required'),
                     minLength: {
                       value: 5,
-                      message: tF('error.minLength', { count: '5' }),
+                      message: t('form:error.minLength', { count: '5' }),
                     },
                   },
                 }}
@@ -190,23 +220,23 @@ const CreateShop = () => {
                   <Input
                     id="postcode"
                     type="text"
-                    placeholder="5020"
+                    placeholder={t('form:placeholder.postcode')}
                     icon="location"
                     flipicon
-                    label="Postleitzahl"
+                    label={t('form:label.postcode')}
                     validation={{
                       field: 'postcode',
                       register,
                       error: errors.postcode,
                       option: {
-                        required: tF('error.required'),
+                        required: t('form:error.required'),
                         pattern: {
                           value: /^[0-9]+$/,
-                          message: tF('error.pattern'),
+                          message: t('form:error.pattern'),
                         },
                         minLength: {
                           value: 4,
-                          message: tF('error.minLength', { count: '4' }),
+                          message: t('form:error.minLength', { count: '4' }),
                         },
                       },
                     }}
@@ -217,19 +247,19 @@ const CreateShop = () => {
                   <Input
                     id="place"
                     type="text"
-                    placeholder="Salzburg"
+                    placeholder={t('form:placeholder.place')}
                     icon="location"
                     flipicon
-                    label="Ort"
+                    label={t('form:label.place')}
                     validation={{
                       field: 'place',
                       register,
                       error: errors.place,
                       option: {
-                        required: tF('error.required'),
+                        required: t('form:error.required'),
                         minLength: {
                           value: 2,
-                          message: tF('error.minLength', { count: '2' }),
+                          message: t('form:error.minLength', { count: '2' }),
                         },
                       },
                     }}
@@ -240,24 +270,27 @@ const CreateShop = () => {
               <Input
                 id="email"
                 type="text"
-                placeholder="mail@provider.at"
+                placeholder={t('form:placeholder.email')}
                 icon="mail"
                 flipicon
-                label="E-Mail"
+                label={t('form:label.email')}
                 validation={{
                   field: 'email',
                   register,
                   error: errors.email,
+                  option: {
+                    pattern: { value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/, message: t('form:error.pattern') }
+                  }
                 }}
               />
 
               <Input
                 id="phone"
                 type="tel"
-                placeholder="0650/232432434"
+                placeholder={t('form:placeholder.phone')}
                 icon="receiver"
                 flipicon
-                label="Telefonnummer"
+                label={t('form:label.phone')}
                 validation={{
                   field: 'phone',
                   register,
@@ -268,21 +301,24 @@ const CreateShop = () => {
               <Input
                 id="website"
                 type="text"
-                placeholder="https://my-website.at"
+                placeholder={t('form:placeholder.web')}
                 icon="link"
                 flipicon
-                label="Webseite"
+                label={t('form:label.web')}
                 validation={{
                   field: 'website',
                   register,
                   error: errors.website,
+                  option: {
+                    pattern: { value: /https?:\/\/.+/, message: t('form:error.pattern') }
+                  }
                 }}
               />
 
               <Textarea
                 id="openingHours"
-                placeholder="MO - FR, von 09:00 - 15:00 Uhr"
-                label="Öffnungszeiten"
+                placeholder={t('form:placeholder.hours')}
+                label={t('form:label.hours')}
                 validation={{
                   field: 'openingHours',
                   register,
@@ -294,16 +330,18 @@ const CreateShop = () => {
             <div className="uk-width-1-2@m">
               <div className="uk-flex uk-flex-center uk-margin-top">
                 <div className="uk-width-1-2 profile-picture">
+                  {/* eslint-disable */}
                   {image ? (
                     <img
                       src={URL.createObjectURL(image)}
-                      alt={'profile picture'}
+                      alt={t('basic:alt.profile')}
                     />
                   ) : (
-                    <Image src={insta} alt={'profile picture'} />
+                    <Image src={shopImage} alt={t('basic:alt.shop')} />
                   )}
+                  {/* eslint-enable */}
                   <FileInput
-                    placeholder="Bild auswählen"
+                    placeholder={t('form:placeholder.image')}
                     icon="image"
                     flipicon
                     accept="image/*"
@@ -319,7 +357,7 @@ const CreateShop = () => {
           </div>
 
           <div className="uk-margin-medium-top">
-            <p>Ausgewählte Kategorien werden farblich markiert</p>
+            <p>{t('form:label.categories')}</p>
             <div className="flex-gap uk-flex uk-flex-wrap">
               {CATEGORIES.map((category) => {
                 return (
@@ -349,7 +387,7 @@ const CreateShop = () => {
             </div>
           </div>
 
-          <Submit id="register" value="Shop erstellen" />
+          <Submit id="register" value={t('form:button.shop')} />
         </form>
       </FormProvider>
     </div>
