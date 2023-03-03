@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { useEffect, useState } from 'react'
 
-
 export const Header = () => {
   const { user } = useUser()
   const router = useRouter()
@@ -79,11 +78,11 @@ export const Header = () => {
         </nav>
 
         {locale == 'en' ? (
-          <Link href={router.pathname} locale="de">
+          <Link href={router.asPath} locale="de">
             {t('de')}
           </Link>
         ) : (
-          <Link href={router.pathname} locale="en">
+          <Link href={router.asPath} locale="en">
             {t('en')}
           </Link>
         )}
@@ -135,11 +134,11 @@ export const Header = () => {
 
             <div className="uk-padding uk-text-center">
               {locale == 'en' ? (
-                <Link href={router.pathname} locale="de">
+                <Link href={router.asPath} locale="de">
                   {t('de')}
                 </Link>
               ) : (
-                <Link href={router.pathname} locale="en">
+                <Link href={router.asPath} locale="en">
                   {t('en')}
                 </Link>
               )}
