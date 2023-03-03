@@ -31,6 +31,7 @@
           left: 50%;
           transform: translateX(-50%);
           opacity: 0;
+          width: 0;
           transition: all 0.1s linear;
         }
 
@@ -39,6 +40,7 @@
 
           &::before {
             opacity: 1;
+            width: 100%;
           }
         }
       }
@@ -61,19 +63,6 @@
           padding: 20px 15px;
           border-bottom: 0.5px solid $secondary-color-opaque;
         }
-      }
-    }
-  }
-}
-
-@media (max-width: 959px) {
-  .footer {
-    .nav {
-      ul {
-        flex-direction: column;
-        gap: 0;
-        padding: 15px;
-        padding-left: 0;
       }
     }
   }
