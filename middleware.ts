@@ -45,7 +45,7 @@ async function checkIfUserIsShopOwner(userId, shopId) {
     method: 'POST',
   })
     .then((response) => response.json())
-    .then((data) => data.data.shop.ownerUuid)
+    .then((data) => data?.data?.shop?.ownerUuid)
 
   return gql === userId ? true : false
 }

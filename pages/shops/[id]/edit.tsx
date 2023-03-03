@@ -18,6 +18,8 @@ import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
 import { CATEGORIES } from '../../../assets/categories/categories'
 import Router from 'next/router'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
@@ -37,11 +39,12 @@ const GetShopData = gql`
       openingHours
       categories
     }
-  }`
+  }
+`
 
 const EDIT_SHOP = gql`
   mutation updateShop(
-  $id: Int!
+    $id: Int!
     $name: String
     $street: String
     $postcode: String
@@ -54,9 +57,9 @@ const EDIT_SHOP = gql`
     $openingHours: String
     $image: String
     $categories: String
-) {
-  updateShop(
-    id: $id
+  ) {
+    updateShop(
+      id: $id
       name: $name
       street: $street
       postcode: $postcode
@@ -69,10 +72,10 @@ const EDIT_SHOP = gql`
       openingHours: $openingHours
       image: $image
       categories: $categories
-  ) {
-    id
+    ) {
+      id
+    }
   }
-}
 `
 
 export interface ShopFields {
@@ -112,7 +115,11 @@ export const EditShop = () => {
   const [categories, setCategories] = useState<number[]>([])
 
   useEffect(() => {
-    setCategories(shopResult.data?.shop.categories ? JSON.parse(shopResult.data?.shop.categories) : [])
+    setCategories(
+      shopResult.data?.shop.categories
+        ? JSON.parse(shopResult.data?.shop.categories)
+        : []
+    )
     setPersistedImage(shopResult.data?.shop.image ?? null)
     methods.setValue('name', shopResult.data?.shop.name)
     methods.setValue('street', shopResult.data?.shop.street)
@@ -126,13 +133,12 @@ export const EditShop = () => {
   }, [shopResult.data])
 
   const methods = useForm<ShopFields>({
-    mode: 'onChange'
+    mode: 'onChange',
   })
 
-  if (shopResult.loading || editShopResult.loading) return (<>Loading...</>)
-  if (shopResult.error || editShopResult.error) return (<>Error!</>)
+  if (shopResult.loading || editShopResult.loading) return <>Loading...</>
+  if (shopResult.error || editShopResult.error) return <>Error!</>
   if (shopResult.data) {
-
     const {
       register,
       handleSubmit,
@@ -145,47 +151,74 @@ export const EditShop = () => {
         shopData.postcode,
         shopData.place
       )
+      let imageUploadError = false
       let filename: string
+
       if (image) {
         let randomuuid = v4()
         filename =
           process.env.NEXT_PUBLIC_SUPABASE_PICTURE_STORAGE +
           randomuuid +
           image.name
-        await supabase.storage
-          .from('shop')
-          .upload('public/' + randomuuid + image.name, image as File)
+        try {
+          await supabase.storage
+            .from('shop')
+            .upload('public/' + randomuuid + image.name, image as File)
+            .then((res) => {
+              if (res.error) throw new Error('error')
+            })
+        } catch (error) {
+          imageUploadError = true
+          console.log(error)
+          toast.error('Image upload was not successful', {
+            position: toast.POSITION.TOP_RIGHT,
+          })
+        }
       }
 
-      editShop({
-        variables: {
-          id: Number(id),
-          name: shopData.name,
-          street: shopData.street,
-          postcode: shopData.postcode,
-          place: shopData.place,
-          latitude: geoValues[1],
-          longitude: geoValues[0],
-          phone: shopData.phone,
-          email: shopData.email,
-          website: shopData.website,
-          openingHours: shopData.openingHours,
-          categories: JSON.stringify(categories),
-          image: image ? filename : persistedImage,
-        },
-      }).then((shopResponse) => {
-        Router.push('/shops/' + shopResponse.data.updateShop.id)
-      })
-    }
+      if (imageUploadError) return
 
+      try {
+        editShop({
+          variables: {
+            id: Number(id),
+            name: shopData.name,
+            street: shopData.street,
+            postcode: shopData.postcode,
+            place: shopData.place,
+            latitude: geoValues[1],
+            longitude: geoValues[0],
+            phone: shopData.phone,
+            email: shopData.email,
+            website: shopData.website,
+            openingHours: shopData.openingHours,
+            categories: JSON.stringify(categories),
+            image: image ? filename : persistedImage,
+          },
+        }).then((shopResponse) => {
+          Router.push('/shops/' + shopResponse.data.updateShop.id)
+        })
+      } catch (error) {
+        toast.error(
+          'An error occurred during saving your shop changes, please try again',
+          {
+            position: toast.POSITION.TOP_RIGHT,
+          }
+        )
+      }
+    }
 
     return (
       <div className="uk-section uk-container uk-container-large">
         <Head>
-          <title>{t('basic:title.short', { subtitle: t('basic:title.editShop') })}</title>
+          <title>
+            {t('basic:title.short', { subtitle: t('basic:title.editShop') })}
+          </title>
         </Head>
 
         <h1>{t('basic:title.editShop')}</h1>
+
+        <ToastContainer />
 
         <FormProvider {...methods}>
           <form
@@ -349,14 +382,13 @@ export const EditShop = () => {
                 <div className="uk-flex uk-flex-center uk-margin-top">
                   <div className="uk-width-1-2 profile-picture">
                     {/* eslint-disable */}
-                    {image ? <img
-                      src={URL.createObjectURL(image)}
-                      alt={'profile picture'}
-                    /> : persistedImage ? (
+                    {image ? (
                       <img
-                        src={persistedImage}
+                        src={URL.createObjectURL(image)}
                         alt={'profile picture'}
                       />
+                    ) : persistedImage ? (
+                      <img src={persistedImage} alt={'profile picture'} />
                     ) : (
                       <Image src={shopImage} alt={'profile picture'} />
                     )}

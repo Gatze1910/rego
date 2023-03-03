@@ -18,6 +18,9 @@ import { Categories, Category } from '../../components/partials/categories'
 import { CATEGORIES } from '../../assets/categories/categories'
 import { redirect } from 'next/navigation'
 import Router from 'next/router'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
 const ADD_SHOP = gql`
@@ -98,45 +101,73 @@ const CreateShop = () => {
       shopData.postcode,
       shopData.place
     )
+    let imageUploadError = false
     let filename: string
+
     if (image) {
       let randomuuid = v4()
       filename =
         process.env.NEXT_PUBLIC_SUPABASE_PICTURE_STORAGE +
         randomuuid +
         image.name
-      await supabase.storage
-        .from('shop')
-        .upload('public/' + randomuuid + image.name, image as File)
+      try {
+        await supabase.storage
+          .from('shop')
+          .upload('public/' + randomuuid + image.name, image as File)
+          .then((res) => {
+            if (res.error) throw new Error('error')
+          })
+      } catch (error) {
+        imageUploadError = true
+        console.log(error)
+        toast.error('Image upload was not successful', {
+          position: toast.POSITION.TOP_RIGHT,
+        })
+      }
     }
 
-    shop({
-      variables: {
-        name: shopData.name,
-        street: shopData.street,
-        postcode: shopData.postcode,
-        place: shopData.place,
-        latitude: geoValues[1],
-        longitude: geoValues[0],
-        phone: shopData.phone,
-        email: shopData.email,
-        website: shopData.website,
-        openingHours: shopData.openingHours,
-        categories: JSON.stringify(categories),
-        image: filename,
-      },
-    }).then((shopResponse) => {
-      Router.push('/shops/' + shopResponse.data.createShop.id)
-    })
+    if (imageUploadError) return
+
+    try {
+      shop({
+        variables: {
+          name: shopData.name,
+          street: shopData.street,
+          postcode: shopData.postcode,
+          place: shopData.place,
+          latitude: geoValues[1],
+          longitude: geoValues[0],
+          phone: shopData.phone,
+          email: shopData.email,
+          website: shopData.website,
+          openingHours: shopData.openingHours,
+          categories: JSON.stringify(categories),
+          image: filename,
+        },
+      }).then((shopResponse) => {
+        Router.push('/shops/' + shopResponse.data.createShop.id)
+      })
+    } catch (error) {
+      toast.error(
+        'An error occurred during saving of your shop creation, please try again',
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
+      )
+    }
   }
 
   return (
     <div className="uk-section uk-container uk-container-large">
       <Head>
-        <title>{t('basic:title.short', { subtitle: t('basic:title.createShop') })}</title>
+        <title>
+          {t('basic:title.short', { subtitle: t('basic:title.createShop') })}
+        </title>
       </Head>
 
       <h1>{t('basic:title.createShop')}</h1>
+
+      <ToastContainer />
 
       <FormProvider {...methods}>
         <form
@@ -299,6 +330,7 @@ const CreateShop = () => {
             <div className="uk-width-1-2@m">
               <div className="uk-flex uk-flex-center uk-margin-top">
                 <div className="uk-width-1-2 profile-picture">
+                  {/* eslint-disable */}
                   {image ? (
                     <img
                       src={URL.createObjectURL(image)}
@@ -307,6 +339,7 @@ const CreateShop = () => {
                   ) : (
                     <Image src={shopImage} alt={t('basic:alt.shop')} />
                   )}
+                  {/* eslint-enable */}
                   <FileInput
                     placeholder={t('form:placeholder.image')}
                     icon="image"

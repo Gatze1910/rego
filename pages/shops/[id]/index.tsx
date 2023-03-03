@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import useTranslation from 'next-translate/useTranslation'
-import { Product } from '../../../components/partials/product'
 import { Category } from '../../../components/partials/categories'
 import Image from 'next/image'
 import shopImage from '../../../assets/icons/shop.png'
@@ -39,8 +38,12 @@ export const Shop = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Currently there is no production database available..</p>
 
-  const categoryArray = JSON.parse(data.shop.categories)
+  if (data.shop == null) {
+    router.push('/404')
+    return
+  }
 
+  const categoryArray = JSON.parse(data?.shop?.categories)
   const activeCategories = CATEGORIES.filter((category) =>
     categoryArray?.includes(category.id)
   )
@@ -61,7 +64,8 @@ export const Shop = () => {
               ) : (
                 <img
                   className="uk-width-1-2 uk-margin-large-right"
-                  src={data.shop.image} alt={t('basic:alt.profile')}
+                  src={data.shop.image}
+                  alt={t('basic:alt.profile')}
                 />
               )}
               {/* eslint-enable */}
@@ -111,7 +115,7 @@ export const Shop = () => {
                   <Category
                     category={a}
                     isSelected={true}
-                    onCategoryClick={() => { }}
+                    onCategoryClick={() => {}}
                     key={a.id}
                   />
                 )

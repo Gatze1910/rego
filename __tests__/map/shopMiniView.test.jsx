@@ -20,7 +20,7 @@ test('Mini view of shop contains button with text Shop besuchen', async () => {
     </ApolloProvider>
   )
   await waitFor(() => {
-    expect(document.querySelector('a')).toHaveTextContent('Shop besuchen')
+    expect(document.querySelector('a')).toHaveTextContent('basic:button.visit')
   })
 })
 
