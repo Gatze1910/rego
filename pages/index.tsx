@@ -22,9 +22,7 @@ export const Home = () => {
             <h1 className="uk-text-center">{t('landingPage:heading.title')}</h1>
 
             <div className="uk-text-center">
-              <p>
-                {t('landingPage:text.title')}
-              </p>
+              <p>{t('landingPage:text.title')}</p>
             </div>
           </div>
         </div>
@@ -32,18 +30,18 @@ export const Home = () => {
         <div className="uk-section">
           <div className="uk-container uk-container-large">
             <h2>{t('landingPage:heading.category')}</h2>
-            <p className="uk-margin-medium-bottom">{t('landingPage:text.category')}</p>
+            <p className="uk-margin-medium-bottom">
+              {t('landingPage:text.category')}
+            </p>
             <Categories />
           </div>
         </div>
 
-        <div className="uk-section">
-          <div className="background-orange">
-            <div className="uk-section">
-              <div className="uk-container uk-container-small">
-                <h2>{t('landingPage:heading.concept')}</h2>
-                <p>{t('landingPage:text.concept')}</p>
-              </div>
+        <div className="background-orange">
+          <div className="uk-section">
+            <div className="uk-container uk-container-small">
+              <h2>{t('landingPage:heading.concept')}</h2>
+              <p>{t('landingPage:text.concept')}</p>
             </div>
           </div>
         </div>
@@ -54,7 +52,6 @@ export const Home = () => {
             <p>{t('landingPage:text.team')}</p>
           </div>
         </div>
-
       </main>
     </>
   )

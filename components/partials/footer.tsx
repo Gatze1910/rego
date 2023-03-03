@@ -26,7 +26,9 @@ export const Footer = () => {
       <div className="uk-section footer">
         <div className="uk-container uk-container-large">
           <div className="uk-grid uk-child-width-1-1 uk-child-width-1-3@m">
-            <Link href="/"><h4>{t('rego')}</h4></Link>
+            <Link href="/">
+              <h4>{t('rego')}</h4>
+            </Link>
 
             <nav className="nav uk-flex uk-flex-center">
               <ul className="">
@@ -50,7 +52,7 @@ export const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="uk-padding uk-padding-remove-horizontal uk-padding-remove-bottom uk-text-center@m">
+          <div className="copyright uk-padding uk-padding-remove-horizontal uk-padding-remove-bottom uk-text-center@m">
             © {t('rego')} {new Date().getFullYear()}
           </div>
         </div>
