@@ -6,7 +6,7 @@ import Image from 'next/image'
 import shopImage from '../../../assets/icons/shop.png'
 import { ButtonPrimary } from '../../../components/basic/button'
 import { gql, useQuery } from '@apollo/client'
-import { CATEGORIES } from '../../../assets/categories.js'
+import { CATEGORIES } from '../../../assets/categories/categories'
 
 const GetShopData = gql`
   query Shop($id: Int!) {

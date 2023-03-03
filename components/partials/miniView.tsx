@@ -1,10 +1,9 @@
-import { ReactNode } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import Image from 'next/image'
 import shopImage from '../../assets/icons/shop.png'
-import { ButtonPrimary, ButtonLink } from '../basic/button'
+import { ButtonLink } from '../basic/button'
 import { Category } from '../partials/categories'
-import { CATEGORIES } from '../../assets/categories'
+import { CATEGORIES } from '../../assets/categories/categories'
 import useTranslation from 'next-translate/useTranslation'
 
 interface ViewProps {

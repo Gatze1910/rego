@@ -16,7 +16,7 @@ import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
-import { CATEGORIES } from '../../../assets/categories'
+import { CATEGORIES } from '../../../assets/categories/categories'
 import Router from 'next/router'
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN

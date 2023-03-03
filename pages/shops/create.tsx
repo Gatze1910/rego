@@ -15,7 +15,7 @@ import shopImage from '../../assets/icons/shop.png'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
 import { Categories, Category } from '../../components/partials/categories'
-import { CATEGORIES } from '../../assets/categories'
+import { CATEGORIES } from '../../assets/categories/categories'
 import { redirect } from 'next/navigation'
 import Router from 'next/router'
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
