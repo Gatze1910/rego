@@ -1,0 +1,21 @@
+{
+    "beef": "Rind",
+    "pig": "Schwein",
+    "sheep": "Schaf",
+    "poultry": "Geflügel",
+    "fish": "Fisch",
+    "noPlastic": "kein Plastik",
+    "beverages": "Getränke",
+    "alcohol": "Alkohol",
+    "dairyProducts": "Milch-produkte",
+    "longOpened": "lange geöffnet",
+    "glutenFree": "glutenfrei",
+    "pastries": "Gebäck",
+    "vegetarian": "vegetarisch",
+    "fruits": "Früchte",
+    "clothing": "Bekleidung",
+    "handmade": "hand-gemacht",
+    "herbs": "Kräuter",
+    "vegan": "vegan",
+    "bio": "Bio"
+}
