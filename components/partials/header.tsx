@@ -31,7 +31,7 @@ export const Header = () => {
     {
       id: 3,
       name: 'nav.recipe',
-      link: '/',
+      link: '/recipes',
     },
   ]
 
