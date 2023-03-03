@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import insta from '../../../assets/icons/instagram.png'
+import shopImage from '../../../assets/icons/shop.png'
 import { Category } from '../../../components/partials/categories'
 import { gql, useMutation, useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
@@ -296,6 +296,9 @@ export const EditShop = () => {
                     field: 'email',
                     register,
                     error: errors.email,
+                    option: {
+                      pattern: { value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/, message: t('form:error.pattern') }
+                    }
                   }}
                 />
 
@@ -324,6 +327,9 @@ export const EditShop = () => {
                     field: 'website',
                     register,
                     error: errors.website,
+                    option: {
+                      pattern: { value: /https?:\/\/.+/, message: t('form:error.pattern') }
+                    }
                   }}
                 />
 
@@ -352,7 +358,7 @@ export const EditShop = () => {
                         alt={'profile picture'}
                       />
                     ) : (
-                      <Image src={insta} alt={'profile picture'} />
+                      <Image src={shopImage} alt={'profile picture'} />
                     )}
                     {/* eslint-enable */}
                     <FileInput
