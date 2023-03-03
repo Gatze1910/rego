@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
-import fetch from 'cross-fetch';
+import fetch from 'cross-fetch'
 
 if (process.env.NODE_ENV === 'production') {
   var apolloClient = new ApolloClient({

@@ -1,53 +1,57 @@
 .miniview-search {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 500px;
-    z-index: 100;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 500px;
+  z-index: 100;
 }
 
 .miniview-box {
-    position: absolute;
-    top: 120px;
-    width: 500px;
-    background: white;
-    z-index: 10;
+  position: absolute;
+  top: 120px;
+  width: 500px;
+  background: white;
+  z-index: 10;
 
-    .miniview-view {
-        span {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+  @media (min-width: 960px) {
+    max-height: 680px;
+    overflow-y: auto;
+  }
 
-            &:hover {
-                cursor: pointer;
-            }
-        }
+  .miniview-view {
+    span {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
-
+  }
 }
 
 @media (max-width: 1200px) {
-    .miniview-search {
-        top: 60px;
-    }
+  .miniview-search {
+    top: 60px;
+  }
 
-    .miniview-box {
-        top: 100px;
-    }
+  .miniview-box {
+    top: 100px;
+  }
 }
 
 @media (max-width: 959px) {
-    .miniview-box {
-        position: relative;
-        top: 0;
-        width: 100%;
-        align-items: center;
-    }
+  .miniview-box {
+    position: relative;
+    top: 0;
+    width: 100%;
+    align-items: center;
+  }
 }
 
 @media (max-width: 767px) {
-    .miniview-search {
-        width: 100%;
-    }
+  .miniview-search {
+    width: 100%;
+  }
 }

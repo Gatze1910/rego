@@ -50,7 +50,7 @@ export const Shops: NextPage = () => {
       setLat(selectedShop.latitude)
       setLng(selectedShop.longitude)
       setZoom(13)
-    }    
+    }
   }
 
   const markerClose = () => {
@@ -66,6 +66,7 @@ export const Shops: NextPage = () => {
       marker.getElement().id = shop.id.toString()
       marker.getElement().addEventListener('click', () => markerClick(shop.id))
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shops])
 
   useEffect(() => {
@@ -90,6 +91,7 @@ export const Shops: NextPage = () => {
         markerClick(numericSelectedShopId)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   useEffect(() => {
@@ -102,15 +104,20 @@ export const Shops: NextPage = () => {
       <div className="miniview-search box-shadow">
         <Search placeholder="Suche"></Search>
       </div>
-      
-      {miniView && 
-      <div className="miniview-box">
-        <div className="uk-padding miniview-view">
-          <span onClick={() => { markerClose() }} uk-icon=" icon: close"></span>
-          {shopId && <MiniView shopId={shopId} />}
+
+      {miniView && (
+        <div className="miniview-box">
+          <div className="uk-padding miniview-view">
+            <span
+              onClick={() => {
+                markerClose()
+              }}
+              uk-icon=" icon: close"
+            ></span>
+            {shopId && <MiniView shopId={shopId} />}
+          </div>
         </div>
-        </div>
-        }  
+      )}
     </>
   )
 }

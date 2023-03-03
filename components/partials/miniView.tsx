@@ -5,9 +5,10 @@ import { ButtonLink } from '../basic/button'
 import { Category } from '../partials/categories'
 import { CATEGORIES } from '../../assets/categories/categories'
 import useTranslation from 'next-translate/useTranslation'
+import Link from 'next/link'
 
 interface ViewProps {
-    shopId: Number
+  shopId: Number
 }
 
 const GetShopData = gql`
@@ -30,94 +31,106 @@ const GetShopData = gql`
 `
 
 export const MiniView = (props: ViewProps) => {
-    const { t } = useTranslation()
-    const { loading, error, data } = useQuery(GetShopData, {
-        variables: { id: props.shopId },
-    })
+  const { t } = useTranslation()
+  const { loading, error, data } = useQuery(GetShopData, {
+    variables: { id: props.shopId },
+  })
 
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Currently there is no production database available..</p>
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Currently there is no production database available..</p>
 
-    const categoryArray = JSON.parse(data.shop.categories)
+  const categoryArray = JSON.parse(data.shop.categories)
 
-    const activeCategories = CATEGORIES.filter((category) =>
-        categoryArray?.includes(category.id)
-    )
+  const activeCategories = CATEGORIES.filter((category) =>
+    categoryArray?.includes(category.id)
+  )
 
-    var shopUrl = "/shops/" + props.shopId
+  var shopUrl = '/shops/' + props.shopId
 
-    return (
-        <>
-            <div className="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal">
-                <div className="uk-width-1-3 uk-margin-medium-right profile-picture">
-                    {!data.shop.image ? (
-                        <Image
-                            className="background-orange uk-padding-small"
-                            src={shopImage}
-                            alt={t('basic:alt.shop')}
-                        />
-                    ) : (
-                        <img
-                            className="profile-picture uk-width-1-2 uk-margin-large-right"
-                            src={data.shop.image} alt={t('basic:alt.profile')}
-                        />
-                    )}
-                </div>
-                <div className="uk-width-2-3">
-                    <h3>{data.shop.name}</h3>
-                    <p>
-                        {data.shop.street}<br />
-                        {data.shop.postcode} {data.shop.place}
-                    </p>
-                </div>
-            </div>
+  if (data.shop.email) {
+    var emailLink = 'mailto:' + data.shop.email
+  }
 
-            {(data.shop.openingHours || data.shop.email || data.shop.phone) && (
-                <div className="uk-padding-small uk-padding-remove-horizontal">
-                    {data.shop.openingHours && (
-                        <>
-                            <h4>{t('basic:hours')}</h4>
-                            <p>{data.shop.openingHours}</p>
-                        </>
-                    )}
+  return (
+    <>
+      <div className="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal">
+        <div className="uk-width-1-3 uk-margin-medium-right profile-picture">
+          {/* eslint-disable */}
+          {!data.shop.image ? (
+            <Image
+              className="background-orange uk-padding-small"
+              src={shopImage}
+              alt={t('basic:alt.shop')}
+            />
+          ) : (
+            <img
+              className="profile-picture uk-width-1-2 uk-margin-large-right"
+              src={data.shop.image}
+              alt={t('basic:alt.profile')}
+            />
+          )}
+          {/* eslint-enable */}
+        </div>
+        <div className="uk-width-2-3">
+          <h3>{data.shop.name}</h3>
+          <p>
+            {data.shop.street}
+            <br />
+            {data.shop.postcode} {data.shop.place}
+          </p>
+          {data.shop.website && (
+            <a href={data.shop.website} target="_blank" rel="noreferrer">
+              {data.shop.website}
+            </a>
+          )}
+        </div>
+      </div>
 
-                    {(data.shop.email || data.shop.phone) && (
-                        <>
-                            <h4>{t('basic:contact')}</h4>
-                            <p>
-                                {data.shop.email && data.shop.email}
-                                <br />
-                                {data.shop.phone && data.shop.phone}
-                            </p>
-                        </>
-                    )}
-                </div>
-            )}
+      {(data.shop.openingHours || data.shop.email || data.shop.phone) && (
+        <div className="uk-padding-small uk-padding-remove-horizontal">
+          {data.shop.openingHours && (
+            <>
+              <h4>{t('basic:hours')}</h4>
+              <p>{data.shop.openingHours}</p>
+            </>
+          )}
 
+          {(data.shop.email || data.shop.phone) && (
+            <>
+              <h4>{t('basic:contact')}</h4>
+              <p>
+                {data.shop.email && <a href={emailLink}>{data.shop.email}</a>}
+                <br />
+                {data.shop.phone && data.shop.phone}
+              </p>
+            </>
+          )}
+        </div>
+      )}
 
-            {activeCategories.length > 0 && (
-                <div className="uk-padding-small uk-padding-remove-horizontal">
-                    <div className="flex-gap uk-flex uk-flex-wrap">
-                        {activeCategories.map((a) => {
-                            return (
-                                <Category
-                                    category={a}
-                                    isSelected={true}
-                                    onCategoryClick={() => { }}
-                                    key={a.id}
-                                />
-                            )
-                        })}
-                    </div>
-                </div>
-            )}
+      {activeCategories.length > 0 && (
+        <div className="uk-padding-small uk-padding-remove-horizontal">
+          <div className="flex-gap uk-flex uk-flex-wrap">
+            {activeCategories.map((a) => {
+              return (
+                <Category
+                  category={a}
+                  isSelected={true}
+                  onCategoryClick={() => {}}
+                  key={a.id}
+                />
+              )
+            })}
+          </div>
+        </div>
+      )}
 
-            <div className="uk-flex flex-gap">
-                <ButtonLink href={shopUrl}>{t('basic:button.visit')}</ButtonLink>
-                <ButtonLink href="">{t('basic:button.route')}</ButtonLink>
-            </div>
-        </>
-    )
+      <div className="uk-flex uk-flex-wrap flex-gap">
+        <ButtonLink href={shopUrl}>{t('basic:button.visit')}</ButtonLink>
+        <ButtonLink href="">{t('basic:button.route')}</ButtonLink>
+      </div>
+    </>
+  )
 }
 
 export default MiniView

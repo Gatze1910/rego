@@ -14,9 +14,8 @@ import Image from 'next/image'
 import shopImage from '../../assets/icons/shop.png'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
-import { Categories, Category } from '../../components/partials/categories'
+import { Category } from '../../components/partials/categories'
 import { CATEGORIES } from '../../assets/categories/categories'
-import { redirect } from 'next/navigation'
 import Router from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -279,8 +278,11 @@ const CreateShop = () => {
                   register,
                   error: errors.email,
                   option: {
-                    pattern: { value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/, message: t('form:error.pattern') }
-                  }
+                    pattern: {
+                      value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+                      message: t('form:error.pattern'),
+                    },
+                  },
                 }}
               />
 
@@ -310,8 +312,11 @@ const CreateShop = () => {
                   register,
                   error: errors.website,
                   option: {
-                    pattern: { value: /https?:\/\/.+/, message: t('form:error.pattern') }
-                  }
+                    pattern: {
+                      value: /https?:\/\/.+/,
+                      message: t('form:error.pattern'),
+                    },
+                  },
                 }}
               />
 

@@ -33,6 +33,7 @@ export const Shop = () => {
   const { t } = useTranslation()
   const { loading, error, data } = useQuery(GetShopData, {
     variables: { id: newId },
+    fetchPolicy: 'no-cache',
   })
 
   if (loading) return <p>Loading...</p>
@@ -47,6 +48,10 @@ export const Shop = () => {
   const activeCategories = CATEGORIES.filter((category) =>
     categoryArray?.includes(category.id)
   )
+
+  if (data.shop.email) {
+    var emailLink = 'mailto:' + data.shop.email
+  }
 
   return (
     <>
@@ -63,7 +68,7 @@ export const Shop = () => {
                 />
               ) : (
                 <img
-                  className="uk-width-1-2 uk-margin-large-right"
+                  className="uk-width-1-2"
                   src={data.shop.image}
                   alt={t('basic:alt.profile')}
                 />
@@ -77,7 +82,11 @@ export const Shop = () => {
                 <br />
                 {data.shop.postcode} {data.shop.place}
               </p>
-              {data.shop.website && <p>{data.shop.website}</p>}
+              {data.shop.website && (
+                <a href={data.shop.website} target="_blank" rel="noreferrer">
+                  {data.shop.website}
+                </a>
+              )}
               {data.shop.openingHours && (
                 <>
                   <h3>{t('basic:hours')}</h3>
@@ -89,13 +98,15 @@ export const Shop = () => {
                 <>
                   <h3>{t('basic:contact')}</h3>
                   <p>
-                    {data.shop.email && data.shop.email}
+                    {data.shop.email && (
+                      <a href={emailLink}>{data.shop.email}</a>
+                    )}
                     <br />
                     {data.shop.phone && data.shop.phone}
                   </p>
                 </>
               )}
-              <div className="uk-flex flex-gap-medium">
+              <div className="uk-flex uk-flex-wrap flex-gap-medium">
                 <ButtonPrimary onClick={() => router.push('/shops#' + id)}>
                   {t('basic:button.map')}
                 </ButtonPrimary>

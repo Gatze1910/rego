@@ -1,12 +1,13 @@
 .footer {
   position: relative;
   background: $secondary-color-opaque;
-  text-align: center;
+
+  h4:hover {
+    color: $secondary-color;
+  }
 
   @media (max-width: 959px) {
-    h4:hover {
-      color: $secondary-color;
-    }
+    text-align: center;
 
     .uk-grid {
       gap: 10px;
