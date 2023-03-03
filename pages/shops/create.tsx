@@ -14,11 +14,12 @@ import Image from 'next/image'
 import shopImage from '../../assets/icons/shop.png'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
-import { Categories, Category } from '../../components/partials/categories'
+import { Category } from '../../components/partials/categories'
 import { CATEGORIES } from '../../assets/categories'
-import { redirect } from 'next/navigation'
 import Router from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_ACCESS_TOKEN
 
 const ADD_SHOP = gql`
@@ -99,7 +100,9 @@ const CreateShop = () => {
       shopData.postcode,
       shopData.place
     )
+    let imageUploadError = false
     let filename: string
+
     if (image) {
       let randomuuid = v4()
       filename =
@@ -109,13 +112,21 @@ const CreateShop = () => {
       try {
         await supabase.storage
           .from('shop')
-          .upload('public/' + image.name, image as File)
-      } catch {
-        toast.error('Image Upload was not successful', {
+          .upload('public/' + randomuuid + image.name, image as File)
+          .then((res) => {
+            if (res.error) throw new Error('error')
+          })
+      } catch (error) {
+        imageUploadError = true
+        console.log(error)
+        toast.error('Image upload was not successful', {
           position: toast.POSITION.TOP_RIGHT,
         })
       }
     }
+
+    if (imageUploadError) return
+
     try {
       shop({
         variables: {
@@ -135,23 +146,27 @@ const CreateShop = () => {
       }).then((shopResponse) => {
         Router.push('/shops/' + shopResponse.data.createShop.id)
       })
-    } catch {
-      toast.error('An error occurred during your shop creation, please try again', {
-        position: toast.POSITION.TOP_RIGHT,
-      })
+    } catch (error) {
+      toast.error(
+        'An error occurred during saving of your shop creation, please try again',
+        {
+          position: toast.POSITION.TOP_RIGHT,
+        }
+      )
     }
-    
   }
 
   return (
     <div className="uk-section uk-container uk-container-large">
       <Head>
-        <title>{t('basic:title.short', { subtitle: t('basic:title.createShop') })}</title>
+        <title>
+          {t('basic:title.short', { subtitle: t('basic:title.createShop') })}
+        </title>
       </Head>
 
       <h1>{t('basic:title.createShop')}</h1>
 
-      <ToastContainer/>
+      <ToastContainer />
 
       <FormProvider {...methods}>
         <form
@@ -308,6 +323,7 @@ const CreateShop = () => {
             <div className="uk-width-1-2@m">
               <div className="uk-flex uk-flex-center uk-margin-top">
                 <div className="uk-width-1-2 profile-picture">
+                  {/* eslint-disable */}
                   {image ? (
                     <img
                       src={URL.createObjectURL(image)}
@@ -316,6 +332,7 @@ const CreateShop = () => {
                   ) : (
                     <Image src={shopImage} alt={t('basic:alt.shop')} />
                   )}
+                  {/* eslint-enable */}
                   <FileInput
                     placeholder={t('placeholder.image')}
                     icon="image"
