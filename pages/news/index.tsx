@@ -14,7 +14,7 @@ export const News = () => {
       <Head>
         <title>{t('basic:title.short', { subtitle: t('basic:nav.news') })}</title>
       </Head>
-      <div className="uk-section uk-padding-remove-bottom">
+      <div className="uk-section">
         <div className="uk-container uk-container-small">
           <div className="uk-text-center">
             <h1>{t('text:heading.news')}</h1>
@@ -24,7 +24,7 @@ export const News = () => {
           </div>
         </div>
       </div>
-      <div className="uk-section">
+      {/* <div className="uk-section">
         <div className="uk-container uk-container-large">
           <div className="uk-flex flex-gap-large">
             <div className="uk-width-1-1 uk-width-2-3@l">
@@ -52,7 +52,7 @@ export const News = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
