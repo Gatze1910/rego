@@ -33,6 +33,7 @@ body {
   color: $primary-color;
   background: $background-color;
   overflow-x: hidden;
+  white-space: pre-line;
 }
 
 .mapboxgl-ctrl-bottom-right {
@@ -75,8 +76,12 @@ body {
   background: $secondary-color;
   color: white;
 
-  h1, h2, h3, a {
+  h1,
+  h2,
+  h3,
+  a {
     color: white;
+
     &:hover {
       color: white;
     }

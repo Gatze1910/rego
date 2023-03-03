@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import insta from '../../../assets/icons/instagram.png'
+import shopImage from '../../../assets/icons/shop.png'
 import { Category } from '../../../components/partials/categories'
 import { gql, useMutation, useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
@@ -16,7 +16,7 @@ import useTranslation from 'next-translate/useTranslation'
 import Head from 'next/head'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
-import { CATEGORIES } from '../../../assets/categories'
+import { CATEGORIES } from '../../../assets/categories/categories'
 import Router from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -329,6 +329,9 @@ export const EditShop = () => {
                     field: 'email',
                     register,
                     error: errors.email,
+                    option: {
+                      pattern: { value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/, message: t('form:error.pattern') }
+                    }
                   }}
                 />
 
@@ -357,6 +360,9 @@ export const EditShop = () => {
                     field: 'website',
                     register,
                     error: errors.website,
+                    option: {
+                      pattern: { value: /https?:\/\/.+/, message: t('form:error.pattern') }
+                    }
                   }}
                 />
 
@@ -384,7 +390,7 @@ export const EditShop = () => {
                     ) : persistedImage ? (
                       <img src={persistedImage} alt={'profile picture'} />
                     ) : (
-                      <Image src={insta} alt={'profile picture'} />
+                      <Image src={shopImage} alt={'profile picture'} />
                     )}
                     {/* eslint-enable */}
                     <FileInput

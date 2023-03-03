@@ -1,6 +1,24 @@
 .footer {
   position: relative;
   background: $secondary-color-opaque;
+  text-align: center;
+
+  @media (max-width: 959px) {
+    h4:hover {
+      color: $secondary-color;
+    }
+
+    .uk-grid {
+      gap: 10px;
+    }
+
+    .nav {
+      ul {
+        padding: 15px 0;
+        gap: 20px;
+      }
+    }
+  }
 
   .wave {
     position: absolute;
@@ -11,5 +29,3 @@
     z-index: 10;
   }
 }
-
-

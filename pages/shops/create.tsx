@@ -14,8 +14,9 @@ import Image from 'next/image'
 import shopImage from '../../assets/icons/shop.png'
 import mapboxgl from 'mapbox-gl'
 import { v4 } from 'uuid'
-import { Category } from '../../components/partials/categories'
-import { CATEGORIES } from '../../assets/categories'
+import { Categories, Category } from '../../components/partials/categories'
+import { CATEGORIES } from '../../assets/categories/categories'
+import { redirect } from 'next/navigation'
 import Router from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -179,10 +180,10 @@ const CreateShop = () => {
               <Input
                 id="name"
                 type="text"
-                placeholder={t('placeholder.name')}
+                placeholder={t('form:placeholder.name')}
                 icon="user"
                 flipicon
-                label={t('label.name')}
+                label={t('form:label.name')}
                 validation={{
                   field: 'name',
                   register,
@@ -196,10 +197,10 @@ const CreateShop = () => {
               <Input
                 id="street"
                 type="text"
-                placeholder={t('placeholder.street')}
+                placeholder={t('form:placeholder.street')}
                 icon="location"
                 flipicon
-                label={t('label.street')}
+                label={t('form:label.street')}
                 validation={{
                   field: 'street',
                   register,
@@ -219,10 +220,10 @@ const CreateShop = () => {
                   <Input
                     id="postcode"
                     type="text"
-                    placeholder={t('placeholder.postcode')}
+                    placeholder={t('form:placeholder.postcode')}
                     icon="location"
                     flipicon
-                    label={t('label.postcode')}
+                    label={t('form:label.postcode')}
                     validation={{
                       field: 'postcode',
                       register,
@@ -246,10 +247,10 @@ const CreateShop = () => {
                   <Input
                     id="place"
                     type="text"
-                    placeholder={t('placeholder.place')}
+                    placeholder={t('form:placeholder.place')}
                     icon="location"
                     flipicon
-                    label={t('label.place')}
+                    label={t('form:label.place')}
                     validation={{
                       field: 'place',
                       register,
@@ -269,24 +270,27 @@ const CreateShop = () => {
               <Input
                 id="email"
                 type="text"
-                placeholder={t('placeholder.email')}
+                placeholder={t('form:placeholder.email')}
                 icon="mail"
                 flipicon
-                label={t('label.email')}
+                label={t('form:label.email')}
                 validation={{
                   field: 'email',
                   register,
                   error: errors.email,
+                  option: {
+                    pattern: { value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/, message: t('form:error.pattern') }
+                  }
                 }}
               />
 
               <Input
                 id="phone"
                 type="tel"
-                placeholder={t('placeholder.phone')}
+                placeholder={t('form:placeholder.phone')}
                 icon="receiver"
                 flipicon
-                label={t('label.phone')}
+                label={t('form:label.phone')}
                 validation={{
                   field: 'phone',
                   register,
@@ -297,21 +301,24 @@ const CreateShop = () => {
               <Input
                 id="website"
                 type="text"
-                placeholder={t('placeholder.web')}
+                placeholder={t('form:placeholder.web')}
                 icon="link"
                 flipicon
-                label={t('label.web')}
+                label={t('form:label.web')}
                 validation={{
                   field: 'website',
                   register,
                   error: errors.website,
+                  option: {
+                    pattern: { value: /https?:\/\/.+/, message: t('form:error.pattern') }
+                  }
                 }}
               />
 
               <Textarea
                 id="openingHours"
-                placeholder={t('placeholder.hours')}
-                label={t('label.hours')}
+                placeholder={t('form:placeholder.hours')}
+                label={t('form:label.hours')}
                 validation={{
                   field: 'openingHours',
                   register,
@@ -334,7 +341,7 @@ const CreateShop = () => {
                   )}
                   {/* eslint-enable */}
                   <FileInput
-                    placeholder={t('placeholder.image')}
+                    placeholder={t('form:placeholder.image')}
                     icon="image"
                     flipicon
                     accept="image/*"
@@ -380,7 +387,7 @@ const CreateShop = () => {
             </div>
           </div>
 
-          <Submit id="register" value={t('button.shop')} />
+          <Submit id="register" value={t('form:button.shop')} />
         </form>
       </FormProvider>
     </div>

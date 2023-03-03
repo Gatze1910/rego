@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import insta from '../../assets/icons/instagram.png'
-import { CATEGORIES } from '../../assets/categories.js'
+import { CATEGORIES } from '../../assets/categories/categories'
 import useTranslation from 'next-translate/useTranslation'
 
 export const Category = ({
@@ -9,6 +9,9 @@ export const Category = ({
   onCategoryClick,
   variant = 'big',
 }) => {
+
+  const { t } = useTranslation()
+
   return (
     <div
       style={{ background: isSelected ? category.color : '#bbb' }}
@@ -20,11 +23,11 @@ export const Category = ({
       <Image
         className="img-container"
         src={category.img}
-        alt={category.name}
+        alt={t(`categories:${category.name}`)}
         width={40}
         height={40}
       />
-      <p className="uk-margin-remove uk-text-center">{category.name}</p>
+      <p className="uk-margin-remove uk-text-center">{t(`categories:${category.name}`)}</p>
     </div>
   )
 }
@@ -35,21 +38,21 @@ export const Categories = () => {
   return (
     <>
       <div className="flex-gap uk-flex uk-flex-wrap">
-        {CATEGORIES.map((item) => {
+        {CATEGORIES.map((category) => {
           return (
             <div
-              key={item.id}
-              style={{ background: item?.color }}
+              key={category.id}
+              style={{ background: category?.color }}
               className="category uk-flex uk-flex-center uk-flex-middle uk-flex-column uk-padding-small box-shadow"
             >
               <Image
                 className="img-container"
-                src={item?.img}
-                alt={t('basic:alt.category')}
+                src={category?.img}
+                alt={t(`categories:${category?.name}`)}
                 width={40}
                 height={40}
               />
-              <p className="uk-margin-remove uk-text-center">{item?.name}</p>
+              <p className="uk-margin-remove uk-text-center">{t(`categories:${category?.name}`)}</p>
             </div>
           )
         })}

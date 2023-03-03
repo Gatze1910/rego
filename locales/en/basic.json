@@ -11,8 +11,8 @@
     "404": "404 - Page not found",
     "403": "403 - No access rights",
     "500": "500 - Server Error",
-    "createShop": "create shop",
-    "editShop": "edit shop"
+    "createShop": "Create shop",
+    "editShop": "Edit shop"
   },
   "nav": {
     "map": "Map",

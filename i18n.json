@@ -6,28 +6,11 @@
   "defaultLocale": "de",
   "pages": {
     "*": [
-      "common",
       "text",
       "basic",
       "form",
-      "landingPage"
-    ],
-    "/": [
-      "home",
-      "example",
-      "common",
-      "text",
-      "basic",
-      "form",
-      "landingPage"
-    ],
-    "/about": [
-      "about",
-      "common",
-      "text",
-      "basic",
-      "form",
-      "landingPage"
+      "landingPage",
+      "categories"
     ]
   }
 }

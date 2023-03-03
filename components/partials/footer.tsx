@@ -26,11 +26,9 @@ export const Footer = () => {
       <div className="uk-section footer">
         <div className="uk-container uk-container-large">
           <div className="uk-grid uk-child-width-1-1 uk-child-width-1-3@m">
-            <h4>
-              {t('rego')}
-            </h4>
+            <Link href="/"><h4>{t('rego')}</h4></Link>
 
-            <nav className="nav uk-flex uk-flex-center@m">
+            <nav className="nav uk-flex uk-flex-center">
               <ul className="">
                 {menuItems.map((item) => {
                   return (
