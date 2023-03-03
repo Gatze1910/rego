@@ -99,8 +99,7 @@ export const EditShop = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const tF = useTranslation('form').t
-  const tB = useTranslation('basic').t
+  const { t } = useTranslation()
 
   const shopResult = useQuery(GetShopData, {
     variables: { id: Number(id) },
@@ -183,10 +182,10 @@ export const EditShop = () => {
     return (
       <div className="uk-section uk-container uk-container-large">
         <Head>
-          <title>{tB('title.short', { subtitle: tB('title.editShop') })}</title>
+          <title>{t('basic:title.short', { subtitle: t('basic:title.editShop') })}</title>
         </Head>
 
-        <h1>{tB('title.editShop')}</h1>
+        <h1>{t('basic:title.editShop')}</h1>
 
         <FormProvider {...methods}>
           <form
@@ -199,16 +198,16 @@ export const EditShop = () => {
                 <Input
                   id="name"
                   type="text"
-                  placeholder="Mustershop"
+                  placeholder={t('form:placeholder.name')}
                   icon="user"
                   flipicon
-                  label="Name des Shops"
+                  label={t('form:label.name')}
                   validation={{
                     field: 'name',
                     register,
                     error: errors.name,
                     option: {
-                      required: tF('error.required'),
+                      required: t('form:error.required'),
                     },
                   }}
                 />
@@ -216,19 +215,19 @@ export const EditShop = () => {
                 <Input
                   id="street"
                   type="text"
-                  placeholder="Musterstraße 12"
+                  placeholder={t('form:placeholder.street')}
                   icon="location"
                   flipicon
-                  label="Adresse"
+                  label={t('form:label.street')}
                   validation={{
                     field: 'street',
                     register,
                     error: errors.street,
                     option: {
-                      required: tF('error.required'),
+                      required: t('form:error.required'),
                       minLength: {
                         value: 5,
-                        message: tF('error.minLength', { count: '5' }),
+                        message: t('form:error.minLength', { count: '5' }),
                       },
                     },
                   }}
@@ -239,23 +238,23 @@ export const EditShop = () => {
                     <Input
                       id="postcode"
                       type="text"
-                      placeholder="5020"
+                      placeholder={t('form:placeholder.postcode')}
                       icon="location"
                       flipicon
-                      label="Postleitzahl"
+                      label={t('form:label.postcode')}
                       validation={{
                         field: 'postcode',
                         register,
                         error: errors.postcode,
                         option: {
-                          required: tF('error.required'),
+                          required: t('form:error.required'),
                           pattern: {
                             value: /^[0-9]+$/,
-                            message: tF('error.pattern'),
+                            message: t('form:error.pattern'),
                           },
                           minLength: {
                             value: 4,
-                            message: tF('error.minLength', { count: '4' }),
+                            message: t('form:error.minLength', { count: '4' }),
                           },
                         },
                       }}
@@ -266,19 +265,19 @@ export const EditShop = () => {
                     <Input
                       id="place"
                       type="text"
-                      placeholder="Salzburg"
+                      placeholder={t('form:placeholder.place')}
                       icon="location"
                       flipicon
-                      label="Ort"
+                      label={t('form:label.place')}
                       validation={{
                         field: 'place',
                         register,
                         error: errors.place,
                         option: {
-                          required: tF('error.required'),
+                          required: t('form:error.required'),
                           minLength: {
                             value: 2,
-                            message: tF('error.minLength', { count: '2' }),
+                            message: t('form:error.minLength', { count: '2' }),
                           },
                         },
                       }}
@@ -289,10 +288,10 @@ export const EditShop = () => {
                 <Input
                   id="email"
                   type="text"
-                  placeholder="mail@provider.at"
+                  placeholder={t('form:placeholder.email')}
                   icon="mail"
                   flipicon
-                  label="E-Mail"
+                  label={t('form:label.email')}
                   validation={{
                     field: 'email',
                     register,
@@ -303,10 +302,10 @@ export const EditShop = () => {
                 <Input
                   id="phone"
                   type="tel"
-                  placeholder="0650/232432434"
+                  placeholder={t('form:placeholder.phone')}
                   icon="receiver"
                   flipicon
-                  label="Telefonnummer"
+                  label={t('form:label.phone')}
                   validation={{
                     field: 'phone',
                     register,
@@ -317,10 +316,10 @@ export const EditShop = () => {
                 <Input
                   id="website"
                   type="text"
-                  placeholder="https://my-website.at"
+                  placeholder={t('form:placeholder.web')}
                   icon="link"
                   flipicon
-                  label="Webseite"
+                  label={t('form:label.web')}
                   validation={{
                     field: 'website',
                     register,
@@ -330,8 +329,8 @@ export const EditShop = () => {
 
                 <Textarea
                   id="openingHours"
-                  placeholder="MO - FR, von 09:00 - 15:00 Uhr"
-                  label="Öffnungszeiten"
+                  placeholder={t('form:placeholder.hours')}
+                  label={t('form:label.hours')}
                   validation={{
                     field: 'openingHours',
                     register,
@@ -357,7 +356,7 @@ export const EditShop = () => {
                     )}
                     {/* eslint-enable */}
                     <FileInput
-                      placeholder="Bild auswählen"
+                      placeholder={t('form:placeholder.image')}
                       icon="image"
                       flipicon
                       accept="image/*"
@@ -373,7 +372,7 @@ export const EditShop = () => {
             </div>
 
             <div className="uk-margin-medium-top">
-              <p>Ausgewählte Kategorien werden farblich markiert</p>
+              <p>{t('form:label.categories')}</p>
               <div className="flex-gap uk-flex uk-flex-wrap">
                 {CATEGORIES.map((category) => {
                   return (
@@ -403,7 +402,7 @@ export const EditShop = () => {
               </div>
             </div>
 
-            <Submit id="save" value="Speichern" />
+            <Submit id="save" value={t('form:button.save')} />
           </form>
         </FormProvider>
       </div>

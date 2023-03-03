@@ -21,6 +21,10 @@ $text-font: 'ABeeZee';
   }
 }
 
+#root {
+  white-space: pre-line;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -71,7 +75,7 @@ body {
   background: $secondary-color;
   color: white;
 
-  a {
+  h1, h2, h3, a {
     color: white;
     &:hover {
       color: white;

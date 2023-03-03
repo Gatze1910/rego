@@ -28,6 +28,7 @@
     "image": "Bild auswählen"
   },
   "button": {
-    "shop": "Shop erstellen"
+    "shop": "Shop erstellen",
+    "save": "Speichern"
   }
 }

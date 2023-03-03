@@ -1,3 +1,14 @@
 {
-  "bla": "bla"
+  "heading": {
+    "title": "ReGo - Regional ToGo",
+    "category": "Unsere Kategorien",
+    "concept": "Regional ToGo - MultiMedia Projekt 2023",
+    "team": "Das ReGo Team"
+  },
+  "text": {
+    "title": "Auf unserer Seite kannst du dich registrieren und deinen Shop und deine Produkte bewerben oder einfach nur stöbern. Außerdem erwarten dich demnächst viele Neuigkeiten und Rezepte zum selbst ausprobieren.",
+    "category": "Damit wir es dir etwas einfacher machen können, dich unter den vielen Produkten und Shops zurechtzufinden, findest du immer wieder die unten gezeigten Kategorien. Unsere Kategorien zeigen dir was du von einem Shop erwarten kannst und helfen dir den richtigen Shop für dich zu finden!",
+    "concept": "Im Zuge unseres MMP3 erstellen wir die Plattform 'ReGo'. Mit ReGo soll regionales und nachhaltiges Einkaufen (wieder)entdeckt werden. Jeder, der gerne seine Produkte verkaufen möchte, egal ob Obst-Stand oder Hofladen, hat hier die Möglichkeit sein Profil zu erstellen, sodass man zeigen kann 'hey mich gibt’s auch'. Die potenziellen Käufer können Shops in ihrer Region entdecken und über Routen den geplanten Nachmittagsspaziergang mit einem regionalen Einkauf verbinden.",
+    "team": "Unser Team besteht aus drei Mitgliedern: Bernadette unser Team-Lead und Backend-Profi. Marukus unser Fronend-Spezialist und tatkräftiger Unterstützer im Backend. Vanessa unsere Frontend-Unterstützung und Designerin."
+  }
 }

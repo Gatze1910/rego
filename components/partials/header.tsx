@@ -43,7 +43,7 @@ export const Header = () => {
           <Image
             className="img-container"
             src={logo}
-            alt="lbbla"
+            alt={t('basic:alt.logo')}
             width={40}
             height={40}
           />
@@ -94,7 +94,7 @@ export const Header = () => {
           <Image
             className="img-container"
             src={logo}
-            alt="lbbla"
+            alt={t('basic:alt.logo')}
             width={40}
             height={40}
           />

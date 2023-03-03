@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import insta from '../../assets/icons/instagram.png'
 import { CATEGORIES } from '../../assets/categories.js'
+import useTranslation from 'next-translate/useTranslation'
 
 export const Category = ({
   category,
@@ -29,6 +30,8 @@ export const Category = ({
 }
 
 export const Categories = () => {
+  const { t } = useTranslation()
+
   return (
     <>
       <div className="flex-gap uk-flex uk-flex-wrap">
@@ -42,7 +45,7 @@ export const Categories = () => {
               <Image
                 className="img-container"
                 src={item?.img}
-                alt="lbbla"
+                alt={t('basic:alt.category')}
                 width={40}
                 height={40}
               />

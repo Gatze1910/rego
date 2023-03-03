@@ -28,6 +28,7 @@
     "image": "Select image "
   },
   "button": {
-    "shop": "create shop"
+    "shop": "create shop",
+    "save": "Save"
   }
 }

@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { Product } from '../../../components/partials/product'
 import { Category } from '../../../components/partials/categories'
 import Image from 'next/image'
-import insta from '../../../assets/icons/instagram.png'
+import shopImage from '../../../assets/icons/shop.png'
 import { ButtonPrimary } from '../../../components/basic/button'
 import { gql, useQuery } from '@apollo/client'
 import { CATEGORIES } from '../../../assets/categories.js'
@@ -54,14 +54,14 @@ export const Shop = () => {
               {/* eslint-disable */}
               {!data.shop.image ? (
                 <Image
-                  className="background-orange uk-padding"
-                  src={insta}
-                  alt={'blubbl'}
+                  className="background-orange-opaque uk-padding"
+                  src={shopImage}
+                  alt={t('basic:alt.shop')}
                 />
               ) : (
                 <img
                   className="uk-width-1-2 uk-margin-large-right"
-                  src={data.shop.image}
+                  src={data.shop.image} alt={t('basic:alt.profile')}
                 />
               )}
               {/* eslint-enable */}
@@ -121,7 +121,7 @@ export const Shop = () => {
         </div>
       )}
 
-      <div className="uk-section">
+      {/* <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h2>{t('text:heading.products')}</h2>
           <ButtonPrimary>{t('basic:button.filter')}</ButtonPrimary>
@@ -135,7 +135,7 @@ export const Shop = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

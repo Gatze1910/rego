@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation'
 import Image from 'next/image'
 import insta from '../../assets/icons/instagram.png'
 
@@ -21,6 +22,8 @@ export const Post = () => {
 }
 
 export const Card = () => {
+  const { t } = useTranslation()
+
   return (
     <>
       <a href="" className="uk-card">
@@ -34,7 +37,7 @@ export const Card = () => {
             <Image
               className="img-container"
               src={insta}
-              alt="lbbla"
+              alt={t('basic:alt.post')}
               width={40}
               height={40}
             />

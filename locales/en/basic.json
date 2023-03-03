@@ -18,20 +18,28 @@
     "map": "Map",
     "news": "News",
     "recipe": "Recipes",
-    "login": "login",
-    "logout": "logout",
+    "login": "Login",
+    "logout": "Logout",
     "myShops": "My Shops",
     "imprint": "Imprint",
-    "privacy": "privacy policy"
+    "privacy": "Privacy policy"
   },
   "button": {
-    "newShop": "create new shop",
-    "view": "view",
-    "edit": "edit",
-    "visit": "visit",
-    "route": "calculate route",
-    "map": "show on map",
-    "filter": "filter",
-    "sort": "sort"
+    "newShop": "Create new shop",
+    "view": "View",
+    "edit": "Edit",
+    "visit": "Visit",
+    "route": "Calculate route",
+    "map": "Show on map",
+    "filter": "Filter",
+    "sort": "Sort"
+  },
+  "alt": {
+    "shop": "Shop",
+    "profile": "profile picture",
+    "logo": "logo",
+    "category": "ReGo Category",
+    "post": "ReGo Post",
+    "product": "ReGo Product"
   }
 }

@@ -47,6 +47,7 @@ type Query {
   recipes: [Recipe]
   shop(id: Int!): Shop
   shops: [Shop]
+  shopsByOwner(ownerUuid: String!): [Shop]
 }
 
 type Recipe {

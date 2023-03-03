@@ -1,14 +1,17 @@
+import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image'
 import insta from '../../assets/icons/instagram.png';
 
 export const Product = () => {
+  const { t } = useTranslation()
+  
   return (
     <>
       <div className="product-container">
         <div className="img-container uk-flex uk-flex-center uk-position-relative">
           <Image className="uk-padding-small"
             src={insta}
-            alt="lbbla"
+            alt={t('basic:alt.product')}
             fill={true}
           />
 

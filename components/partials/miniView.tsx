@@ -1,10 +1,11 @@
 import { ReactNode } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import Image from 'next/image'
-import insta from '../../assets/icons/instagram.png'
+import shopImage from '../../assets/icons/shop.png'
 import { ButtonPrimary, ButtonLink } from '../basic/button'
 import { Category } from '../partials/categories'
 import { CATEGORIES } from '../../assets/categories'
+import useTranslation from 'next-translate/useTranslation'
 
 interface ViewProps {
     shopId: Number
@@ -30,6 +31,7 @@ const GetShopData = gql`
 `
 
 export const MiniView = (props: ViewProps) => {
+    const { t } = useTranslation()
     const { loading, error, data } = useQuery(GetShopData, {
         variables: { id: props.shopId },
     })
@@ -52,13 +54,13 @@ export const MiniView = (props: ViewProps) => {
                     {!data.shop.image ? (
                         <Image
                             className="background-orange uk-padding-small"
-                            src={insta}
-                            alt={'blubbl'}
+                            src={shopImage}
+                            alt={t('basic:alt.shop')}
                         />
                     ) : (
                         <img
                             className="profile-picture uk-width-1-2 uk-margin-large-right"
-                            src={data.shop.image}
+                            src={data.shop.image} alt={t('basic:alt.profile')}
                         />
                     )}
                 </div>
@@ -75,14 +77,14 @@ export const MiniView = (props: ViewProps) => {
                 <div className="uk-padding-small uk-padding-remove-horizontal">
                     {data.shop.openingHours && (
                         <>
-                            <h4>Öffnungszeiten</h4>
+                            <h4>{t('basic:hours')}</h4>
                             <p>{data.shop.openingHours}</p>
                         </>
                     )}
 
                     {(data.shop.email || data.shop.phone) && (
                         <>
-                            <h4>Kontakt</h4>
+                            <h4>{t('basic:contact')}</h4>
                             <p>
                                 {data.shop.email && data.shop.email}
                                 <br />
@@ -112,8 +114,8 @@ export const MiniView = (props: ViewProps) => {
             )}
 
             <div className="uk-flex flex-gap">
-                <ButtonLink href={shopUrl}>Shop besuchen</ButtonLink>
-                <ButtonLink href="">Route berechnen</ButtonLink>
+                <ButtonLink href={shopUrl}>{t('basic:button.visit')}</ButtonLink>
+                <ButtonLink href="">{t('basic:button.route')}</ButtonLink>
             </div>
         </>
     )
