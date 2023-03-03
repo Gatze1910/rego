@@ -38,8 +38,12 @@ export const Shop = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Currently there is no production database available..</p>
 
-  const categoryArray = JSON.parse(data.shop.categories)
+  if (data.shop == null) {
+    router.push('/404')
+    return
+  }
 
+  const categoryArray = JSON.parse(data?.shop?.categories)
   const activeCategories = CATEGORIES.filter((category) =>
     categoryArray?.includes(category.id)
   )
